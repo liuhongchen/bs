@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bs-common.iml" filepath="$PROJECT_DIR$/bs-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-client/bs-common-client.iml" filepath="$PROJECT_DIR$/bs-common-client/bs-common-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-dao/bs-common-dao.iml" filepath="$PROJECT_DIR$/bs-common-dao/bs-common-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-dto/bs-common-dto.iml" filepath="$PROJECT_DIR$/bs-common-dto/bs-common-dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-ext-utils/bs-common-ext-utils.iml" filepath="$PROJECT_DIR$/bs-common-ext-utils/bs-common-ext-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-module/bs-common-module.iml" filepath="$PROJECT_DIR$/bs-common-module/bs-common-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-utils/bs-common-utils.iml" filepath="$PROJECT_DIR$/bs-common-utils/bs-common-utils.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: bs-eureka-server
+server:
+  port: 7776
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7776/eureka/
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+    enable-self-preservation: false

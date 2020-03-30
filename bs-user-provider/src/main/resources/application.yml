@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: bs-user-provider
+#  zipkin:
+#    base-url: http://localhost:7700
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+
+
+server:
+  port: 15001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7776/eureka/
+
+
+logging:
+  level:
+    root: info
+
+#不添加这一项，每次访问都会报异常
+#management:
+#  metrics:
+#    web:
+#      server:
+#        auto-time-requests: false

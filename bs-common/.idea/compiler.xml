@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bs-common-module" />
+        <module name="bs-common-dao" />
+        <module name="bs-common-client" />
+        <module name="bs-common-ext-utils" />
+        <module name="bs-common-dto" />
+        <module name="bs-common-utils" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bs-common" target="1.8" />
+      <module name="bs-common-client" target="1.8" />
+      <module name="bs-common-dao" target="1.8" />
+      <module name="bs-common-dto" target="1.8" />
+      <module name="bs-common-ext-utils" target="1.8" />
+      <module name="bs-common-module" target="1.8" />
+      <module name="bs-common-utils" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bs-common" options="-parameters" />
+      <module name="bs-common-client" options="-parameters" />
+      <module name="bs-common-dao" options="-parameters" />
+      <module name="bs-common-dto" options="-parameters" />
+      <module name="bs-common-ext-utils" options="-parameters" />
+      <module name="bs-common-module" options="-parameters" />
+      <module name="bs-common-utils" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: bs-user-consumer
+#  zipkin:
+#    base-url: http://localhost:7700
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7776/eureka/
+server:
+  port: 15051
+
+feign:
+  hystrix:
+    enabled: false
+
+#要以被负载均衡的模块的名字开始，默认是轮询
+dm-user-provider:
+  ribbon:
+    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
+
+#
+#logging:
+#  level:
+#    root: info
