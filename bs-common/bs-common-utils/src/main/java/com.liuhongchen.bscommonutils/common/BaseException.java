@@ -1,13 +1,9 @@
-package cn.dm.common;
-
+package com.liuhongchen.bscommonutils.common;
 import java.util.Map;
 
 /**
  * <p>通用异常的处理</p>
  *
- * @author zzshang
- * @version v1.0
- * @since 2015/5/19
  */
 public class BaseException extends Exception {
     private static final long serialVersionUID = 1L;

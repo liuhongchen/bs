@@ -1,4 +1,4 @@
-package cn.dm.common;
+package com.liuhongchen.bscommonutils.common;
 
 import java.io.*;
 

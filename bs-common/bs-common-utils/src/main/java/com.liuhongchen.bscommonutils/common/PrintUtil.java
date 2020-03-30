@@ -1,8 +1,7 @@
-package cn.dm.common;
+package com.liuhongchen.bscommonutils.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,7 +10,8 @@ import java.io.Writer;
 
 public class PrintUtil {
 	//打印日志
-	static Logger logger=Logger.getLogger(PrintUtil.class);
+//	static Logger logger=Logger.getLogger(PrintUtil.class);
+
 
 	public HttpServletResponse response;
 	public PrintUtil(HttpServletResponse response, String contentType){
@@ -27,7 +27,7 @@ public class PrintUtil {
             if(null != response){
 				//如果系统打开了outputStream 那么将其关闭
                 writer=new PrintWriter(response.getOutputStream());
-				logger.info("PrintUtil>>>>>>>received>>>>>>>>>>"+msg);
+//				logger.info("PrintUtil>>>>>>>received>>>>>>>>>>"+msg);
 				String temp=new String(String.valueOf(msg));
                 writer.write(temp);
                 writer.flush();

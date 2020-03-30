@@ -18,9 +18,9 @@ feign:
     enabled: false
 
 #要以被负载均衡的模块的名字开始，默认是轮询
-dm-user-provider:
-  ribbon:
-    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
+#bs-user-provider:
+#  ribbon:
+#    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
 
 #
 #logging:

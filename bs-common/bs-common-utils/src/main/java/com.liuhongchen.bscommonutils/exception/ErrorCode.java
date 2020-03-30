@@ -1,6 +1,7 @@
-package cn.dm.exception;
+package com.liuhongchen.bscommonutils.exception;
 
-import cn.dm.common.IErrorCode;
+
+import com.liuhongchen.bscommonutils.common.IErrorCode;
 
 public enum ErrorCode implements IErrorCode {
     /**通用异常**/
