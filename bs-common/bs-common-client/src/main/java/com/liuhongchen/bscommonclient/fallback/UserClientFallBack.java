@@ -7,7 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserClientFallBack implements UserClient {
     @Override
-    public User login(String phone, String password) throws Exception {
-        return null;
+    public User login() throws Exception {
+        User user=new User();
+        user.setPhone("bad-phone");
+        return user;
     }
+//    @Override
+//    public User login(String phone, String password) throws Exception {
+//        User user=new User();
+//        user.setPhone("bad-phone");
+//        return user;
+//    }
+
 }

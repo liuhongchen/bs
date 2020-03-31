@@ -1,12 +1,20 @@
 spring:
   application:
     name: bs-user-provider
+  datasource:
+    url: jdbc:mysql://192.168.1.180:3306/bs_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #  zipkin:
 #    base-url: http://localhost:7700
 #  sleuth:
 #    sampler:
 #      percentage: 1.0
 
+mybatis:
+  type-aliases-package: com.liuhongchen.bscommonmodule.pojo
+  mapper-locations: classpath*:mapper/*.xml
 
 server:
   port: 15001
@@ -15,15 +23,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7776/eureka/
-
-
-logging:
-  level:
-    root: info
+#
+#logging:
+#  level:
+#    root: info
 
 #不添加这一项，每次访问都会报异常
 #management:
 #  metrics:
 #    web:
 #      server:
+
 #        auto-time-requests: false

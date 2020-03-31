@@ -10,6 +10,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7776/eureka/
+    fetch-registry: true
 server:
   port: 15051
 
@@ -22,7 +23,6 @@ feign:
 #  ribbon:
 #    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
 
-#
 #logging:
 #  level:
 #    root: info

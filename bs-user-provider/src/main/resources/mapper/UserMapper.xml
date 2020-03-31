@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.liuhongchen.bscommondao.mapper.UserMapper">
+<mapper namespace="com.liuhongchen.bsuserprovider.mapper.UserMapper">
 
     <resultMap id="userMap" type="com.liuhongchen.bscommonmodule.pojo.User">
         <id jdbcType="INTEGER" javaType="Integer" property="id" column="id"/>
@@ -10,9 +10,9 @@
         <result jdbcType="VARCHAR" javaType="String" column="password" property="password"/>
     </resultMap>
 
-<!--    <select id="login" parameterType="com.liuhongchen.bscommonmodule.pojo.User" resultType="com.liuhongchen.bscommonmodule.pojo.User">-->
-<!--        select *-->
-<!--        from user-->
-<!--        where phone=#{phone} and password=#{password}-->
-<!--    </select>-->
+    <select id="login" parameterType="com.liuhongchen.bscommonmodule.pojo.User" resultType="com.liuhongchen.bscommonmodule.pojo.User">
+        select *
+        from user
+        where phone=#{phone} and password=#{password}
+    </select>
 </mapper>

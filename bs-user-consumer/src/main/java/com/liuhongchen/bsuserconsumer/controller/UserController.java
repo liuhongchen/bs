@@ -20,18 +20,19 @@ public class UserController {
 
 
 
+//    @PostMapping("/login")
+//    public ResponseEntity login(@PathParam("phone")String phone,
+//                                @PathParam("password")String password) throws Exception {
+//
+//        User user = userClient.login(phone, password);
+//        return ResponseEntity.ok(user);
+//    }
     @PostMapping("/login")
-    public ResponseEntity login(@PathParam("phone")String phone,
-                                @PathParam("password")String password) throws Exception {
-
-        User user = userClient.login(phone, password);
-        return ResponseEntity.ok(user);
-    }
-
-
-    @GetMapping("/login")
     public ResponseEntity login() throws Exception {
-        User user = userClient.login("12312312", "123456");
+
+        User user = userClient.login();
         return ResponseEntity.ok(user);
     }
+
+
 }
