@@ -1,22 +1,36 @@
-package com.liuhongchen.bscommonclient.fallback;
 
-import com.liuhongchen.bscommonclient.client.UserClient;
-import com.liuhongchen.bscommonmodule.pojo.User;
 import org.springframework.stereotype.Component;
 
-@Component
-public class UserClientFallBack implements UserClient {
-    @Override
-    public User login() throws Exception {
-        User user=new User();
-        user.setPhone("bad-phone");
-        return user;
-    }
-//    @Override
-//    public User login(String phone, String password) throws Exception {
-//        User user=new User();
-//        user.setPhone("bad-phone");
-//        return user;
-//    }
+import com.liuhongchen.bscommonmodule.pojo.User;
 
+import java.util.List;
+import java.util.Map;
+@Component
+public class UserClientFallBack implements RestUserClient {
+
+
+    @Override
+    public User getUserById(Long id)throws Exception{
+        return null;
+    }
+
+    @Override
+    public List<User>	getUserListByMap(Map<String,Object> param)throws Exception{
+        return null;
+    }
+
+    @Override
+    public Integer getUserCountByMap(Map<String,Object> param)throws Exception{
+        return null;
+    }
+
+    @Override
+    public Integer qdtxAddUser(User user)throws Exception{
+        return null;
+    }
+
+    @Override
+    public Integer qdtxModifyUser(User user)throws Exception{
+        return null;
+    }
 }

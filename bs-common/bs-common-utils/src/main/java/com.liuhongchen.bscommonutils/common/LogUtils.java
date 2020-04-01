@@ -21,7 +21,7 @@ public class LogUtils {
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
-                kafkaTemplate.send(topic, "dm", msg);
+                kafkaTemplate.send(topic, "bs", msg);
             }
         });
     }

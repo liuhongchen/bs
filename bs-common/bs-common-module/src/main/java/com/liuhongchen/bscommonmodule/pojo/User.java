@@ -1,52 +1,89 @@
 package com.liuhongchen.bscommonmodule.pojo;
-
-public class User {
-
+import java.io.Serializable;
+import java.util.Date;
+/***
+*   
+*/
+public class User implements Serializable {
+    //
     private Integer id;
+    //
     private String phone;
+    //
     private String password;
-
-    public User() {
+    //
+    private String wxUserId;
+    //
+    private String realName;
+    //
+    private String nickname;
+    //
+    private Integer gender;
+    //
+    private Date birthday;
+    //
+    private Date createdTime;
+    //
+    private Date updatedTime;
+    //get set 方法
+    public void setId (Integer  id){
+        this.id=id;
     }
-
-    public User(Integer id, String phone, String password) {
-        this.id = id;
-        this.phone = phone;
-        this.password = password;
+    public  Integer getId(){
+        return this.id;
     }
-
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public void setPhone (String  phone){
+        this.phone=phone;
     }
-
-    public Integer getId() {
-        return id;
+    public  String getPhone(){
+        return this.phone;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPassword (String  password){
+        this.password=password;
     }
-
-    public String getPhone() {
-        return phone;
+    public  String getPassword(){
+        return this.password;
     }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setWxUserId (String  wxUserId){
+        this.wxUserId=wxUserId;
     }
-
-    public String getPassword() {
-        return password;
+    public  String getWxUserId(){
+        return this.wxUserId;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRealName (String  realName){
+        this.realName=realName;
+    }
+    public  String getRealName(){
+        return this.realName;
+    }
+    public void setNickname (String  nickname){
+        this.nickname=nickname;
+    }
+    public  String getNickname(){
+        return this.nickname;
+    }
+    public void setGender (Integer  gender){
+        this.gender=gender;
+    }
+    public  Integer getGender(){
+        return this.gender;
+    }
+    public void setBirthday (Date  birthday){
+        this.birthday=birthday;
+    }
+    public  Date getBirthday(){
+        return this.birthday;
+    }
+    public void setCreatedTime (Date  createdTime){
+        this.createdTime=createdTime;
+    }
+    public  Date getCreatedTime(){
+        return this.createdTime;
+    }
+    public void setUpdatedTime (Date  updatedTime){
+        this.updatedTime=updatedTime;
+    }
+    public  Date getUpdatedTime(){
+        return this.updatedTime;
     }
 }
