@@ -66,9 +66,15 @@ public class RestUserService {
         map.put("wxUserId",user.getWxUserId());
         List<User> users = userMapper.getUserListByMap(map);
         if (EmptyUtils.isEmpty(users)) {//此时不存在该用户，需要insert
+            user.setCreatedTime(new Date());
             userMapper.insertUser(user);
+        }else {
+            user.setId(users.get(0).getId());
+            user.setUpdatedTime(new Date());
+            userMapper.updateUser(user);
         }
         return user;//这个user是自动生成key的
+
 
     }
 

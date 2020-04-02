@@ -8,15 +8,20 @@ spring:
     user: root
     password: 123456
     timeout: 3000
-#  zipkin:
-#    base-url: http://localhost:7700
-#  sleuth:
-#    sampler:
-#      percentage: 1.0
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.1.180:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  zipkin:
+    base-url: http://localhost:7700
+  sleuth:
+    sampler:
+      percentage: 1.0
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7776/eureka/
+      defaultZone: http://192.168.1.180:7776/eureka/
     fetch-registry: true
 server:
   port: 15051
@@ -30,6 +35,6 @@ feign:
 #  ribbon:
 #    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
 
-#logging:
-#  level:
-#    root: info
+logging:
+  level:
+    root: info

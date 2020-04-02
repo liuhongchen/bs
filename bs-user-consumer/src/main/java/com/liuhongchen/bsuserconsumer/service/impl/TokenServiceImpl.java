@@ -7,6 +7,7 @@ import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.Constants;
 import com.liuhongchen.bsuserconsumer.client.RestUserClient;
 import com.liuhongchen.bsuserconsumer.service.TokenService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,11 @@ public class TokenServiceImpl implements TokenService {
     @Autowired
     private RestUserClient userClient;
 
-    @Override
-    public String generateToken(User user) {
+    private String generateToken(User user) {
         return userClient.generateToken(user);
     }
 
-    @Override
-    public void saveToken(UserVo userVo, String token) {
+    private void saveToken(UserVo userVo, String token) {
         String tokenKey = Constants.USER_TOKEN_PREFIX + userVo.getId();
         String tokenValue = null;
 
@@ -33,6 +32,7 @@ public class TokenServiceImpl implements TokenService {
         if ((tokenValue = (String) redisUtils.get(tokenKey)) != null){
             //代表原来用户已经登录
             redisUtils.delete(tokenKey);
+            redisUtils.delete(tokenValue);
         }
         //缓存用户token
         redisUtils.set(tokenKey,Constants.Redis_Expire.SESSION_TIMEOUT,token);
@@ -43,4 +43,18 @@ public class TokenServiceImpl implements TokenService {
 
 
     }
+
+    @Override
+    public String token(User user) {
+        String token = this.generateToken(user);
+
+        UserVo userVo=new UserVo();
+        BeanUtils.copyProperties(user,userVo);
+        userVo.setId(user.getId());
+
+        this.saveToken(userVo,token);
+        return token;
+    }
+
+
 }

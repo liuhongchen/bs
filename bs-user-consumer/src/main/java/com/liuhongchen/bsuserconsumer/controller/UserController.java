@@ -53,20 +53,32 @@ public class UserController {
     }
 
     @GetMapping("/wxLogin")
-    public String login(String code) throws Exception {
-        if (code==null||code.length()==0)return "code 为null";
+    public Dto login(String code,String nickName,Integer gender) throws Exception {
+        if (code==null||code.length()==0)return DtoUtil.returnFail("code为空","0011");
+
         JSONObject jsonObject = loginService.wxLogin(code);
+        if (EmptyUtils.isEmpty(jsonObject))return DtoUtil.returnFail("请求微信服务器失败","0011");
+
         String session_key = jsonObject.get("session_key").toString();
         String openid = jsonObject.get("openid").toString();
+        if (EmptyUtils.isEmpty(session_key)||EmptyUtils.isEmpty(openid)) return DtoUtil.returnFail("微信服务器返回数据有误","0011");
+
 
         User user=new User();
         user.setWxUserId(openid);
-        user.setCreatedTime(new Date());
-        user.setUpdatedTime(new Date());
+        user.setGender(gender);
+        user.setNickName(nickName);
         String token = registerService.wxRegister(user);
-        if (EmptyUtils.isEmpty(token)) return "登录失败,服务器端用户注册失败";
 
-        return "登录成功,token为："+token;
+        if (EmptyUtils.isEmpty(token)) return DtoUtil.returnFail("服务端token生成失败","0011");
+
+        return DtoUtil.returnSuccess("登录成功",token);
+
+    }
+
+    @GetMapping("/hello")
+    public Dto hello(){
+        return DtoUtil.returnSuccess("hello");
     }
 
 }

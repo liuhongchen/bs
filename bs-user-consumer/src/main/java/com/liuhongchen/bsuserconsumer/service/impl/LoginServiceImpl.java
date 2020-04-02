@@ -47,10 +47,7 @@ public class LoginServiceImpl implements LoginService {
 
 
         //生成用户token
-        String token = tokenService.generateToken(user);
-
-        //保存token到redis中
-        tokenService.saveToken(userVo, token);
+        String token = tokenService.token(queryUser);
 
         TokenVO tokenVo=new TokenVO(token,Constants.Redis_Expire.SESSION_TIMEOUT,new Date().getTime());
 

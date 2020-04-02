@@ -11,11 +11,12 @@
                 password as password,
                 wxUserId as wxUserId,
                 realName as realName,
-                nickname as nickname,
+                nickName as nickName,
                 gender as gender,
                 birthday as birthday,
                 createdTime as createdTime,
-                updatedTime as updatedTime
+                updatedTime as updatedTime,
+                avatarUrl as avatarUrl
         from user
         <trim prefix="where" prefixOverrides="and | or">
             <if test="id != null">
@@ -31,11 +32,12 @@
                 password as password,
                 wxUserId as wxUserId,
                 realName as realName,
-                nickname as nickname,
+                nickName as nickName,
                 gender as gender,
                 birthday as birthday,
                 createdTime as createdTime,
-                updatedTime as updatedTime
+                updatedTime as updatedTime,
+                avatarUrl as avatarUrl
         from user
         <trim prefix="where" prefixOverrides="and | or">
                 <if test="id != null and id!=''">
@@ -53,8 +55,8 @@
                 <if test="realName != null and realName!=''">
                     and realName=#{realName}
                 </if>
-                <if test="nickname != null and nickname!=''">
-                    and nickname=#{nickname}
+                <if test="nickName != null and nickName!=''">
+                    and nickName=#{nickName}
                 </if>
                 <if test="gender != null and gender!=''">
                     and gender=#{gender}
@@ -67,6 +69,9 @@
                 </if>
                 <if test="updatedTime != null and updatedTime!=''">
                     and updatedTime=#{updatedTime}
+                </if>
+                <if test="avatarUrl != null and avatarUrl!=''">
+                    and avatarUrl=#{avatarUrl}
                 </if>
         </trim>
         <if test="beginPos != null and pageSize != null ">
@@ -92,8 +97,8 @@
                 <if test="realName != null and realName!=''">
                     and realName=#{realName}
                 </if>
-                <if test="nickname != null and nickname!=''">
-                    and nickname=#{nickname}
+                <if test="nickName != null and nickName!=''">
+                    and nickName=#{nickName}
                 </if>
                 <if test="gender != null and gender!=''">
                     and gender=#{gender}
@@ -107,6 +112,9 @@
                 <if test="updatedTime != null and updatedTime!=''">
                     and updatedTime=#{updatedTime}
                 </if>
+                <if test="avatarUrl != null and avatarUrl!=''">
+                    and avatarUrl=#{avatarUrl}
+                </if>
         </trim>
     </select>
 
@@ -116,21 +124,23 @@
                         password,
                         wxUserId,
                         realName,
-                        nickname,
+                        nickName,
                         gender,
                         birthday,
                         createdTime,
-                        updatedTime)
+                        updatedTime,
+                        avatarUrl)
         values(
                      #{phone},
                      #{password},
                      #{wxUserId},
                      #{realName},
-                     #{nickname},
+                     #{nickName},
                      #{gender},
                      #{birthday},
                      #{createdTime},
-                    #{updatedTime})
+                     #{updatedTime},
+                    #{avatarUrl})
     </insert>
 
     <update id="updateUser" parameterType="com.liuhongchen.bscommonmodule.pojo.User">
@@ -148,8 +158,8 @@
                         <if test="realName != null and realName!=''">
                             realName=#{realName},
                         </if>
-                        <if test="nickname != null and nickname!=''">
-                            nickname=#{nickname},
+                        <if test="nickName != null and nickName!=''">
+                            nickName=#{nickName},
                         </if>
                         <if test="gender != null and gender!=''">
                             gender=#{gender},
@@ -161,7 +171,10 @@
                             createdTime=#{createdTime},
                         </if>
                         <if test="updatedTime != null and updatedTime!=''">
-                            updatedTime=#{updatedTime}
+                            updatedTime=#{updatedTime},
+                        </if>
+                        <if test="avatarUrl != null and avatarUrl!=''">
+                            avatarUrl=#{avatarUrl}
                         </if>
         </trim>
     </update>

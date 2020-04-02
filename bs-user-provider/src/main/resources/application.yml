@@ -6,11 +6,11 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  zipkin:
-#    base-url: http://localhost:7700
-#  sleuth:
-#    sampler:
-#      percentage: 1.0
+  zipkin:
+    base-url: http://localhost:7700
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 mybatis:
   type-aliases-package: com.liuhongchen.bscommonmodule.pojo
@@ -22,16 +22,15 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7776/eureka/
-#
-#logging:
-#  level:
-#    root: info
+      defaultZone: http://192.168.1.180:7776/eureka/
 
-#不添加这一项，每次访问都会报异常
-#management:
-#  metrics:
-#    web:
-#      server:
+logging:
+  level:
+    root: info
 
-#        auto-time-requests: false
+#不添加这一项，每次访问都会报异常,zipkin
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

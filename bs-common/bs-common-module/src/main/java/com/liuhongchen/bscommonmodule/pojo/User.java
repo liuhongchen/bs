@@ -16,7 +16,7 @@ public class User implements Serializable {
     //
     private String realName;
     //
-    private String nickname;
+    private String nickName;
     //
     private Integer gender;
     //
@@ -25,6 +25,8 @@ public class User implements Serializable {
     private Date createdTime;
     //
     private Date updatedTime;
+    //
+    private String avatarUrl;
     //get set 方法
     public void setId (Integer  id){
         this.id=id;
@@ -56,11 +58,11 @@ public class User implements Serializable {
     public  String getRealName(){
         return this.realName;
     }
-    public void setNickname (String  nickname){
-        this.nickname=nickname;
+    public void setNickName (String  nickName){
+        this.nickName=nickName;
     }
-    public  String getNickname(){
-        return this.nickname;
+    public  String getNickName(){
+        return this.nickName;
     }
     public void setGender (Integer  gender){
         this.gender=gender;
@@ -85,5 +87,11 @@ public class User implements Serializable {
     }
     public  Date getUpdatedTime(){
         return this.updatedTime;
+    }
+    public void setAvatarUrl (String  avatarUrl){
+        this.avatarUrl=avatarUrl;
+    }
+    public  String getAvatarUrl(){
+        return this.avatarUrl;
     }
 }

@@ -27,14 +27,6 @@ public class RegisterServiceImpl implements RegisterService {
         User queryUser = userClient.wxRegister(user);
         if (EmptyUtils.isEmpty(queryUser.getId()))return null;
 
-        String token = tokenService.generateToken(user);
-
-        UserVo userVo=new UserVo();
-        BeanUtils.copyProperties(queryUser,userVo);
-        userVo.setId(queryUser.getId());
-
-        tokenService.saveToken(userVo,token);
-
-        return token;
+        return tokenService.token(queryUser);
     }
 }
