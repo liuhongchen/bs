@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@SpringBootApplication(scanBasePackages = {"com.liuhongchen.bscommonextutils","com.liuhongchen.bsuserconsumer"})
+@SpringBootApplication(scanBasePackages = {"com.liuhongchen.bscommonutils","com.liuhongchen.bscommonextutils","com.liuhongchen.bsuserconsumer"})
 @EnableEurekaClient
 @EnableFeignClients
 public class BsUserConsumerApplication {

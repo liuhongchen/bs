@@ -14,6 +14,8 @@ import java.util.concurrent.Executors;
  */
 @Component
 public class LogUtils {
+
+    @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public void i(String topic, String msg) {

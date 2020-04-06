@@ -85,6 +85,8 @@
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
 
+
+
         <!--这个依赖里面已经包含ribbon了-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-feign -->
         <dependency>

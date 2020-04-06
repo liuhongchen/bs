@@ -6,12 +6,14 @@ import com.liuhongchen.bscommondto.common.Dto;
 import com.liuhongchen.bscommondto.common.DtoUtil;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
+import com.liuhongchen.bscommonutils.common.LogUtils;
 import com.liuhongchen.bscommonutils.common.MD5;
 import com.liuhongchen.bsuserconsumer.service.LoginService;
 import com.liuhongchen.bsuserconsumer.service.RegisterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,10 +36,17 @@ public class UserController {
     @Autowired
     private RegisterService registerService;
 
+    @Autowired
+    private LogUtils logUtils;
+
 
     @PostMapping("/login")
     public Dto login(@PathParam("phone") String phone
             , @PathParam("password") String password) throws Exception {
+
+
+        logUtils.i("user_consumer","手机号登录请求：phone="+phone+
+                ",password="+password);
 
         User user = new User();
         user.setPhone(phone);
@@ -46,14 +55,20 @@ public class UserController {
 
         Object[] results = loginService.login(user);
         if (EmptyUtils.isEmpty(results)) {
+            logUtils.i("user_consumer","手机号登录请求：phone="+phone+
+                    "登录失败");
             return DtoUtil.returnFail("登录失败", "0000");
         } else {
+            logUtils.i("user_consumer","手机号登录请求：phone="+phone+
+                    "登录成功");
             return DtoUtil.returnSuccess("登录成功", results);
         }
     }
 
     @GetMapping("/wxLogin")
     public Dto login(String code,String nickName,Integer gender) throws Exception {
+        logUtils.i("user_consumer","小程序登录请求：code="+code);
+
         if (code==null||code.length()==0)return DtoUtil.returnFail("code为空","0011");
 
         JSONObject jsonObject = loginService.wxLogin(code);
@@ -71,6 +86,8 @@ public class UserController {
         String token = registerService.wxRegister(user);
 
         if (EmptyUtils.isEmpty(token)) return DtoUtil.returnFail("服务端token生成失败","0011");
+
+        logUtils.i("user_consumer","登录成功：wxUserId="+openid);
 
         return DtoUtil.returnSuccess("登录成功",token);
 
