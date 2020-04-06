@@ -1,6 +1,6 @@
-com\liuhongchen\bscommondto\param\QuerySeatParam.class
-com\liuhongchen\bscommondto\vo\UserVo.class
-com\liuhongchen\bscommondto\common\DtoUtil.class
-com\liuhongchen\bscommondto\common\Dto.class
-com\liuhongchen\bscommondto\common\Page.class
-com\liuhongchen\bscommondto\vo\TokenVO.class
+com/liuhongchen/bscommondto/param/QuerySeatParam.class
+com/liuhongchen/bscommondto/vo/UserVo.class
+com/liuhongchen/bscommondto/common/Page.class
+com/liuhongchen/bscommondto/common/DtoUtil.class
+com/liuhongchen/bscommondto/vo/TokenVO.class
+com/liuhongchen/bscommondto/common/Dto.class

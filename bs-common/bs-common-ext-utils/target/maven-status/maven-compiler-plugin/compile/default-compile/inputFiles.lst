@@ -1,2 +1,4 @@
-C:\bs\bs-common\bs-common-ext-utils\src\main\java\com\liuhongchen\bscommonextutils\common\RedisUtils.java
-C:\bs\bs-common\bs-common-ext-utils\src\main\java\com\liuhongchen\bscommonextutils\config\RedisConfig.java
+/Users/admin/workspace/bs/bs-common/bs-common-ext-utils/src/main/java/com/liuhongchen/bscommonextutils/config/RedisConfig.java
+/Users/admin/workspace/bs/bs-common/bs-common-ext-utils/src/main/java/com/liuhongchen/bscommonextutils/common/MqUtils.java
+/Users/admin/workspace/bs/bs-common/bs-common-ext-utils/src/main/java/com/liuhongchen/bscommonextutils/common/RedisUtils.java
+/Users/admin/workspace/bs/bs-common/bs-common-ext-utils/src/main/java/com/liuhongchen/bscommonextutils/common/RabbitMQUtils.java
