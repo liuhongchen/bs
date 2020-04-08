@@ -36,6 +36,7 @@ public class Constants {
         public final static int REPLACEABLE_TIME_RANGE = 32 * 60;
         public final static int REPLACEMENT_PROTECTION_TIMEOUT = SESSION_TIMEOUT - REPLACEABLE_TIME_RANGE;//默认1.5h
         public final static int REPLACEMENT_DELAY = 2 * 60;//默认2min
+        public final static int PHONE_CODE_EXPIRE=300;
     }
 
     public static class OrderStatus {
@@ -118,6 +119,11 @@ public class Constants {
 
     public static final String USER_TOKEN_PREFIX = "userToken:";
     public static final String IMAGE_TOKEN_PREFIX = "imageCache:";
+    public static final String USER_CODE_PREFIX = "userCode:";
+    public static final String APP_ID = "wxb795694064d91fc6";
+
+    public static final String SECRET = "1d2e3cc8b796c8e44fe5f19a8572f2cb";
+
 
     //文件服务器前缀
     public static final String FILE_PRE = "http://192.168.9.151:8888/";

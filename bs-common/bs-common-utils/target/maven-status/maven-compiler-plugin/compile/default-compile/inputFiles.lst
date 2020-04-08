@@ -11,6 +11,7 @@
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/BigDecimalUtil.java
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/IdWorker.java
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/exception/ErrorCode.java
+/Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/CheckUtils.java
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/OrderUtils.java
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/IErrorCode.java
 /Users/admin/workspace/bs/bs-common/bs-common-utils/src/main/java/com.liuhongchen.bscommonutils/common/LogUtils.java

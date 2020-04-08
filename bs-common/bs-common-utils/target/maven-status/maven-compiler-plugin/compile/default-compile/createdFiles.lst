@@ -26,6 +26,7 @@ com/liuhongchen/bscommonutils/common/MD5.class
 com/liuhongchen/bscommonutils/common/Constants$RabbitQueueName.class
 com/liuhongchen/bscommonutils/common/PrintUtil.class
 com/liuhongchen/bscommonutils/common/LogUtils.class
+com/liuhongchen/bscommonutils/common/CheckUtils.class
 com/liuhongchen/bscommonutils/common/Constants$Image$ImageCategory.class
 com/liuhongchen/bscommonutils/common/Constants$QueueName.class
 com/liuhongchen/bscommonutils/common/EmptyUtils.class

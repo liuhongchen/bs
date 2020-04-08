@@ -10,4 +10,6 @@ public interface LoginService {
 
 
     JSONObject wxLogin(String code);
+
+    String getPhoneCode(String phone);
 }
