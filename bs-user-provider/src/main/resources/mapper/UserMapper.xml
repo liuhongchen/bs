@@ -8,6 +8,9 @@
         select
         id as id,
         phone as phone,
+        email as email,
+        wxnum as wxnum,
+        qqnum as qqnum,
         password as password,
         wxUserId as wxUserId,
         realName as realName,
@@ -30,6 +33,9 @@
         select
         id as id,
         phone as phone,
+        email as email,
+        wxnum as wxnum,
+        qqnum as qqnum,
         password as password,
         wxUserId as wxUserId,
         realName as realName,
@@ -47,6 +53,15 @@
             </if>
             <if test="phone != null and phone!=''">
                 and phone=#{phone}
+            </if>
+            <if test="email != null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="wxnum != null and wxnum!=''">
+                and wxnum=#{wxnum}
+            </if>
+            <if test="qqnum != null and qqnum!=''">
+                and qqnum=#{qqnum}
             </if>
             <if test="password != null and password!=''">
                 and password=#{password}
@@ -123,6 +138,9 @@
     <insert id="insertUser" parameterType="com.liuhongchen.bscommonmodule.pojo.User" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into user(phone,
+                         email,
+                         wxnum,
+                         qqnum,
                          password,
                          wxUserId,
                          realName,
@@ -133,6 +151,9 @@
                          updatedTime,
                          avatarUrl)
         values (#{phone},
+                #{email},
+                #{wxnum},
+                #{qqnum},
                 #{password},
                 #{wxUserId},
                 #{realName},
@@ -152,6 +173,15 @@
             </if>
             <if test="password != null and password!=''">
                 password=#{password},
+            </if>
+            <if test="email != null and email!=''">
+                email=#{email},
+            </if>
+            <if test="wxnum != null and wxnum!=''">
+                wxnum=#{wxnum},
+            </if>
+            <if test="qqnum != null and qqnum!=''">
+                qqnum=#{qqnum},
             </if>
             <if test="wxUserId != null and wxUserId!=''">
                 wxUserId=#{wxUserId},
@@ -184,6 +214,9 @@
     <select id="checkLoginByPassword" resultType="com.liuhongchen.bscommonmodule.pojo.User">
         select id          as id,
                phone       as phone,
+               email       as email,
+               wxnum       as wxnum,
+               qqnum       as qqnum,
                password    as password,
                wxUserId    as wxUserId,
                realName    as realName,
@@ -192,7 +225,7 @@
                birthday    as birthday,
                createdTime as createdTime,
                updatedTime as updatedTime,
-               avatarUrl as avatarUrl
+               avatarUrl   as avatarUrl
         from user
         where phone = #{phone}
           and password = #{password}

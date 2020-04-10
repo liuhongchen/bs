@@ -5,5 +5,5 @@ import com.liuhongchen.bscommonmodule.pojo.User;
 
 public interface TokenService {
 
-    String token(User user);
+    UserVo token(User user);
 }

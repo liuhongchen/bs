@@ -31,7 +31,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
         }
 
 
-        System.out.println(token);
+//        System.out.println(token);
         return true;
     }
 }

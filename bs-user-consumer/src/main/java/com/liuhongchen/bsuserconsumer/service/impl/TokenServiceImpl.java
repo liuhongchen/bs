@@ -35,25 +35,27 @@ public class TokenServiceImpl implements TokenService {
             redisUtils.delete(tokenValue);
         }
         //缓存用户token
-        redisUtils.set(tokenKey,Constants.Redis_Expire.SESSION_TIMEOUT,token);
+        redisUtils.set(tokenKey,token);
 
         //缓存用户详细信息
-        redisUtils.set(token,Constants.Redis_Expire.SESSION_TIMEOUT, JSON.toJSONString(userVo));
+        redisUtils.set(token, JSON.toJSONString(userVo));
 
 
 
     }
 
     @Override
-    public String token(User user) {
+    public UserVo token(User user) {
         String token = this.generateToken(user);
 
         UserVo userVo=new UserVo();
         BeanUtils.copyProperties(user,userVo);
         userVo.setId(user.getId());
 
+        userVo.setToken(token);
+
         this.saveToken(userVo,token);
-        return token;
+        return userVo;
     }
 
 

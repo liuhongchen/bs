@@ -4,6 +4,7 @@ package com.liuhongchen.bsuserconsumer.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.liuhongchen.bscommondto.common.Dto;
 import com.liuhongchen.bscommondto.common.DtoUtil;
+import com.liuhongchen.bscommondto.vo.UserVo;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.CheckUtils;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
@@ -11,6 +12,7 @@ import com.liuhongchen.bscommonutils.common.LogUtils;
 import com.liuhongchen.bscommonutils.common.MD5;
 import com.liuhongchen.bsuserconsumer.service.LoginService;
 import com.liuhongchen.bsuserconsumer.service.RegisterService;
+import com.liuhongchen.bsuserconsumer.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,30 +44,33 @@ public class UserController {
     private LogUtils logUtils;
 
 
-    @PostMapping("/login")
-    public Dto login(@PathParam("phone") String phone
-            , @PathParam("password") String password) throws Exception {
+    @Autowired
+    private UserService userService;
 
-
-        logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
-                ",password=" + password);
-
-        User user = new User();
-        user.setPhone(phone);
-        user.setPassword(MD5.getMd5(password, 32));
-
-
-        Object[] results = loginService.login(user);
-        if (EmptyUtils.isEmpty(results)) {
-            logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
-                    "登录失败");
-            return DtoUtil.returnFail("登录失败", "0000");
-        } else {
-            logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
-                    "登录成功");
-            return DtoUtil.returnSuccess("登录成功", results);
-        }
-    }
+//    @PostMapping("/login")
+//    public Dto login(@PathParam("phone") String phone
+//            , @PathParam("password") String password) throws Exception {
+//
+//
+//        logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
+//                ",password=" + password);
+//
+//        User user = new User();
+//        user.setPhone(phone);
+//        user.setPassword(MD5.getMd5(password, 32));
+//
+//
+//        Object[] results = loginService.login(user);
+//        if (EmptyUtils.isEmpty(results)) {
+//            logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
+//                    "登录失败");
+//            return DtoUtil.returnFail("登录失败", "0000");
+//        } else {
+//            logUtils.i("user_consumer", "手机号登录请求：phone=" + phone +
+//                    "登录成功");
+//            return DtoUtil.returnSuccess("登录成功", results);
+//        }
+//    }
 
     @GetMapping("/wxLogin")
     public Dto login(String code, String nickName, Integer gender) throws Exception {
@@ -86,13 +91,13 @@ public class UserController {
         user.setWxUserId(openid);
         user.setGender(gender);
         user.setNickName(nickName);
-        String token = registerService.wxRegister(user);
+        UserVo userVo = registerService.wxRegister(user);
 
-        if (EmptyUtils.isEmpty(token)) return DtoUtil.returnFail("服务端token生成失败", "0011");
+        if (EmptyUtils.isEmpty(userVo.getToken())) return DtoUtil.returnFail("服务端token生成失败", "0011");
 
         logUtils.i("user_consumer", "登录成功：wxUserId=" + openid);
 
-        return DtoUtil.returnSuccess("登录成功", token);
+        return DtoUtil.returnSuccess("登录成功", userVo);
 
     }
 
@@ -102,20 +107,55 @@ public class UserController {
     }
 
 
-    @GetMapping("/getPhoneCode")
-    public Dto getPhoneCode(String phone) {
-        System.out.println(phone);
+    @GetMapping("/updateInfo")
+    public Dto updateInfo(Integer id,String phone,String email, String wxnum,String qqnum) {
 
-        int checkPhone = CheckUtils.checkPhone(phone);
-        if (checkPhone == 0) {
-            return DtoUtil.returnFail("手机号格式应为11位", "0011");
-        }else if (checkPhone==2){
-            return DtoUtil.returnFail("您的手机号" + phone + "是错误格式！！！", "0011");
-        }else{
-            String phoneCode = loginService.getPhoneCode(phone);
-            if (EmptyUtils.isEmpty(phoneCode))return DtoUtil.returnFail("服务器错误,稍后重试","-1");
-            return DtoUtil.returnSuccess("登录成功",phoneCode);
+        CheckUtils.paramNullCheck(id,phone, email);
+
+        User user=new User();
+        user.setId(id);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setWxnum(wxnum);
+        user.setQqnum(qqnum);
+        Object[] result=userService.updateInfo(user);
+
+        if (Integer.parseInt(result[0].toString())==1){
+            return DtoUtil.returnSuccess("更新成功",result[1]);
+        }else {
+            return DtoUtil.returnFail("更新失败","0022");
         }
+
     }
+
+    @GetMapping("/getUserById")
+    public Dto getUserById(Long id) throws Exception {
+
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id为空","0022");
+
+        User user = userService.getUserById(id);
+        if (EmptyUtils.isEmpty(user)){
+            return DtoUtil.returnFail("未查询到该用户","0022");
+        }
+
+
+        return DtoUtil.returnSuccess("查询成功",user);
+    }
+
+//    @GetMapping("/getPhoneCode")
+//    public Dto getPhoneCode(String phone) {
+//        System.out.println(phone);
+//
+//        int checkPhone = CheckUtils.checkPhone(phone);
+//        if (checkPhone == 0) {
+//            return DtoUtil.returnFail("手机号格式应为11位", "0011");
+//        }else if (checkPhone==2){
+//            return DtoUtil.returnFail("您的手机号" + phone + "是错误格式！！！", "0011");
+//        }else{
+//            String phoneCode = loginService.getPhoneCode(phone);
+//            if (EmptyUtils.isEmpty(phoneCode))return DtoUtil.returnFail("服务器错误,稍后重试","-1");
+//            return DtoUtil.returnSuccess("登录成功",phoneCode);
+//        }
+//    }
 
 }

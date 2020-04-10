@@ -9,6 +9,12 @@ public class User implements Serializable {
     private Integer id;
     //
     private String phone;
+
+    private String email;
+
+    private String wxnum;
+
+    private String qqnum;
     //
     private String password;
     //
@@ -93,5 +99,30 @@ public class User implements Serializable {
     }
     public  String getAvatarUrl(){
         return this.avatarUrl;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWxnum() {
+        return wxnum;
+    }
+
+    public void setWxnum(String wxnum) {
+        this.wxnum = wxnum;
+    }
+
+    public String getQqnum() {
+        return qqnum;
+    }
+
+    public void setQqnum(String qqnum) {
+        this.qqnum = qqnum;
     }
 }

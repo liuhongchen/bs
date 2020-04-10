@@ -9,6 +9,12 @@ public class UserVo {
     private Integer id;
     //
     private String phone;
+
+    private String email;
+
+    private String wxnum;
+
+    private String qqnum;
     //
     private String password;
     //
@@ -19,6 +25,9 @@ public class UserVo {
     private String nickname;
     //
     private Integer gender;
+
+
+    private String token;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date birthday;
@@ -31,19 +40,7 @@ public class UserVo {
     private Date updatedTime;
 
 
-    // 头像图片ID
-    private Long imageId;
-    // 图片URL
-    private String imgUrl;
-    //微信用户头像
-    private String headimgUrl;
 
-
-
-    public Long getImageId() { return imageId; }
-    public void setImageId(Long imageId) { this.imageId = imageId; }
-    public String getImgUrl() { return imgUrl; }
-    public void setImgUrl(String imgUrl) { this.imgUrl = imgUrl; }
 
     //get set 方法
     public void setId (Integer  id){
@@ -107,5 +104,36 @@ public class UserVo {
         return this.updatedTime;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWxnum() {
+        return wxnum;
+    }
+
+    public void setWxnum(String wxnum) {
+        this.wxnum = wxnum;
+    }
+
+    public String getQqnum() {
+        return qqnum;
+    }
+
+    public void setQqnum(String qqnum) {
+        this.qqnum = qqnum;
+    }
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

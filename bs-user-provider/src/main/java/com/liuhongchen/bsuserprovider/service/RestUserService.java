@@ -79,4 +79,14 @@ public class RestUserService {
     }
 
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Object[] update(@RequestBody User user) throws Exception {
+        Integer result = userMapper.updateUser(user);
+
+        return new Object[]{result,userMapper.getUserById(Long.valueOf(user.getId()))};
+
+
+
+    }
+
 }

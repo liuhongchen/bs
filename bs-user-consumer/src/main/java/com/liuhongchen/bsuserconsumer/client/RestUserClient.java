@@ -39,5 +39,9 @@ public interface RestUserClient {
 
     @RequestMapping(value = "/wxRegister", method = RequestMethod.POST)
     public User wxRegister(@RequestBody User user) throws Exception ;
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Object[] update(@RequestBody User user) throws Exception ;
+
 }
 

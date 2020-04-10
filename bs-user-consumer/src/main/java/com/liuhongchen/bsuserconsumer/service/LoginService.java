@@ -6,10 +6,10 @@ import com.liuhongchen.bscommonmodule.pojo.User;
 
 public interface LoginService {
 
-    public Object[] login(User user) throws Exception;
+//    public Object[] login(User user) throws Exception;
 
 
     JSONObject wxLogin(String code);
 
-    String getPhoneCode(String phone);
+//    String getPhoneCode(String phone);
 }

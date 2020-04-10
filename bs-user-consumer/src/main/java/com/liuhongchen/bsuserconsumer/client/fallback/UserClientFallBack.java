@@ -50,4 +50,9 @@ public class UserClientFallBack implements RestUserClient {
     public User wxRegister(User user) throws Exception {
         return null;
     }
+
+    @Override
+    public Object[] update(User user) throws Exception {
+        return null;
+    }
 }
