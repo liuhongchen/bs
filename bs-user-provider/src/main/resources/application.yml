@@ -2,12 +2,12 @@ spring:
   application:
     name: bs-user-provider
   datasource:
-    url: jdbc:mysql://192.168.1.180:3306/bs_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://router.liuhongchen.com:3306/bs_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   zipkin:
-    base-url: http://192.168.1.180:7700
+    base-url: http://router.liuhongchen.com:7700
   sleuth:
     sampler:
       percentage: 1.0
@@ -22,7 +22,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.1.180:7776/eureka/
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
 
 logging:
   level:
