@@ -19,13 +19,11 @@ public class Book implements Serializable {
 	//
 	private String author;
 	//
-	private String summary;
-	//
 	private String publisher;
 	//
 	private String pubplace;
 	//
-	private Date pubdate;
+	private String pubdate;
 	//
 	private Integer page;
 
@@ -43,19 +41,16 @@ public class Book implements Serializable {
 
 	private String language;
 
-	private String format;
-
 	public Book() {
 	}
 
-	public Book(Integer id, String isbn10, String title, String subtitle, String pic, String author, String summary, String publisher, String pubplace, Date pubdate, Integer page, Double price, String binding, String isbn13, String keyword, String edition, String impression, String language, String format) {
+	public Book(Integer id, String isbn10, String title, String subtitle, String pic, String author,String publisher, String pubplace, String pubdate, Integer page, Double price, String binding, String isbn13, String keyword, String edition, String impression, String language) {
 		this.id = id;
 		this.isbn10 = isbn10;
 		this.title = title;
 		this.subtitle = subtitle;
 		this.pic = pic;
 		this.author = author;
-		this.summary = summary;
 		this.publisher = publisher;
 		this.pubplace = pubplace;
 		this.pubdate = pubdate;
@@ -67,7 +62,6 @@ public class Book implements Serializable {
 		this.edition = edition;
 		this.impression = impression;
 		this.language = language;
-		this.format = format;
 	}
 
 	public Integer getId() {
@@ -118,14 +112,6 @@ public class Book implements Serializable {
 		this.author = author;
 	}
 
-	public String getSummary() {
-		return summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-
 	public String getPublisher() {
 		return publisher;
 	}
@@ -142,11 +128,11 @@ public class Book implements Serializable {
 		this.pubplace = pubplace;
 	}
 
-	public Date getPubdate() {
+	public String getPubdate() {
 		return pubdate;
 	}
 
-	public void setPubdate(Date pubdate) {
+	public void setPubdate(String pubdate) {
 		this.pubdate = pubdate;
 	}
 
@@ -214,11 +200,4 @@ public class Book implements Serializable {
 		this.language = language;
 	}
 
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
 }

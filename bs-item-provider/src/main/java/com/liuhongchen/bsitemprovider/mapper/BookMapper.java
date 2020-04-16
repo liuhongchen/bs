@@ -27,4 +27,7 @@ public interface BookMapper {
 
 	public Integer batchDeleteBook(Map<String, List<String>> params);
 
+	Book getBookByIsbn10(@Param("isbn") String isbn);
+
+	Book getBookByIsbn13(@Param("isbn") String isbn);
 }

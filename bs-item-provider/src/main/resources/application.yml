@@ -1,8 +1,8 @@
 spring:
   application:
-    name: bs-user-provider
+    name: bs-item-provider
   datasource:
-    url: jdbc:mysql://router.liuhongchen.com:8066/bs_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://router.liuhongchen.com:3306/bs_item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,7 +17,7 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
 
 server:
-  port: 15001
+  port: 15002
 
 eureka:
   client:
