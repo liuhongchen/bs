@@ -2,7 +2,7 @@ spring:
   application:
     name: bs-user-consumer
   redis:
-    host: 192.168.1.180
+    host: router.liuhongchen.com
     database: 0
     port: 6379
     user: root
@@ -10,23 +10,23 @@ spring:
     timeout: 3000
   kafka:
     producer:
-      bootstrap-servers: 192.168.1.180:9092
+      bootstrap-servers: router.liuhongchen.com:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   zipkin:
-    base-url: http://192.168.1.180:7700
+    base-url: http://router.liuhongchen.com:7700
   sleuth:
     sampler:
       percentage: 1.0
   rabbitmq:
-    host: 192.168.1.180
+    host: router.liuhongchen.com
     port: 5672
     username: guest
     password: guest
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.1.180:7776/eureka/
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
     fetch-registry: true
 server:
   port: 15051
