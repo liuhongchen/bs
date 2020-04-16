@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhongchen.dm.mapper.BookMapper">
+
+    <select id="getBookById" resultType="com.liuhongchen.bscommonmodule.pojo.Book">
+        select
+                id as id,
+                isbn10 as isbn10,
+                title as title,
+                subtitle as subtitle,
+                pic as pic,
+                author as author,
+                summary as summary,
+                publisher as publisher,
+                pubplace as pubplace,
+                pubdate as pubdate,
+                page as page,
+                price as price,
+                binding as binding,
+                isbn13 as isbn13,
+                keyword as keyword,
+                edition as edition,
+                impression as impression,
+                language as language,
+                format as format
+        from book
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getBookListByMap" resultType="com.liuhongchen.bscommonmodule.pojo.Book" parameterType="java.util.Map">
+        select
+                id as id,
+                isbn10 as isbn10,
+                title as title,
+                subtitle as subtitle,
+                pic as pic,
+                author as author,
+                summary as summary,
+                publisher as publisher,
+                pubplace as pubplace,
+                pubdate as pubdate,
+                page as page,
+                price as price,
+                binding as binding,
+                isbn13 as isbn13,
+                keyword as keyword,
+                edition as edition,
+                impression as impression,
+                language as language,
+                format as format
+        from book
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="isbn10 != null and isbn10!=''">
+                    and isbn10=#{isbn10}
+                </if>
+                <if test="title != null and title!=''">
+                    and title=#{title}
+                </if>
+                <if test="subtitle != null and subtitle!=''">
+                    and subtitle=#{subtitle}
+                </if>
+                <if test="pic != null and pic!=''">
+                    and pic=#{pic}
+                </if>
+                <if test="author != null and author!=''">
+                    and author=#{author}
+                </if>
+                <if test="summary != null and summary!=''">
+                    and summary=#{summary}
+                </if>
+                <if test="publisher != null and publisher!=''">
+                    and publisher=#{publisher}
+                </if>
+                <if test="pubplace != null and pubplace!=''">
+                    and pubplace=#{pubplace}
+                </if>
+                <if test="pubdate != null and pubdate!=''">
+                    and pubdate=#{pubdate}
+                </if>
+                <if test="page != null and page!=''">
+                    and page=#{page}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="binding != null and binding!=''">
+                    and binding=#{binding}
+                </if>
+                <if test="isbn13 != null and isbn13!=''">
+                    and isbn13=#{isbn13}
+                </if>
+                <if test="keyword != null and keyword!=''">
+                    and keyword=#{keyword}
+                </if>
+                <if test="edition != null and edition!=''">
+                    and edition=#{edition}
+                </if>
+                <if test="impression != null and impression!=''">
+                    and impression=#{impression}
+                </if>
+                <if test="language != null and language!=''">
+                    and language=#{language}
+                </if>
+                <if test="format != null and format!=''">
+                    and format=#{format}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getBookCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from book
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="isbn10 != null and isbn10!=''">
+                    and isbn10=#{isbn10}
+                </if>
+                <if test="title != null and title!=''">
+                    and title=#{title}
+                </if>
+                <if test="subtitle != null and subtitle!=''">
+                    and subtitle=#{subtitle}
+                </if>
+                <if test="pic != null and pic!=''">
+                    and pic=#{pic}
+                </if>
+                <if test="author != null and author!=''">
+                    and author=#{author}
+                </if>
+                <if test="summary != null and summary!=''">
+                    and summary=#{summary}
+                </if>
+                <if test="publisher != null and publisher!=''">
+                    and publisher=#{publisher}
+                </if>
+                <if test="pubplace != null and pubplace!=''">
+                    and pubplace=#{pubplace}
+                </if>
+                <if test="pubdate != null and pubdate!=''">
+                    and pubdate=#{pubdate}
+                </if>
+                <if test="page != null and page!=''">
+                    and page=#{page}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="binding != null and binding!=''">
+                    and binding=#{binding}
+                </if>
+                <if test="isbn13 != null and isbn13!=''">
+                    and isbn13=#{isbn13}
+                </if>
+                <if test="keyword != null and keyword!=''">
+                    and keyword=#{keyword}
+                </if>
+                <if test="edition != null and edition!=''">
+                    and edition=#{edition}
+                </if>
+                <if test="impression != null and impression!=''">
+                    and impression=#{impression}
+                </if>
+                <if test="language != null and language!=''">
+                    and language=#{language}
+                </if>
+                <if test="format != null and format!=''">
+                    and format=#{format}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertBook" parameterType="com.liuhongchen.bscommonmodule.pojo.Book">
+        insert into book(
+                        isbn10,
+                        title,
+                        subtitle,
+                        pic,
+                        author,
+                        summary,
+                        publisher,
+                        pubplace,
+                        pubdate,
+                        page,
+                        price,
+                        binding,
+                        isbn13,
+                        keyword,
+                        edition,
+                        impression,
+                        language,
+                        format)
+        values(
+                     #{isbn10},
+                     #{title},
+                     #{subtitle},
+                     #{pic},
+                     #{author},
+                     #{summary},
+                     #{publisher},
+                     #{pubplace},
+                     #{pubdate},
+                     #{page},
+                     #{price},
+                     #{binding},
+                     #{isbn13},
+                     #{keyword},
+                     #{edition},
+                     #{impression},
+                     #{language},
+                    #{format})
+    </insert>
+
+    <update id="updateBook" parameterType="com.liuhongchen.bscommonmodule.pojo.Book">
+        update book
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="isbn10 != null and isbn10!=''">
+                            isbn10=#{isbn10},
+                        </if>
+                        <if test="title != null and title!=''">
+                            title=#{title},
+                        </if>
+                        <if test="subtitle != null and subtitle!=''">
+                            subtitle=#{subtitle},
+                        </if>
+                        <if test="pic != null and pic!=''">
+                            pic=#{pic},
+                        </if>
+                        <if test="author != null and author!=''">
+                            author=#{author},
+                        </if>
+                        <if test="summary != null and summary!=''">
+                            summary=#{summary},
+                        </if>
+                        <if test="publisher != null and publisher!=''">
+                            publisher=#{publisher},
+                        </if>
+                        <if test="pubplace != null and pubplace!=''">
+                            pubplace=#{pubplace},
+                        </if>
+                        <if test="pubdate != null and pubdate!=''">
+                            pubdate=#{pubdate},
+                        </if>
+                        <if test="page != null and page!=''">
+                            page=#{page},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="binding != null and binding!=''">
+                            binding=#{binding},
+                        </if>
+                        <if test="isbn13 != null and isbn13!=''">
+                            isbn13=#{isbn13},
+                        </if>
+                        <if test="keyword != null and keyword!=''">
+                            keyword=#{keyword},
+                        </if>
+                        <if test="edition != null and edition!=''">
+                            edition=#{edition},
+                        </if>
+                        <if test="impression != null and impression!=''">
+                            impression=#{impression},
+                        </if>
+                        <if test="language != null and language!=''">
+                            language=#{language},
+                        </if>
+                        <if test="format != null and format!=''">
+                            format=#{format}
+                        </if>
+        </trim>
+    </update>
+</mapper>

@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: bs-user-provider
+  datasource:
+    url: jdbc:mysql://router.liuhongchen.com:8066/bs_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  zipkin:
+    base-url: http://router.liuhongchen.com:7700
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+mybatis:
+  type-aliases-package: com.liuhongchen.bscommonmodule.pojo
+  mapper-locations: classpath*:mapper/*.xml
+
+server:
+  port: 15001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
+
+logging:
+  level:
+    root: info
+
+#不添加这一项，每次访问都会报异常,zipkin
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

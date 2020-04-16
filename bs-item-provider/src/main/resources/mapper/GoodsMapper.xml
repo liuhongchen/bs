@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhongchen.dm.mapper.GoodsMapper">
+
+    <select id="getGoodsById" resultType="com.liuhongchen.bscommonmodule.pojo.Goods">
+        select
+                id as id,
+                bookId as bookId,
+                typeId as typeId,
+                price as price,
+                way as way,
+                info as info,
+                createTime as createTime,
+                updateTime as updateTime,
+                status as status,
+                sellerId as sellerId,
+                address as address
+        from goods
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getGoodsListByMap" resultType="com.liuhongchen.bscommonmodule.pojo.Goods" parameterType="java.util.Map">
+        select
+                id as id,
+                bookId as bookId,
+                typeId as typeId,
+                price as price,
+                way as way,
+                info as info,
+                createTime as createTime,
+                updateTime as updateTime,
+                status as status,
+                sellerId as sellerId,
+                address as address
+        from goods
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="bookId != null and bookId!=''">
+                    and bookId=#{bookId}
+                </if>
+                <if test="typeId != null and typeId!=''">
+                    and typeId=#{typeId}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="way != null and way!=''">
+                    and way=#{way}
+                </if>
+                <if test="info != null and info!=''">
+                    and info=#{info}
+                </if>
+                <if test="createTime != null and createTime!=''">
+                    and createTime=#{createTime}
+                </if>
+                <if test="updateTime != null and updateTime!=''">
+                    and updateTime=#{updateTime}
+                </if>
+                <if test="status != null and status!=''">
+                    and status=#{status}
+                </if>
+                <if test="sellerId != null and sellerId!=''">
+                    and sellerId=#{sellerId}
+                </if>
+                <if test="address != null and address!=''">
+                    and address=#{address}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getGoodsCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from goods
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="bookId != null and bookId!=''">
+                    and bookId=#{bookId}
+                </if>
+                <if test="typeId != null and typeId!=''">
+                    and typeId=#{typeId}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="way != null and way!=''">
+                    and way=#{way}
+                </if>
+                <if test="info != null and info!=''">
+                    and info=#{info}
+                </if>
+                <if test="createTime != null and createTime!=''">
+                    and createTime=#{createTime}
+                </if>
+                <if test="updateTime != null and updateTime!=''">
+                    and updateTime=#{updateTime}
+                </if>
+                <if test="status != null and status!=''">
+                    and status=#{status}
+                </if>
+                <if test="sellerId != null and sellerId!=''">
+                    and sellerId=#{sellerId}
+                </if>
+                <if test="address != null and address!=''">
+                    and address=#{address}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods">
+        insert into goods(
+                        bookId,
+                        typeId,
+                        price,
+                        way,
+                        info,
+                        createTime,
+                        updateTime,
+                        status,
+                        sellerId,
+                        address)
+        values(
+                     #{bookId},
+                     #{typeId},
+                     #{price},
+                     #{way},
+                     #{info},
+                     #{createTime},
+                     #{updateTime},
+                     #{status},
+                     #{sellerId},
+                    #{address})
+    </insert>
+
+    <update id="updateGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods">
+        update goods
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="bookId != null and bookId!=''">
+                            bookId=#{bookId},
+                        </if>
+                        <if test="typeId != null and typeId!=''">
+                            typeId=#{typeId},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="way != null and way!=''">
+                            way=#{way},
+                        </if>
+                        <if test="info != null and info!=''">
+                            info=#{info},
+                        </if>
+                        <if test="createTime != null and createTime!=''">
+                            createTime=#{createTime},
+                        </if>
+                        <if test="updateTime != null and updateTime!=''">
+                            updateTime=#{updateTime},
+                        </if>
+                        <if test="status != null and status!=''">
+                            status=#{status},
+                        </if>
+                        <if test="sellerId != null and sellerId!=''">
+                            sellerId=#{sellerId},
+                        </if>
+                        <if test="address != null and address!=''">
+                            address=#{address}
+                        </if>
+        </trim>
+    </update>
+</mapper>
