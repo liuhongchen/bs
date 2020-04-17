@@ -1,5 +1,7 @@
 package com.liuhongchen.bsitemconsumer.service;
 
+import com.liuhongchen.bscommonmodule.pojo.Book;
+
 /**
  * ClassName:BookService
  * Package:com.liuhongchen.bsitemconsumer.service.impl
@@ -10,5 +12,8 @@ package com.liuhongchen.bsitemconsumer.service;
  */
 public interface BookService {
 
-    Integer isbn(String isbn);
+    Book isbn(String isbn);
+
+    Book getBookById(Integer id);
+
 }
