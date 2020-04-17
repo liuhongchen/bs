@@ -3,10 +3,12 @@ package com.liuhongchen.bsitemprovider.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.liuhongchen.bscommonmodule.pojo.Book;
+import com.liuhongchen.bscommonmodule.pojo.Goods;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.Constants;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
 import com.liuhongchen.bsitemprovider.mapper.BookMapper;
+import com.liuhongchen.bsitemprovider.mapper.GoodsMapper;
 import com.liuhongchen.bsitemprovider.utils.HttpUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.InputStream;
@@ -33,21 +32,22 @@ public class RestItemService {
     String path = "/isbn/query";
     String method = "GET";
 
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private BookMapper bookMapper;
 
-    @RequestMapping(value = "/isbn",method = RequestMethod.POST)
+    @Autowired
+    private GoodsMapper goodsMapper;
+
+    @RequestMapping(value = "/isbn", method = RequestMethod.POST)
 //    public Integer isbn()throws Exception{
-    public Integer isbn(@RequestParam("isbn") String isbn)throws Exception{
+    public Book isbn(@RequestParam("isbn") String isbn) throws Exception {
 //        String isbn="9787040205497";
         if (EmptyUtils.isEmpty(isbn)) {
             return null;
         }
-        Book book=(isbn.length()==10)?bookMapper.getBookByIsbn10(isbn):bookMapper.getBookByIsbn13(isbn);
-        if (book!=null) return book.getId();
+        Book book = (isbn.length() == 10) ? bookMapper.getBookByIsbn10(isbn) : bookMapper.getBookByIsbn13(isbn);
+        if (book != null) return book;
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
@@ -60,12 +60,12 @@ public class RestItemService {
             System.out.println(response.toString());
             //获取response的body
             HttpEntity entity = response.getEntity();
-            String json=EntityUtils.toString(entity);
+            String json = EntityUtils.toString(entity);
             System.out.println(json);
             JSONObject jsonObject = JSON.parseObject(json);
             JSONObject result = jsonObject.getJSONObject("result");
 
-            book=new Book();
+            book = new Book();
             book.setTitle(result.getString("title"));
             book.setSubtitle(result.getString("subtitle"));
             book.setPic(result.getString("pic"));
@@ -85,9 +85,9 @@ public class RestItemService {
 
             Integer integer = bookMapper.insertBook(book);
 
-            if (integer==1){
-                return book.getId();
-            }else{
+            if (integer == 1) {
+                return book;
+            } else {
                 return null;
             }
 
@@ -98,10 +98,26 @@ public class RestItemService {
         return null;
     }
 
+    @RequestMapping(value = "/createGoods", method = RequestMethod.POST)
+    public Goods createGoods(@RequestBody Goods goods) throws Exception {
+        goodsMapper.insertGoods(goods);
+        return goods;
+    }
 
+    @RequestMapping(value = "/getGoodsStatus", method = RequestMethod.POST)
+    public Integer getGoodsStatus(@RequestParam("id") Integer id) throws Exception {
+        return goodsMapper.getGoodsById(Long.valueOf(id)).getStatus();
 
+    }
+    @RequestMapping(value = "/getGoodsById", method = RequestMethod.POST)
+    public Goods getGoodsById(@RequestParam("id") Integer id) throws Exception {
+        return goodsMapper.getGoodsById(Long.valueOf(id));
+    }
+    @RequestMapping(value = "/getBookById", method = RequestMethod.POST)
+    public Book getBookById(@RequestParam("id") Integer id) throws Exception {
 
-
+        return bookMapper.getBookById(Long.valueOf(id));
+    }
 
 
 

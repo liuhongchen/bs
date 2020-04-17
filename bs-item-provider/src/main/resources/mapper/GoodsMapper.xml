@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.liuhongchen.dm.mapper.GoodsMapper">
+<mapper namespace="com.liuhongchen.bsitemprovider.mapper.GoodsMapper">
 
     <select id="getGoodsById" resultType="com.liuhongchen.bscommonmodule.pojo.Goods">
         select
@@ -118,7 +118,7 @@
         </trim>
     </select>
 
-    <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods">
+    <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into goods(
                         bookId,
                         typeId,
