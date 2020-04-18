@@ -58,5 +58,11 @@ public class TokenServiceImpl implements TokenService {
         return userVo;
     }
 
+    @Override
+    public Boolean tokenValid(String token) {
+        Object o = redisUtils.get(token);
+        return o != null ;
+    }
+
 
 }

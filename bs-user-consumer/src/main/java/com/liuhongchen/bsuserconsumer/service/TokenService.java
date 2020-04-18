@@ -6,4 +6,6 @@ import com.liuhongchen.bscommonmodule.pojo.User;
 public interface TokenService {
 
     UserVo token(User user);
+
+    Boolean tokenValid(String token);
 }

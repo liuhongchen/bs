@@ -2,6 +2,7 @@ package com.liuhongchen.bsitemconsumer.controller;
 
 import com.liuhongchen.bscommondto.common.Dto;
 import com.liuhongchen.bscommondto.common.DtoUtil;
+import com.liuhongchen.bscommondto.vo.GoodsVo;
 import com.liuhongchen.bscommonmodule.pojo.Goods;
 import com.liuhongchen.bscommonutils.common.CheckUtils;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * ClassName:GoodsController
@@ -80,4 +82,38 @@ public class GoodsController {
 
         return DtoUtil.returnSuccess("查询成功",goods);
     }
+    @GetMapping("/getGoodsVoById")
+    public Dto getGoodsVoById(Integer id){
+        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+
+        GoodsVo goods = goodsService.getGoodsVoById(id);
+        if (goods==null)return DtoUtil.returnFail("查询失败","0022");
+
+        return DtoUtil.returnSuccess("查询成功",goods);
+    }
+
+    @GetMapping("/getGoodsVoBySellerId")
+    public Dto getGoodsBySellerId(Integer id){
+        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+
+        List<GoodsVo> goodsList=goodsService.getGoodsVoBySellerId(id);
+
+        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+
+        return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
+    }
+
+
+    @GetMapping("/cancelOrder")
+    public Dto cancelOrder(Integer id){
+        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+
+
+        Integer res=goodsService.cancelOrder(id);
+
+        return (res==null||res!=1)?
+                DtoUtil.returnFail("取消失败","0022"):
+                DtoUtil.returnSuccess("取消成功");
+    }
+
 }

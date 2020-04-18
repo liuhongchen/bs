@@ -21,7 +21,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(globalInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login")
-                .excludePathPatterns("/wxLogin");
+                .excludePathPatterns("/wxLogin")
+                .excludePathPatterns("/tokenValid");
 
     }
 }

@@ -1,5 +1,6 @@
 package com.liuhongchen.bsitemconsumer.client;
 
+import com.liuhongchen.bscommondto.vo.GoodsVo;
 import com.liuhongchen.bscommonmodule.pojo.Book;
 import com.liuhongchen.bscommonmodule.pojo.Goods;
 import com.liuhongchen.bsitemconsumer.client.fallback.ItemClientFallBack;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.websocket.server.PathParam;
+import java.util.List;
 
 /**
  * Created by liuhongchen
@@ -37,5 +41,24 @@ public interface RestItemClient {
 
     @RequestMapping(value = "/getBookById", method = RequestMethod.POST)
     Book getBookById(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getGoodsBySellerId", method = RequestMethod.POST)
+    List<Goods> getGoodsBySellerId(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getGoodsByBuyerId", method = RequestMethod.POST)
+    List<Goods> getGoodsByBuyerId(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getGoodsVoBySellerId", method = RequestMethod.POST)
+    List<GoodsVo> getGoodsVoBySellerId(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getGoodsVoByBuyerId", method = RequestMethod.POST)
+    List<GoodsVo> getGoodsVoByBuyerId(@RequestParam("id")Integer id);
+
+
+    @RequestMapping(value = "/getGoodsVoById", method = RequestMethod.POST)
+    GoodsVo getGoodsVoById(@RequestParam("id") Integer id);
+
+    @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
+    Integer cancelOrder(@RequestParam("id")Integer id);
 }
 
