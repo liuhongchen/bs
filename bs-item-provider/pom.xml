@@ -64,7 +64,11 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.liuhongchen</groupId>
+            <artifactId>bs-common-dto</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.liuhongchen</groupId>
             <artifactId>bs-common-utils</artifactId>

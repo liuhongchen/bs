@@ -1,11 +1,13 @@
-package com.liuhongchen.bscommonmodule.pojo;
+package com.liuhongchen.bscommondto.vo;
+import com.liuhongchen.bscommonmodule.pojo.Book;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /***
 *   
 */
-public class Goods implements Serializable {
+public class GoodsVo implements Serializable {
 	//
 	private Integer id;
 	//
@@ -28,8 +30,9 @@ public class Goods implements Serializable {
 	private Integer status;
 
 	private Integer sellerId;
-
 	private Integer buyerId;
+
+	private Book bookinfo;
 
 
 	public Integer getBuyerId() {
@@ -128,7 +131,15 @@ public class Goods implements Serializable {
 		this.sellerId = sellerId;
 	}
 
-	public Goods() {
+	public Book getBookinfo() {
+		return bookinfo;
+	}
+
+	public void setBookinfo(Book bookinfo) {
+		this.bookinfo = bookinfo;
+	}
+
+	public GoodsVo() {
 	}
 
 

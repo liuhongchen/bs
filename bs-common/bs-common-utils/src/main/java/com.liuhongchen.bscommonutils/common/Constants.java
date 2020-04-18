@@ -12,6 +12,13 @@ public class Constants {
         }
     }
 
+    public static class MsgLogStatus{
+        public static final Integer DELIVERING=0;
+        public static final Integer DELIVER_SUCCESS=1;
+        public static final Integer DELIVER_FAILED=2;
+        public static final Integer CONSUMED_SUCCESS=3;
+    }
+
     public static class Image {
         //0:无类型 1:轮播图 2:海报图
         public static class ImageType {
