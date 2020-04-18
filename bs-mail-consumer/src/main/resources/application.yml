@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: bs-mail-consumer
+  datasource:
+    url: jdbc:mysql://192.168.1.180:3306/bs_mail?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  zipkin:
+    base-url: http://router.liuhongchen.com:7700
+  sleuth:
+    sampler:
+      percentage: 1.0
+  mail:
+    default-encoding: UTF-8
+    from: 892698613@qq.com
+    host: smtp.qq.com
+    password: mwqktcykjhjqbbeg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    username: 892698613@qq.com
+  rabbitmq:
+    host: 192.168.1.180
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100
+    username: guest
+    password: guest
+    port: 5672
+    publisher-confirms: true
+    publisher-returns: true
+
+mybatis:
+  type-aliases-package: com.liuhongchen.bscommonmodule.pojo
+  mapper-locations: classpath*:mapper/*.xml
+
+server:
+  port: 15053
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
+
+logging:
+  level:
+    root: info
+
+#不添加这一项，每次访问都会报异常,zipkin
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

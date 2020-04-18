@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhongchen.bsmailconsumer.mapper.MsgLogMapper">
+
+    <resultMap id="msgLogMap" type="com.liuhongchen.bscommonmodule.pojo.MsgLog">
+        <id column="msgId" property="msgId" jdbcType="VARCHAR" />
+        <result column="msg" property="msg" jdbcType="VARCHAR" />
+        <result column="exchange" property="exchange" jdbcType="VARCHAR" />
+        <result column="routingKey" property="routingKey" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="tryCount" property="tryCount" jdbcType="INTEGER" />
+        <result column="nextTryTime" property="nextTryTime" jdbcType="TIMESTAMP" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectByMsgId" resultMap="msgLogMap">
+        select *
+        from msgLog
+        where msgId=#{msgId}
+    </select>
+
+
+    <sql id="Base_Column_List" >
+        msgId, msg, exchange, routingKey, status, tryCount, nextTryTime,
+        createTime, updateTime
+    </sql>
+
+    <insert id="insert" parameterType="com.liuhongchen.bscommonmodule.pojo.MsgLog">
+        INSERT INTO msg_log(msgId, msg, exchange, routingKey, status,
+                            tryCount, nextTryTime, createTime, updateTime)
+        VALUES (#{msgId}, #{msg}, #{exchange}, #{routingKey}, #{status}, #{tryCount}, #{nextTryTime}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="updateStatus" parameterType="com.liuhongchen.bscommonmodule.pojo.MsgLog">
+        update msg_log
+        set `status`=#{status}, updateTime = now()
+        where msgId=#{msgId}
+    </update>
+
+
+    <select id="selectTimeoutMsg" resultMap="msgLogMap">
+        select <include refid="Base_Column_List"/>
+        from msg_log
+        where status = 0
+        and nextTryTime &lt;= now()
+    </select>
+
+    <update id="updateTryCount">
+        update msg_log set tryCount = tryCount + 1, nextTryTime =
+            #{nextTryTime}, updateTime = now()
+        where msgId = #{msgId}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultMap="msgLogMap">
+        select
+        <include refid="Base_Column_List" />
+        from msg_log
+        where msgId = #{msgId,jdbcType=VARCHAR}
+    </select>
+</mapper>

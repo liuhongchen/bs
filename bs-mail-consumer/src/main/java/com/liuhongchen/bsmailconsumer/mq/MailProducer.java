@@ -1,21 +1,17 @@
-package com.liuhongchen.bsmailprovider.mq;
+package com.liuhongchen.bsmailconsumer.mq;
 
-import com.liuhongchen.bscommondto.common.Dto;
-import com.liuhongchen.bscommondto.common.DtoUtil;
 import com.liuhongchen.bscommonmodule.pojo.Mail;
 import com.liuhongchen.bscommonmodule.pojo.MsgLog;
 import com.liuhongchen.bscommonutils.common.Constants;
 import com.liuhongchen.bscommonutils.common.IdWorker;
-import com.liuhongchen.bsmailprovider.config.RabbitConfig;
-import com.liuhongchen.bsmailprovider.service.MsgLogService;
-import com.liuhongchen.bsmailprovider.utils.JodaTimeUtil;
-import com.liuhongchen.bsmailprovider.utils.JsonUtil;
-import com.liuhongchen.bsmailprovider.utils.MessageHelper;
+import com.liuhongchen.bsmailconsumer.config.RabbitConfig;
+import com.liuhongchen.bsmailconsumer.service.MsgLogService;
+import com.liuhongchen.bsmailconsumer.utils.JodaTimeUtil;
+import com.liuhongchen.bsmailconsumer.utils.JsonUtil;
+import com.liuhongchen.bsmailconsumer.utils.MessageHelper;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,8 +27,8 @@ import java.util.Date;
  * @date:2020-04-18 17:01
  * @author:892698613@qq.com
  */
-//@RestController
-public class MailProvider {
+@RestController
+public class MailProducer {
 
 
     @Autowired
