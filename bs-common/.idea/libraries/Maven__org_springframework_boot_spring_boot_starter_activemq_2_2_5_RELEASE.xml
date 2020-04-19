@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.boot:spring-boot-starter-activemq:2.2.5.RELEASE">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-activeMQ/2.2.5.RELEASE/spring-boot-starter-activemq-2.2.5.RELEASE.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-activemq/2.2.5.RELEASE/spring-boot-starter-activemq-2.2.5.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-activemq/2.2.5.RELEASE/spring-boot-starter-activemq-2.2.5.RELEASE-javadoc.jar!/" />

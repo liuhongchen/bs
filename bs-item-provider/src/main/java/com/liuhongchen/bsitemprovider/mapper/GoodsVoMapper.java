@@ -21,4 +21,5 @@ public interface GoodsVoMapper {
 
 	List<GoodsVo> getGoodsListByMap(Map<String,Object> map);
 
+    List<GoodsVo> getAllGoodsVo();
 }

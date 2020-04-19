@@ -141,9 +141,30 @@ public class RestItemService {
         return goodsVoMapper.getGoodsListByMap(params);
     }
 
+    @RequestMapping(value = "/getGoodsVoByBuyerIdAndStatus", method = RequestMethod.POST)
+    public List<GoodsVo> getGoodsVoByBuyerIdAndStatus(@RequestParam("id") Integer id
+            ,@RequestParam("status") Integer status) throws Exception {
+
+        Map<String,Object> params=new HashMap<>();
+        params.put("buyerId",id);
+        params.put("status",status);
+        return goodsVoMapper.getGoodsListByMap(params);
+    }
+
     @RequestMapping(value = "/getGoodsVoById", method = RequestMethod.POST)
     public GoodsVo getGoodsVoById(@RequestParam("id") Integer id) throws Exception {
         return goodsVoMapper.getGoodsById(id);
+    }
+    @RequestMapping(value = "/getGoodsVoByTypeId", method = RequestMethod.POST)
+    public List<GoodsVo> getGoodsVoByTypeId(@RequestParam("typeId") Integer typeId) throws Exception {
+        Map<String,Object> params=new HashMap<>();
+        params.put("typeId",typeId);
+        List<GoodsVo> goodsVoList = goodsVoMapper.getGoodsListByMap(params);
+        return goodsVoList;
+    }
+    @RequestMapping(value = "/getAllGoodsVo", method = RequestMethod.POST)
+    public List<GoodsVo> getAllGoodsVo() throws Exception {
+        return goodsVoMapper.getAllGoodsVo();
     }
 
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)

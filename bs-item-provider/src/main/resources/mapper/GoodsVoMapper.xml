@@ -21,6 +21,7 @@
                      select="getBookById" column="bookId"/>
     </resultMap>
 
+
     <select id="getBookById" resultType="com.liuhongchen.bscommonmodule.pojo.Book" parameterType="int">
         select *
         from book
@@ -47,6 +48,22 @@
                 and id=#{id}
             </if>
         </trim>
+    </select>
+    <select id="getAllGoodsVo" resultMap="goodsVoMap">
+        select
+        id as id,
+        bookId as bookId,
+        typeId as typeId,
+        price as price,
+        way as way,
+        info as info,
+        createTime as createTime,
+        updateTime as updateTime,
+        status as status,
+        sellerId as sellerId,
+        buyerId as buyerId,
+        address as address
+        from goods
     </select>
 
     <select id="getGoodsListByMap" resultMap="goodsVoMap" parameterType="java.util.Map">

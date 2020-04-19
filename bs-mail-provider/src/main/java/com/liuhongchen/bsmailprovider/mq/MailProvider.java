@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * ClassName:MailConsumer
@@ -31,7 +32,7 @@ import java.util.Date;
  * @date:2020-04-18 17:01
  * @author:892698613@qq.com
  */
-//@RestController
+@RestController
 public class MailProvider {
 
 
@@ -42,7 +43,7 @@ public class MailProvider {
     private RabbitTemplate rabbitTemplate;
 
 
-    @RequestMapping(value = "/sendSimple",method = RequestMethod.POST)
+    @RequestMapping(value = "/sendSimple", method = RequestMethod.POST)
     public Boolean sendSimple(@RequestBody Mail mail) {
         String msgId = IdWorker.getId();
         mail.setMsgId(msgId);
@@ -57,7 +58,7 @@ public class MailProvider {
         Date date = new Date();
         msgLog.setCreateTime(date);
         msgLog.setUpdateTime(date);
-        msgLog.setNextTryTime((JodaTimeUtil.plusMinutes(date,1)));
+        msgLog.setNextTryTime((JodaTimeUtil.plusMinutes(date, 1)));
 
         msgLogService.insert(msgLog);// 消息入库
 
@@ -67,4 +68,5 @@ public class MailProvider {
                 correlationData);// 发送消息
         return true;
     }
+
 }
