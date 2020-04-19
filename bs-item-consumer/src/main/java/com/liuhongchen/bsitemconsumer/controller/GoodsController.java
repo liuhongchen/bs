@@ -102,18 +102,85 @@ public class GoodsController {
 
         return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
     }
+    @GetMapping("/getGoodsVoByBuyerIdAndStatus")
+    public Dto getGoodsVoByBuyerIdAndStatus(Integer id,Integer status){
+        if (id==null||id<=0||status==null)
+            return DtoUtil.returnFail("参数错误", "0022");
+
+        List<GoodsVo> goodsList
+                =goodsService.getGoodsVoByBuyerIdAndStatus(id, status);
+
+        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+
+        return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
+    }
+
+
+
+    @GetMapping("/getAllGoodsVo")
+    public Dto getAllGoodsVo(){
+
+        List<GoodsVo> goodsList=goodsService.getAllGoodsVo();
+
+        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+
+        return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
+    }
+
+
+    @GetMapping("/getGoodsVoByTypeId")
+    public Dto getGoodsVoByTypeId(Integer typeId){
+
+
+        List<GoodsVo> goodsList=null;
+        if (typeId==0){
+            goodsList=goodsService.getAllGoodsVo();
+        }else{
+            goodsList=goodsService.getGoodsVoByTypeId(typeId+2);
+        }
+
+        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+
+        return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
+    }
 
 
     @GetMapping("/cancelOrder")
-    public Dto cancelOrder(Integer id){
+    public Dto cancelOrder(Integer id) throws Exception {
         if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
 
 
+        goodsService.sendMail(id,4);
         Integer res=goodsService.cancelOrder(id);
+
 
         return (res==null||res!=1)?
                 DtoUtil.returnFail("取消失败","0022"):
                 DtoUtil.returnSuccess("取消成功");
+    }
+
+
+    /**
+     * 发送邮件
+     * @param goodsId 根据goods信息去获取相关的信息,如email等
+     * @param type 邮件发送类型.
+     *             用户下单 1  给卖家和买家.包括对方信息,商品信息+书籍信息
+     *             提醒收货(自提方式)21 给买家 您购买的 书籍信息 收货,地址 联系方式
+     *             提醒发货(配送方式)22 您出售的 书籍信息 收货 地址 联系方式
+     *             完成交易3 给卖家和买家,书籍信息完成交易
+     *             取消交易4 给卖家和买家,书籍信息 取消交易
+     * @return
+     */
+    @SuppressWarnings("JavaDoc")
+    @GetMapping("/sendMail")
+    public Dto sendMail(Integer goodsId,Integer type) throws Exception {
+        if (goodsId==null||type==null)return DtoUtil.returnFail("参数传递失败",
+                "0022");
+
+        goodsService.sendMail(goodsId,type);
+
+
+        return DtoUtil.returnSuccess("发送成功");
     }
 
 }

@@ -53,6 +53,10 @@ public interface RestItemClient {
 
     @RequestMapping(value = "/getGoodsVoByBuyerId", method = RequestMethod.POST)
     List<GoodsVo> getGoodsVoByBuyerId(@RequestParam("id")Integer id);
+    @RequestMapping(value = "/getGoodsVoByBuyerIdAndStatus", method =
+            RequestMethod.POST)
+    List<GoodsVo> getGoodsVoByBuyerIdAndStatus(@RequestParam("id")Integer id,
+                                               @RequestParam("status")Integer status);
 
 
     @RequestMapping(value = "/getGoodsVoById", method = RequestMethod.POST)
@@ -60,5 +64,11 @@ public interface RestItemClient {
 
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
     Integer cancelOrder(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getAllGoodsVo", method = RequestMethod.POST)
+    List<GoodsVo> getAllGoodsVo();
+
+    @RequestMapping(value = "/getGoodsVoByTypeId", method = RequestMethod.POST)
+    List<GoodsVo> getGoodsVoByTypeId(@RequestParam("typeId")Integer typeId);
 }
 

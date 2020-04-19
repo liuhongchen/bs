@@ -26,8 +26,15 @@ public interface GoodsService {
     List<GoodsVo> getGoodsVoBySellerId(Integer id);
 
     List<GoodsVo> getGoodsVoByBuyerId(Integer id);
+    List<GoodsVo> getGoodsVoByBuyerIdAndStatus(Integer id,Integer status);
 
     GoodsVo getGoodsVoById(Integer id);
 
     Integer cancelOrder(Integer id);
+
+    void sendMail(Integer goodsId, Integer type) throws Exception;
+
+    List<GoodsVo> getAllGoodsVo();
+
+    List<GoodsVo> getGoodsVoByTypeId(Integer typeId);
 }
