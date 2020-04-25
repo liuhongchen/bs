@@ -15,4 +15,8 @@ public interface UserService {
     User getUserById(Long id) ;
 
     Object[] updateInfo(User user);
+
+    Double getMoney(Integer id);
+
+
 }

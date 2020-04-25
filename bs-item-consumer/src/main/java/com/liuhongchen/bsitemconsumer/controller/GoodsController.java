@@ -144,6 +144,18 @@ public class GoodsController {
         return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
     }
 
+    @GetMapping("/getSellingGoodsVoByTypeId")
+    public Dto getSellingGoodsVoByTypeId(Integer typeId){
+
+        typeId+=2;
+        List<GoodsVo> goodsList=goodsService.getSellingGoodsVoByTypeId(typeId);
+
+
+        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+
+        return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
+    }
+
 
     @GetMapping("/cancelOrder")
     public Dto cancelOrder(Integer id) throws Exception {
@@ -183,4 +195,15 @@ public class GoodsController {
         return DtoUtil.returnSuccess("发送成功");
     }
 
+
+    @GetMapping("/deleteGoods")
+    public Dto deleteGoods(Integer id){
+        if (id==null||id<=0)return DtoUtil.returnFail("参数错误","0022");
+
+        Integer res=goodsService.deleteGoods(id);
+
+        if(res==null||res!=1)return DtoUtil.returnFail("服务器错误","0033");
+
+        return DtoUtil.returnSuccess("删除成功");
+    }
 }
