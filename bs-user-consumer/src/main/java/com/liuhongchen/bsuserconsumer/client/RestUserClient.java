@@ -43,5 +43,7 @@ public interface RestUserClient {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Object[] update(@RequestBody User user) throws Exception ;
 
+    @RequestMapping(value = "/getMoney", method = RequestMethod.POST)
+    Double getMoney(@RequestParam("id") Integer id);
 }
 

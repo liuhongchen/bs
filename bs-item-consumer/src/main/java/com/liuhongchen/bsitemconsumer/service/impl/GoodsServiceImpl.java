@@ -129,4 +129,17 @@ public class GoodsServiceImpl implements GoodsService {
         return itemClient.getGoodsVoByTypeId(typeId);
     }
 
+    @Override
+    public Integer deleteGoods(Integer id) {
+
+        return itemClient.deleteGoods(id);
+    }
+
+    @Override
+    public List<GoodsVo> getSellingGoodsVoByTypeId(Integer typeId) {
+        //这个1,就是selling的goods status
+        return itemClient.getGoodsVoByTypeIdAndStatus(typeId,1);
+    }
+
+
 }

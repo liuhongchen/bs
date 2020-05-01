@@ -82,10 +82,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/hello")
-    public Dto hello() {
-        return DtoUtil.returnSuccess("hello");
-    }
 
 
     @GetMapping("/updateInfo")
@@ -127,6 +123,19 @@ public class UserController {
     public Dto tokenValid(String token){
 
         return DtoUtil.returnSuccess("valid?",tokenService.tokenValid(token));
+    }
+
+
+
+    @GetMapping("/getMoney")
+    public Dto getMoney(Integer id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("参数传递失败","0022");
+
+        Double money=userService.getMoney(id);
+
+        if(EmptyUtils.isEmpty(money))return DtoUtil.returnFail("服务器错误","0033");
+
+        return DtoUtil.returnSuccess("查询money成功",money);
     }
 
 }

@@ -28,7 +28,6 @@ public class TokenServiceImpl implements TokenService {
         String tokenKey = Constants.USER_TOKEN_PREFIX + userVo.getId();
         String tokenValue = null;
 
-        //检查是否已经登录，如果还在登录有效期内，则删除原来的登录信息
         if ((tokenValue = (String) redisUtils.get(tokenKey)) != null){
             //代表原来用户已经登录
             redisUtils.delete(tokenKey);
@@ -46,11 +45,22 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public UserVo token(User user) {
-        String token = this.generateToken(user);
 
         UserVo userVo=new UserVo();
         BeanUtils.copyProperties(user,userVo);
         userVo.setId(user.getId());
+
+        String tokenKey = Constants.USER_TOKEN_PREFIX + userVo.getId();
+        String tokenValue ;
+
+        //原来token存在的话直接返回,否则会导致顶号现象
+        if ((tokenValue = (String) redisUtils.get(tokenKey)) != null) {
+            userVo.setToken(tokenValue);
+            return userVo;
+        }
+
+        String token = this.generateToken(user);
+
 
         userVo.setToken(token);
 

@@ -55,4 +55,9 @@ public class UserClientFallBack implements RestUserClient {
     public Object[] update(User user) throws Exception {
         return null;
     }
+
+    @Override
+    public Double getMoney(Integer id) {
+        return null;
+    }
 }

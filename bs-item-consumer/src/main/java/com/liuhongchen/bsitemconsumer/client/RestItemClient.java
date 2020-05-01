@@ -70,5 +70,12 @@ public interface RestItemClient {
 
     @RequestMapping(value = "/getGoodsVoByTypeId", method = RequestMethod.POST)
     List<GoodsVo> getGoodsVoByTypeId(@RequestParam("typeId")Integer typeId);
+
+    @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
+    Integer deleteGoods(@RequestParam("id")Integer id);
+
+    @RequestMapping(value = "/getGoodsVoByTypeIdAndStatus", method = RequestMethod.POST)
+    List<GoodsVo> getGoodsVoByTypeIdAndStatus(@RequestParam("typeId")Integer typeId,
+                                            @RequestParam("status")Integer status);
 }
 

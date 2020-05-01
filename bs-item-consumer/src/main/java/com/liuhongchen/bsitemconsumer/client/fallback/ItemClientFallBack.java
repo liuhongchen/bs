@@ -81,4 +81,14 @@ public class ItemClientFallBack implements RestItemClient {
     public List<GoodsVo> getGoodsVoByTypeId(Integer typeId) {
         return null;
     }
+
+    @Override
+    public Integer deleteGoods(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<GoodsVo> getGoodsVoByTypeIdAndStatus(Integer typeId, Integer status) {
+        return null;
+    }
 }

@@ -37,4 +37,11 @@ public interface GoodsService {
     List<GoodsVo> getAllGoodsVo();
 
     List<GoodsVo> getGoodsVoByTypeId(Integer typeId);
+
+    Integer deleteGoods(Integer id);
+
+
+    List<GoodsVo> getSellingGoodsVoByTypeId(Integer typeId);
+
+
 }

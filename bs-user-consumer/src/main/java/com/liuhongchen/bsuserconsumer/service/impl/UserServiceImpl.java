@@ -41,4 +41,10 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Double getMoney(Integer id) {
+
+        return userClient.getMoney(id);
+    }
 }
