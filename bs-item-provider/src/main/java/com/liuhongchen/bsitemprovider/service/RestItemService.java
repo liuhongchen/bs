@@ -5,24 +5,21 @@ import com.alibaba.fastjson.JSONObject;
 import com.liuhongchen.bscommondto.vo.GoodsVo;
 import com.liuhongchen.bscommonmodule.pojo.Book;
 import com.liuhongchen.bscommonmodule.pojo.Goods;
-import com.liuhongchen.bscommonmodule.pojo.User;
-import com.liuhongchen.bscommonutils.common.Constants;
+import com.liuhongchen.bscommonmodule.pojo.MoneyLog;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
 import com.liuhongchen.bsitemprovider.mapper.BookMapper;
 import com.liuhongchen.bsitemprovider.mapper.GoodsMapper;
 import com.liuhongchen.bsitemprovider.mapper.GoodsVoMapper;
+import com.liuhongchen.bsitemprovider.mapper.MoneyLogMapper;
 import com.liuhongchen.bsitemprovider.utils.HttpUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +41,11 @@ public class RestItemService {
 
     @Autowired
     private GoodsVoMapper goodsVoMapper;
+
+    @Autowired
+    private MoneyLogMapper moneyLogMapper;
+
+    private static final Integer ADMIN_ID=2;
 
     @RequestMapping(value = "/isbn", method = RequestMethod.POST)
 //    public Integer isbn()throws Exception{
@@ -67,7 +69,6 @@ public class RestItemService {
             //获取response的body
             HttpEntity entity = response.getEntity();
             String json = EntityUtils.toString(entity);
-            System.out.println(json);
             JSONObject jsonObject = JSON.parseObject(json);
             JSONObject result = jsonObject.getJSONObject("result");
 
@@ -155,25 +156,63 @@ public class RestItemService {
     public GoodsVo getGoodsVoById(@RequestParam("id") Integer id) throws Exception {
         return goodsVoMapper.getGoodsById(id);
     }
+
+    @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
+    public Integer deleteGoods(@RequestParam("id") Integer id) throws Exception {
+        return goodsMapper.deleteGoodsById(Long.parseLong(id.toString()));
+    }
     @RequestMapping(value = "/getGoodsVoByTypeId", method = RequestMethod.POST)
     public List<GoodsVo> getGoodsVoByTypeId(@RequestParam("typeId") Integer typeId) throws Exception {
         Map<String,Object> params=new HashMap<>();
         params.put("typeId",typeId);
-        List<GoodsVo> goodsVoList = goodsVoMapper.getGoodsListByMap(params);
-        return goodsVoList;
+        return goodsVoMapper.getGoodsListByMap(params);
+    }
+
+    @RequestMapping(value = "/getGoodsVoByTypeIdAndStatus", method = RequestMethod.POST)
+    public List<GoodsVo> getGoodsVoByTypeIdAndStatus(@RequestParam("typeId") Integer typeId,
+                                                     @RequestParam("status") Integer status) throws Exception {
+        Map<String,Object> params=new HashMap<>();
+        if (typeId!=0)params.put("typeId",typeId);
+        params.put("status",status);
+        return goodsVoMapper.getGoodsListByMap(params);
     }
     @RequestMapping(value = "/getAllGoodsVo", method = RequestMethod.POST)
     public List<GoodsVo> getAllGoodsVo() throws Exception {
         return goodsVoMapper.getAllGoodsVo();
     }
 
+    @Transactional
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
     public Integer cancelOrder(@RequestParam("id") Integer id) throws Exception {
         Goods goods=new Goods();
         goods.setId(id);
         goods.setBuyerId(-1);
         goods.setStatus(1);
+        Goods queryGoods = goodsMapper.getGoodsById(Long.parseLong(id.toString()));
+        Book book = bookMapper.getBookById(Long.valueOf(queryGoods.getBookId()));
+
+        String bookName=book.getTitle()+"第"+book.getEdition();
+
+        MoneyLog log=new MoneyLog();
+        log.setName(bookName);
+        log.setGoodsId(id);
+        log.setNum(queryGoods.getPrice());
+        log.setTime(new Date());
+
+
         //TODO:退钱操作
+
+        //admin --
+        log.setType(0);
+        log.setUserId(ADMIN_ID);
+        moneyLogMapper.log(log);
+
+        //buyer++
+        log.setType(1);
+        log.setUserId(queryGoods.getBuyerId());
+        moneyLogMapper.log(log);
+
+
         return goodsMapper.updateGoods(goods);
     }
 

@@ -27,4 +27,7 @@ public interface UserMapper {
 	public Integer batchDeleteUser(Map<String, List<String>> params);
 
 	User checkLoginByPassword(String phone, String password);
+
+    Double getMoney(Long id);
+
 }

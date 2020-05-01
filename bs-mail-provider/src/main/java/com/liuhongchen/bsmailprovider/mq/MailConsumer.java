@@ -40,13 +40,17 @@ public class MailConsumer {
     @RabbitListener(queues = RabbitConfig.MAIL_QUEUE_NAME)
     public void consume(Message message, Channel channel) throws IOException {
 
+        //消息解析
         Mail mail = MessageHelper.msgToObj(message, Mail.class);
         log.info("收到消息: {}", mail.toString());
 
 
         String msgId = mail.getMsgId();
 
+        //获取msgLog
         MsgLog msgLog = msgLogService.selectByMsgId(msgId);
+
+        //判断重复消费
         if (null == msgLog || msgLog.getStatus().equals(Constants.MsgLogStatus.CONSUMED_SUCCESS)) {// 消费幂等性
             log.info("重复消费, msgId: {}", msgId);
             return;
@@ -55,8 +59,10 @@ public class MailConsumer {
         MessageProperties properties = message.getMessageProperties();
         long tag = properties.getDeliveryTag();
 
+
+        //发送邮件
         boolean success = mailUtil.send(mail);
-        if (success) {
+        if (success) {//成功更新状态
             msgLogService.updateStatus(msgId, Constants.MsgLogStatus.CONSUMED_SUCCESS);
             channel.basicAck(tag, false);// 消费确认
         } else {

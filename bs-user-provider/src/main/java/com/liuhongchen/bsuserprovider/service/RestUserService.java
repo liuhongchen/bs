@@ -85,8 +85,11 @@ public class RestUserService {
 
         return new Object[]{result,userMapper.getUserById(Long.valueOf(user.getId()))};
 
-
-
     }
+    @RequestMapping(value = "/getMoney",method = RequestMethod.POST)
+    public Double getMoney(@RequestParam("id") Integer id)throws Exception{
+        return userMapper.getMoney(Long.parseLong(id.toString()));
+    }
+
 
 }

@@ -192,4 +192,9 @@
                         </if>
         </trim>
     </update>
+
+    <delete id="deleteGoodsById" parameterType="Long" >
+        delete from goods
+        where id=#{id}
+    </delete>
 </mapper>

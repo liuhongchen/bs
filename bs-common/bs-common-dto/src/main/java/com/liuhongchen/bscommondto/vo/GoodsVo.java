@@ -1,4 +1,5 @@
 package com.liuhongchen.bscommondto.vo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.liuhongchen.bscommonmodule.pojo.Book;
 
 import java.io.Serializable;
@@ -23,8 +24,10 @@ public class GoodsVo implements Serializable {
 
 	private String info;
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
 
 	private Integer status;

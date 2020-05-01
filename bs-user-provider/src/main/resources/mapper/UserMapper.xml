@@ -19,6 +19,7 @@
         birthday as birthday,
         createdTime as createdTime,
         updatedTime as updatedTime,
+        money as money,
         avatarUrl as avatarUrl
 
         from user
@@ -27,6 +28,12 @@
                 and id=#{id}
             </if>
         </trim>
+    </select>
+    <select id="getMoney" resultType="Double" parameterType="Long">
+        select
+        money as money
+        from user
+        where id=#{id}
     </select>
 
     <select id="getUserListByMap" resultType="com.liuhongchen.bscommonmodule.pojo.User" parameterType="java.util.Map">
@@ -44,6 +51,7 @@
         birthday as birthday,
         createdTime as createdTime,
         updatedTime as updatedTime,
+        money as money,
         avatarUrl as avatarUrl
 
         from user
@@ -149,6 +157,7 @@
                          birthday,
                          createdTime,
                          updatedTime,
+                         money,
                          avatarUrl)
         values (#{phone},
                 #{email},
@@ -162,6 +171,7 @@
                 #{birthday},
                 #{createdTime},
                 #{updatedTime},
+                #{money},
                 #{avatarUrl})
     </insert>
 
@@ -207,6 +217,9 @@
             <if test="avatarUrl != null and avatarUrl!=''">
                 avatarUrl=#{avatarUrl}
             </if>
+            <if test="money != null and money!=''">
+                money=#{money}
+            </if>
         </trim>
     </update>
 
@@ -225,9 +238,13 @@
                birthday    as birthday,
                createdTime as createdTime,
                updatedTime as updatedTime,
+               money as money,
                avatarUrl   as avatarUrl
         from user
         where phone = #{phone}
           and password = #{password}
     </select>
+
+
+
 </mapper>

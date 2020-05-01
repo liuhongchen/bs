@@ -1,4 +1,6 @@
 package com.liuhongchen.bscommonmodule.pojo;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 /***
@@ -27,13 +29,28 @@ public class User implements Serializable {
     private Integer gender;
     //
     private Date birthday;
+
+    private Double money;
+
     //
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
     //
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatedTime;
     //
     private String avatarUrl;
     //get set 方法
+
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
     public void setId (Integer  id){
         this.id=id;
     }

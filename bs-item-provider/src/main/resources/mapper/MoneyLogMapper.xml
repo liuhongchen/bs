@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhongchen.bsitemprovider.mapper.MoneyLogMapper">
+
+    <insert id="log" parameterType="com.liuhongchen.bscommonmodule.pojo.MoneyLog">
+        insert  into money_log
+        (`name`,`time`,type,num,goodsId,userId)
+        values
+        (#{name},#{time},#{type},#{num},#{goodsId},#{userId})
+    </insert>
+
+</mapper>
