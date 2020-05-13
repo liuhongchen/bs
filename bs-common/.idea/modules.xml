@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/bs-common-dto/bs-common-dto.iml" filepath="$PROJECT_DIR$/bs-common-dto/bs-common-dto.iml" />
       <module fileurl="file://$PROJECT_DIR$/bs-common-ext-utils/bs-common-ext-utils.iml" filepath="$PROJECT_DIR$/bs-common-ext-utils/bs-common-ext-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/bs-common-module/bs-common-module.iml" filepath="$PROJECT_DIR$/bs-common-module/bs-common-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bs-common-service/bs-common-service.iml" filepath="$PROJECT_DIR$/bs-common-service/bs-common-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/bs-common-utils/bs-common-utils.iml" filepath="$PROJECT_DIR$/bs-common-utils/bs-common-utils.iml" />
     </modules>
   </component>

@@ -30,7 +30,6 @@ public class User implements Serializable {
     //
     private Date birthday;
 
-    private Double money;
 
     //
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -43,13 +42,7 @@ public class User implements Serializable {
     //get set 方法
 
 
-    public Double getMoney() {
-        return money;
-    }
 
-    public void setMoney(Double money) {
-        this.money = money;
-    }
 
     public void setId (Integer  id){
         this.id=id;

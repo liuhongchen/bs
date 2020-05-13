@@ -12,6 +12,7 @@
         <module name="bs-common-ext-utils" />
         <module name="bs-common-dto" />
         <module name="bs-common-utils" />
+        <module name="bs-common-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,6 +22,7 @@
       <module name="bs-common-dto" target="1.8" />
       <module name="bs-common-ext-utils" target="1.8" />
       <module name="bs-common-module" target="1.8" />
+      <module name="bs-common-service" target="1.8" />
       <module name="bs-common-utils" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -32,6 +34,7 @@
       <module name="bs-common-dto" options="-parameters" />
       <module name="bs-common-ext-utils" options="-parameters" />
       <module name="bs-common-module" options="-parameters" />
+      <module name="bs-common-service" options="-parameters" />
       <module name="bs-common-utils" options="-parameters" />
     </option>
   </component>

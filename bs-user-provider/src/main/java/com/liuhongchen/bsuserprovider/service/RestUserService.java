@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * Created by liuhongchen
  * 所有核心业务逻辑都写在这里，尽量让consumer只进行请求转发，而不计算
@@ -17,43 +18,44 @@ import java.util.Map;
 @RestController
 public class RestUserService {
 
-     @Autowired
-     private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
-     @RequestMapping(value = "/getUserById",method = RequestMethod.POST)
-     public User getUserById(@RequestParam("id") Long id)throws Exception{
+    @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
+    public User getUserById(@RequestParam("id") Long id) throws Exception {
         return userMapper.getUserById(id);
-     }
+    }
 
-     @RequestMapping(value = "/getUserListByMap",method = RequestMethod.POST)
-     public List<User>	getUserListByMap(@RequestParam Map<String,Object> param)throws Exception{
+    @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
+    public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception {
         return userMapper.getUserListByMap(param);
-     }
+    }
 
-     @RequestMapping(value = "/getUserCountByMap",method = RequestMethod.POST)
-     public Integer getUserCountByMap(@RequestParam Map<String,Object> param)throws Exception{
+    @RequestMapping(value = "/getUserCountByMap", method = RequestMethod.POST)
+    public Integer getUserCountByMap(@RequestParam Map<String, Object> param) throws Exception {
         return userMapper.getUserCountByMap(param);
-     }
+    }
 
-     @RequestMapping(value = "/qdtxAddUser",method = RequestMethod.POST)
-     public Integer qdtxAddUser(@RequestBody User user)throws Exception{
+    @RequestMapping(value = "/qdtxAddUser", method = RequestMethod.POST)
+    public Integer qdtxAddUser(@RequestBody User user) throws Exception {
         user.setCreatedTime(new Date());
         return userMapper.insertUser(user);
-     }
+    }
 
-     @RequestMapping(value = "/qdtxModifyUser",method = RequestMethod.POST)
-     public Integer qdtxModifyUser(@RequestBody User user)throws Exception{
+    @RequestMapping(value = "/qdtxModifyUser", method = RequestMethod.POST)
+    public Integer qdtxModifyUser(@RequestBody User user) throws Exception {
         user.setUpdatedTime(new Date());
         return userMapper.updateUser(user);
-     }
+    }
 
     /**
      * 注意一定要在参数列表里面写 @RequestBody
+     *
      * @param user
      * @return
      */
     @RequestMapping(value = "/checkLoginByPassword", method = RequestMethod.POST)
-    public User checkLoginByPassword(@RequestBody User user){
+    public User checkLoginByPassword(@RequestBody User user) {
         User user1 = userMapper.checkLoginByPassword(user.getPhone(), user.getPassword());
         return user1;
 
@@ -62,13 +64,13 @@ public class RestUserService {
 
     @RequestMapping(value = "/wxRegister", method = RequestMethod.POST)
     public User wxRegister(@RequestBody User user) throws Exception {
-        Map<String,Object> map=new HashMap<>();
-        map.put("wxUserId",user.getWxUserId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("wxUserId", user.getWxUserId());
         List<User> users = userMapper.getUserListByMap(map);
         if (EmptyUtils.isEmpty(users)) {//此时不存在该用户，需要insert
             user.setCreatedTime(new Date());
             userMapper.insertUser(user);
-        }else {
+        } else {
             user.setId(users.get(0).getId());
             user.setUpdatedTime(new Date());
             userMapper.updateUser(user);
@@ -83,12 +85,8 @@ public class RestUserService {
     public Object[] update(@RequestBody User user) throws Exception {
         Integer result = userMapper.updateUser(user);
 
-        return new Object[]{result,userMapper.getUserById(Long.valueOf(user.getId()))};
+        return new Object[]{result, userMapper.getUserById(Long.valueOf(user.getId()))};
 
-    }
-    @RequestMapping(value = "/getMoney",method = RequestMethod.POST)
-    public Double getMoney(@RequestParam("id") Integer id)throws Exception{
-        return userMapper.getMoney(Long.parseLong(id.toString()));
     }
 
 

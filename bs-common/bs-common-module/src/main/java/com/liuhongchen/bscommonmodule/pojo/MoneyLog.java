@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class MoneyLog {
 
-    private Integer id;
+    private String id;
     private String name;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -16,11 +16,11 @@ public class MoneyLog {
     private Integer goodsId;
     private Integer userId;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

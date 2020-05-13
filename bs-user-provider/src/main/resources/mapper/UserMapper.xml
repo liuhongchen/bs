@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liuhongchen.bsuserprovider.mapper.UserMapper">
 
+
+
     <select id="getUserById" resultType="com.liuhongchen.bscommonmodule.pojo.User">
         select
         id as id,
@@ -19,7 +21,6 @@
         birthday as birthday,
         createdTime as createdTime,
         updatedTime as updatedTime,
-        money as money,
         avatarUrl as avatarUrl
 
         from user
@@ -29,12 +30,7 @@
             </if>
         </trim>
     </select>
-    <select id="getMoney" resultType="Double" parameterType="Long">
-        select
-        money as money
-        from user
-        where id=#{id}
-    </select>
+
 
     <select id="getUserListByMap" resultType="com.liuhongchen.bscommonmodule.pojo.User" parameterType="java.util.Map">
         select
@@ -51,7 +47,6 @@
         birthday as birthday,
         createdTime as createdTime,
         updatedTime as updatedTime,
-        money as money,
         avatarUrl as avatarUrl
 
         from user
@@ -157,7 +152,6 @@
                          birthday,
                          createdTime,
                          updatedTime,
-                         money,
                          avatarUrl)
         values (#{phone},
                 #{email},
@@ -171,7 +165,6 @@
                 #{birthday},
                 #{createdTime},
                 #{updatedTime},
-                #{money},
                 #{avatarUrl})
     </insert>
 
@@ -217,11 +210,9 @@
             <if test="avatarUrl != null and avatarUrl!=''">
                 avatarUrl=#{avatarUrl}
             </if>
-            <if test="money != null and money!=''">
-                money=#{money}
-            </if>
         </trim>
     </update>
+
 
 
     <select id="checkLoginByPassword" resultType="com.liuhongchen.bscommonmodule.pojo.User">
@@ -238,7 +229,6 @@
                birthday    as birthday,
                createdTime as createdTime,
                updatedTime as updatedTime,
-               money as money,
                avatarUrl   as avatarUrl
         from user
         where phone = #{phone}

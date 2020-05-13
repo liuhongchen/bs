@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhongchen.bspayprovider.mapper.MoneyMapper">
+
+
+
+    <select id="getMoney" resultType="Double" parameterType="Long">
+        select
+        money as money
+        from money
+        where userId=#{userId}
+    </select>
+
+
+    <insert id="insert" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        insert into money
+        (userId,money)
+        values
+        (#{userId},#{money})
+    </insert>
+
+
+    <update id="updateMoney" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        update money
+        set money=money+#{money}
+        where userId=#{userId}
+    </update>
+
+
+
+</mapper>

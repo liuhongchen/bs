@@ -10,7 +10,6 @@ import com.liuhongchen.bscommonutils.common.EmptyUtils;
 import com.liuhongchen.bsitemprovider.mapper.BookMapper;
 import com.liuhongchen.bsitemprovider.mapper.GoodsMapper;
 import com.liuhongchen.bsitemprovider.mapper.GoodsVoMapper;
-import com.liuhongchen.bsitemprovider.mapper.MoneyLogMapper;
 import com.liuhongchen.bsitemprovider.utils.HttpUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,8 +41,6 @@ public class RestItemService {
     @Autowired
     private GoodsVoMapper goodsVoMapper;
 
-    @Autowired
-    private MoneyLogMapper moneyLogMapper;
 
     private static final Integer ADMIN_ID=2;
 
@@ -181,46 +178,12 @@ public class RestItemService {
         return goodsVoMapper.getAllGoodsVo();
     }
 
-    @Transactional
-    @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
-    public Integer cancelOrder(@RequestParam("id") Integer id) throws Exception {
-        Goods goods=new Goods();
-        goods.setId(id);
-        goods.setBuyerId(-1);
-        goods.setStatus(1);
-        Goods queryGoods = goodsMapper.getGoodsById(Long.parseLong(id.toString()));
-        Book book = bookMapper.getBookById(Long.valueOf(queryGoods.getBookId()));
-
-        String bookName=book.getTitle()+"第"+book.getEdition();
-
-        MoneyLog log=new MoneyLog();
-        log.setName(bookName);
-        log.setGoodsId(id);
-        log.setNum(queryGoods.getPrice());
-        log.setTime(new Date());
 
 
-        //TODO:退钱操作
-
-        //admin --
-        log.setType(0);
-        log.setUserId(ADMIN_ID);
-        moneyLogMapper.log(log);
-
-        //buyer++
-        log.setType(1);
-        log.setUserId(queryGoods.getBuyerId());
-        moneyLogMapper.log(log);
-
-
+    @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
+    public Integer updateGoods(@RequestBody Goods goods) throws Exception {
         return goodsMapper.updateGoods(goods);
     }
-
-
-
-
-
-
 
 
 

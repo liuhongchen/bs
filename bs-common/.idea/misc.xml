@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/bs-common-ext-utils/pom.xml" />
         <option value="$PROJECT_DIR$/bs-common-module/pom.xml" />
         <option value="$PROJECT_DIR$/bs-common-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/bs-common-service/pom.xml" />
       </list>
     </option>
   </component>

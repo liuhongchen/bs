@@ -1,12 +1,8 @@
 spring:
   application:
-    name: bs-item-provider
-#  cloud:
-#    alibaba:
-#      seata:
-#        tx-service-group: fsp_tx_group
+    name: bs-pay-provider
   datasource:
-    url: jdbc:mysql://192.168.1.180:3306/bs_item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.1.180:3306/bs_pay?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,7 +17,7 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
 
 server:
-  port: 15002
+  port: 15004
 
 eureka:
   client:

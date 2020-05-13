@@ -26,7 +26,6 @@ public class UserVo {
     //
     private Integer gender;
 
-    private Double money;
 
 
     private String token;
@@ -45,14 +44,6 @@ public class UserVo {
 
 
     //get set 方法
-
-    public Double getMoney() {
-        return money;
-    }
-
-    public void setMoney(Double money) {
-        this.money = money;
-    }
 
     public void setId (Integer  id){
         this.id=id;

@@ -172,10 +172,10 @@
                         <if test="info != null and info!=''">
                             info=#{info},
                         </if>
-                        <if test="createTime != null and createTime!=''">
+                        <if test="createTime != null ">
                             createTime=#{createTime},
                         </if>
-                        <if test="updateTime != null and updateTime!=''">
+                        <if test="updateTime != null ">
                             updateTime=#{updateTime},
                         </if>
                         <if test="status != null and status!=''">

@@ -28,6 +28,5 @@ public interface UserMapper {
 
 	User checkLoginByPassword(String phone, String password);
 
-    Double getMoney(Long id);
 
 }
