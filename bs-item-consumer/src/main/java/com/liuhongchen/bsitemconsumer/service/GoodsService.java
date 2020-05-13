@@ -30,7 +30,7 @@ public interface GoodsService {
 
     GoodsVo getGoodsVoById(Integer id);
 
-    Integer cancelOrder(Integer id);
+    Integer cancelOrder(Integer id) throws Exception;
 
     void sendMail(Integer goodsId, Integer type) throws Exception;
 
@@ -44,4 +44,7 @@ public interface GoodsService {
     List<GoodsVo> getSellingGoodsVoByTypeId(Integer typeId);
 
 
+    Integer createOrder(Goods goods) throws Exception;
+
+    Integer finishOrder(Integer id) throws Exception;
 }

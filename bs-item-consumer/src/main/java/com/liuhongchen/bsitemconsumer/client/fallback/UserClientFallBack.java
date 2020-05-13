@@ -24,4 +24,14 @@ public class UserClientFallBack implements RestUserClient {
     public List<User> getUserListByMap(Map<String, Object> param) throws Exception {
         return null;
     }
+
+    @Override
+    public Integer minus(Integer userId, Double price) {
+        return null;
+    }
+
+    @Override
+    public Integer add(Integer userId, Double price) {
+        return null;
+    }
 }

@@ -22,7 +22,14 @@ public interface RestUserClient {
     @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
     public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception;
 
+    @RequestMapping(value = "/minus", method = RequestMethod.POST)
+    Integer minus(@RequestParam("userId") Integer userId,
+                  @RequestParam("price") Double price);
 
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    Integer add(@RequestParam("userId") Integer userId,
+                  @RequestParam("price") Double price);
 
 }
 

@@ -5,15 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.liuhongchen.bscommondto.common.Dto;
 import com.liuhongchen.bscommondto.common.DtoUtil;
 import com.liuhongchen.bscommondto.vo.UserVo;
+import com.liuhongchen.bscommonmodule.pojo.Money;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.CheckUtils;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
 import com.liuhongchen.bscommonutils.common.LogUtils;
 import com.liuhongchen.bscommonutils.common.MD5;
-import com.liuhongchen.bsuserconsumer.service.LoginService;
-import com.liuhongchen.bsuserconsumer.service.RegisterService;
-import com.liuhongchen.bsuserconsumer.service.TokenService;
-import com.liuhongchen.bsuserconsumer.service.UserService;
+import com.liuhongchen.bsuserconsumer.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +49,10 @@ public class UserController {
 
     @Autowired
     private TokenService tokenService;
+
+
+    @Autowired
+    private PayService payService;
 
 
     @GetMapping("/wxLogin")
@@ -131,7 +133,7 @@ public class UserController {
     public Dto getMoney(Integer id){
         if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("参数传递失败","0022");
 
-        Double money=userService.getMoney(id);
+        Money money=payService.getMoney(id);
 
         if(EmptyUtils.isEmpty(money))return DtoUtil.returnFail("服务器错误","0033");
 

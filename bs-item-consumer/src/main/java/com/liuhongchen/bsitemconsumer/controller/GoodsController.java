@@ -171,6 +171,33 @@ public class GoodsController {
                 DtoUtil.returnSuccess("取消成功");
     }
 
+    @GetMapping("/finishOrder")
+    public Dto finishOrder(Integer id) throws Exception {
+        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+
+
+        goodsService.sendMail(id,4);
+        Integer res=goodsService.finishOrder(id);
+
+
+        return (res==null||res!=1)?
+                DtoUtil.returnFail("取消失败","0022"):
+                DtoUtil.returnSuccess("取消成功");
+    }
+
+    @GetMapping("/createOrder")
+    public Dto createOrder(Integer goodsId,Integer buyerId,String address) throws Exception {
+        Goods goods=new Goods();
+        goods.setId(goodsId);
+        goods.setBuyerId(buyerId);
+        goods.setStatus(2);
+        if (!address.equals("address"))goods.setAddress(address);
+        goods.setUpdateTime(new Date());
+        Integer result=goodsService.createOrder(goods);
+        if (result==1)return DtoUtil.returnSuccess("创建成功");
+        return DtoUtil.returnFail("创建失败","0022");
+    }
+
 
     /**
      * 发送邮件

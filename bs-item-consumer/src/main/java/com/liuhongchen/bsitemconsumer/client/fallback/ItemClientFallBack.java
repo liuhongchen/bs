@@ -91,4 +91,9 @@ public class ItemClientFallBack implements RestItemClient {
     public List<GoodsVo> getGoodsVoByTypeIdAndStatus(Integer typeId, Integer status) {
         return null;
     }
+
+    @Override
+    public Integer updateGoods(Goods goods) {
+        return null;
+    }
 }

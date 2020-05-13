@@ -7,7 +7,9 @@ import com.liuhongchen.bscommonmodule.pojo.Mail;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bsitemconsumer.client.RestItemClient;
 import com.liuhongchen.bsitemconsumer.client.RestMailClient;
+import com.liuhongchen.bsitemconsumer.client.RestPayClient;
 import com.liuhongchen.bsitemconsumer.client.RestUserClient;
+import com.liuhongchen.bsitemconsumer.service.BookService;
 import com.liuhongchen.bsitemconsumer.service.GoodsService;
 import com.liuhongchen.bsitemconsumer.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private RestMailClient mailClient;
 
+    @Autowired
+    private RestPayClient payClient;
+
+    @Autowired
+    private BookService bookService;
     @Override
     public Goods createGoods(Goods goods) {
         try {
@@ -84,10 +91,6 @@ public class GoodsServiceImpl implements GoodsService {
         return itemClient.getGoodsVoById(id);
     }
 
-    @Override
-    public Integer cancelOrder(Integer id) {
-        return itemClient.cancelOrder(id);
-    }
 
 
     /**
@@ -141,5 +144,80 @@ public class GoodsServiceImpl implements GoodsService {
         return itemClient.getGoodsVoByTypeIdAndStatus(typeId,1);
     }
 
+
+    @Override
+    public Integer createOrder(Goods goods) throws Exception {
+
+        //这里必须重新获取一次price,万一买家下单的同时卖家改价格
+        Goods queryGoods = itemClient.getGoodsById(goods.getId());
+        Double price=queryGoods.getPrice();
+
+        Book book=bookService.getBookById(queryGoods.getBookId());
+        String bookName=book.getTitle()+"第"+book.getEdition();
+
+        Integer minusResult= payClient.minus(goods.getBuyerId(),price,
+                bookName,goods.getId());
+
+        Integer addResult=payClient.add(2,price,
+                bookName,goods.getId());
+
+        Integer createResult=itemClient.updateGoods(goods);
+
+        return 1;
+    }
+
+    @Override
+    public Integer finishOrder(Integer id) throws Exception {
+        //这里必须重新获取一次price,万一买家下单的同时卖家改价格
+        Goods queryGoods = itemClient.getGoodsById(id);
+        Double price=queryGoods.getPrice();
+
+
+
+        Book book=bookService.getBookById(queryGoods.getBookId());
+        String bookName=book.getTitle()+"第"+book.getEdition();
+
+        Integer addResult= payClient.add(queryGoods.getSellerId(),price,
+                bookName,id);
+
+        Integer minusResult=payClient.minus(2,price,
+                bookName,id);
+
+        Goods goods=new Goods();
+        goods.setId(id);
+        goods.setStatus(3);
+
+        Integer finishResult=itemClient.updateGoods(goods);
+
+        return 1;
+    }
+
+
+    @Override
+    public Integer cancelOrder(Integer id) throws Exception {
+        //这里必须重新获取一次price,万一买家下单的同时卖家改价格
+        Goods queryGoods = itemClient.getGoodsById(id);
+        Double price=queryGoods.getPrice();
+
+
+
+        Book book=bookService.getBookById(queryGoods.getBookId());
+        String bookName=book.getTitle()+"第"+book.getEdition();
+
+        Integer addResult= payClient.add(queryGoods.getBuyerId(),price,
+                bookName,id);
+
+        Integer minusResult=payClient.minus(2,price,
+                bookName,id);
+
+        Goods goods=new Goods();
+        goods.setId(id);
+        goods.setBuyerId(-1);
+        goods.setStatus(1);
+
+        Integer cancelResult=itemClient.updateGoods(goods);
+
+        return 1;
+    }
 
 }
