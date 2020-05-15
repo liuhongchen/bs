@@ -1,11 +1,11 @@
-package com.liuhongchen.bsuserconsumer.interceptor;
+package com.liuhongchen.bspayconsumer.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-//@Configuration
+@Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 
@@ -22,7 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/wxLogin")
-                .excludePathPatterns("/wxLoginCode")
+                .excludePathPatterns("/test")
                 .excludePathPatterns("/tokenValid");
 
     }

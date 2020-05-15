@@ -51,8 +51,6 @@ public class UserController {
     private TokenService tokenService;
 
 
-    @Autowired
-    private PayService payService;
 
 
     @GetMapping("/wxLogin")
@@ -74,6 +72,32 @@ public class UserController {
         user.setWxUserId(openid);
         user.setGender(gender);
         user.setNickName(nickName);
+        UserVo userVo = registerService.wxRegister(user);
+
+        if (EmptyUtils.isEmpty(userVo.getToken())) return DtoUtil.returnFail("服务端token生成失败", "0011");
+
+        logUtils.i("user_consumer", "登录成功：wxUserId=" + openid);
+
+        return DtoUtil.returnSuccess("登录成功", userVo);
+
+    }
+    @GetMapping("/wxLoginCode")
+    public Dto login(String code) throws Exception {
+        logUtils.i("user_consumer", "小程序登录请求：code=" + code);
+
+        if (code == null || code.length() == 0) return DtoUtil.returnFail("code为空", "0011");
+
+        JSONObject jsonObject = loginService.wxLogin(code);
+        if (EmptyUtils.isEmpty(jsonObject)) return DtoUtil.returnFail("请求微信服务器失败", "0011");
+
+        String session_key = jsonObject.get("session_key").toString();
+        String openid = jsonObject.get("openid").toString();
+        if (EmptyUtils.isEmpty(session_key) || EmptyUtils.isEmpty(openid))
+            return DtoUtil.returnFail("微信服务器返回数据有误", "0011");
+
+
+        User user = new User();
+        user.setWxUserId(openid);
         UserVo userVo = registerService.wxRegister(user);
 
         if (EmptyUtils.isEmpty(userVo.getToken())) return DtoUtil.returnFail("服务端token生成失败", "0011");
@@ -129,15 +153,5 @@ public class UserController {
 
 
 
-    @GetMapping("/getMoney")
-    public Dto getMoney(Integer id){
-        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("参数传递失败","0022");
-
-        Money money=payService.getMoney(id);
-
-        if(EmptyUtils.isEmpty(money))return DtoUtil.returnFail("服务器错误","0033");
-
-        return DtoUtil.returnSuccess("查询money成功",money);
-    }
 
 }

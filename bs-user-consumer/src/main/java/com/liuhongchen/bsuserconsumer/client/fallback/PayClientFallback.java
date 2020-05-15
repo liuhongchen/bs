@@ -16,9 +16,4 @@ public class PayClientFallback implements RestPayClient {
     public Integer createAccount(Integer userId) throws Exception {
         return null;
     }
-
-    @Override
-    public Money getMoney(Integer userId) {
-        return null;
-    }
 }

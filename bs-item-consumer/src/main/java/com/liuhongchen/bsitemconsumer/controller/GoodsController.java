@@ -198,6 +198,20 @@ public class GoodsController {
         return DtoUtil.returnFail("创建失败","0022");
     }
 
+    @GetMapping("/deleteOrder")
+    public Dto deleteOrder(Integer id) throws Exception {
+        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+
+
+        Integer res=goodsService.deleteOrder(id);
+
+
+        return (res==null||res!=1)?
+                DtoUtil.returnFail("删除失败","0022"):
+                DtoUtil.returnSuccess("删除成功");
+    }
+
+
 
     /**
      * 发送邮件

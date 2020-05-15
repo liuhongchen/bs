@@ -155,11 +155,9 @@ public class GoodsServiceImpl implements GoodsService {
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
 
-        Integer minusResult= payClient.minus(goods.getBuyerId(),price,
+        Integer payResult= payClient.createOrder(goods.getBuyerId(),price,
                 bookName,goods.getId());
 
-        Integer addResult=payClient.add(2,price,
-                bookName,goods.getId());
 
         Integer createResult=itemClient.updateGoods(goods);
 
@@ -177,11 +175,11 @@ public class GoodsServiceImpl implements GoodsService {
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
 
-        Integer addResult= payClient.add(queryGoods.getSellerId(),price,
+        Integer finishOrderResult=
+                payClient.finishOrder(queryGoods.getSellerId(),
+                queryGoods.getBuyerId(),price,
                 bookName,id);
 
-        Integer minusResult=payClient.minus(2,price,
-                bookName,id);
 
         Goods goods=new Goods();
         goods.setId(id);
@@ -190,6 +188,11 @@ public class GoodsServiceImpl implements GoodsService {
         Integer finishResult=itemClient.updateGoods(goods);
 
         return 1;
+    }
+
+    @Override
+    public Integer deleteOrder(Integer id) {
+        return itemClient.deleteGoods(id);
     }
 
 
@@ -204,11 +207,11 @@ public class GoodsServiceImpl implements GoodsService {
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
 
-        Integer addResult= payClient.add(queryGoods.getBuyerId(),price,
+        Integer cancelOrderResult=
+                payClient.cancelOrder(queryGoods.getBuyerId(),
+                price,
                 bookName,id);
 
-        Integer minusResult=payClient.minus(2,price,
-                bookName,id);
 
         Goods goods=new Goods();
         goods.setId(id);

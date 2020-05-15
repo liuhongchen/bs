@@ -47,4 +47,6 @@ public interface GoodsService {
     Integer createOrder(Goods goods) throws Exception;
 
     Integer finishOrder(Integer id) throws Exception;
+
+    Integer deleteOrder(Integer id);
 }

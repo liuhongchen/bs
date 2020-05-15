@@ -13,13 +13,19 @@ import com.liuhongchen.bsitemconsumer.client.RestPayClient;
  */
 public class PayClientImpl implements RestPayClient {
 
+
     @Override
-    public Integer add(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer createOrder(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
         return null;
     }
 
     @Override
-    public Integer minus(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer cancelOrder(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Integer finishOrder(Integer sellerId, Integer buyerId, Double num, String goodsName, Integer goodsId) throws Exception {
         return null;
     }
 }

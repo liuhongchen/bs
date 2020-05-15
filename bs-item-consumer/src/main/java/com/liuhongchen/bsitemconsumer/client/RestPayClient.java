@@ -16,17 +16,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface RestPayClient {
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-     Integer add(@RequestParam("userId")Integer userId,
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//     Integer add(@RequestParam("userId")Integer userId,
+//                        @RequestParam("num")Double num,
+//                        @RequestParam("goodsName")String goodsName,
+//                        @RequestParam("goodsId")Integer goodsId) throws Exception;
+//
+//    @RequestMapping(value = "/minus", method = RequestMethod.POST)
+//     Integer minus(@RequestParam("userId")Integer userId,
+//                        @RequestParam("num")Double num,
+//                        @RequestParam("goodsName")String goodsName,
+//                        @RequestParam("goodsId")Integer goodsId) throws Exception;
+//
+
+
+    @RequestMapping(value = "/createOrder", method = RequestMethod.POST)
+    Integer createOrder(@RequestParam("userId")Integer userId,
+                @RequestParam("num")Double num,
+                @RequestParam("goodsName")String goodsName,
+                @RequestParam("goodsId")Integer goodsId) throws Exception;
+
+
+
+    @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
+    Integer cancelOrder(@RequestParam("userId")Integer userId,
+                @RequestParam("num")Double num,
+                @RequestParam("goodsName")String goodsName,
+                @RequestParam("goodsId")Integer goodsId) throws Exception;
+
+
+    @RequestMapping(value = "/finishOrder", method = RequestMethod.POST)
+    Integer finishOrder(@RequestParam("sellerId")Integer sellerId,
+                        @RequestParam("buyerId")Integer buyerId,
                         @RequestParam("num")Double num,
                         @RequestParam("goodsName")String goodsName,
                         @RequestParam("goodsId")Integer goodsId) throws Exception;
 
-    @RequestMapping(value = "/minus", method = RequestMethod.POST)
-     Integer minus(@RequestParam("userId")Integer userId,
-                        @RequestParam("num")Double num,
-                        @RequestParam("goodsName")String goodsName,
-                        @RequestParam("goodsId")Integer goodsId) throws Exception;
 
 
 }

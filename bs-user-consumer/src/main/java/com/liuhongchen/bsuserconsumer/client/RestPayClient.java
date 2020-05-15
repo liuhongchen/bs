@@ -22,8 +22,5 @@ public interface RestPayClient {
     public Integer createAccount(@RequestParam("userId") Integer userId) throws Exception;
 
 
-    @RequestMapping(value = "/getMoney",method = RequestMethod.POST)
-    public Money getMoney(@RequestParam("userId")Integer userId);
-
 }
 

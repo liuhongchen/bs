@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bs-pay-consumer
+
+server:
+  port: 15051
+
+feign:
+  hystrix:
+    enabled: false
+
+#要以被负载均衡的模块的名字开始，默认是轮询
+#bs-user-provider:
+#  ribbon:
+#    NFLoadBalanceRuleClassName: com.netflix.loadBalancer.RandomRule
+
+logging:
+  level:
+    root: info
