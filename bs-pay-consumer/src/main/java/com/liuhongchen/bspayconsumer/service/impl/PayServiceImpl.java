@@ -21,26 +21,26 @@ public class PayServiceImpl implements PayService {
     private RestPayClient payClient;
 
     @Override
-    public Money getMoney(Integer id) {
+    public Money getMoney(String id) {
         return payClient.getMoney(id);
     }
 
     @Override
-    public Double getRestMoney(Integer id) {
+    public Double getRestMoney(String id) {
 
         return payClient.getRestMoney(id);
     }
 
     @Override
-    public Integer charge(Integer id, Double num) throws Exception {
+    public Integer charge(String id, Double num) throws Exception {
 
 
 
-        return payClient.add(id,num,"充值",0);
+        return payClient.add(id,num,"充值","0");
     }
 
     @Override
-    public Integer test(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer test(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return payClient.test(userId, num, goodsName, goodsId);
     }
 }

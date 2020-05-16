@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * ClassName:MailConsumer
@@ -47,7 +49,7 @@ public class MailProvider {
     public Boolean sendSimple(@RequestBody Mail mail) {
         String msgId = IdWorker.getId();
         mail.setMsgId(msgId);
-
+        if (mail.getTo()==null||!emailFormat(mail.getTo()))return false;
         MsgLog msgLog = new MsgLog();
         msgLog.setMsgId(msgId);
         msgLog.setMsg(JsonUtil.objToStr(mail));
@@ -67,6 +69,17 @@ public class MailProvider {
                 RabbitConfig.MAIL_ROUTING_KEY_NAME, MessageHelper.objToMsg(mail),
                 correlationData);// 发送消息
         return true;
+    }
+
+    private   boolean emailFormat(String email) {
+        boolean tag = true;
+        final String pattern1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        final Pattern pattern = Pattern.compile(pattern1);
+        final Matcher mat = pattern.matcher(email);
+        if (!mat.find()) {
+            tag = false;
+        }
+        return tag;
     }
 
 }

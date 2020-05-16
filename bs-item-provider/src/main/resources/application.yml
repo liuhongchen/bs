@@ -1,15 +1,21 @@
 spring:
   application:
     name: bs-item-provider
-#  cloud:
-#    alibaba:
-#      seata:
-#        tx-service-group: fsp_tx_group
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
   datasource:
-    url: jdbc:mysql://192.168.1.180:3306/bs_item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://router.liuhongchen.com:3306/bs_item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  elasticsearch:
+    jest:
+      uris: http://router.liuhongchen.com:9200 # ES服务器的地址！
+      read-timeout: 5000
   zipkin:
     base-url: http://router.liuhongchen.com:7700
   sleuth:
@@ -27,10 +33,20 @@ eureka:
   client:
     service-url:
       defaultZone: http://router.liuhongchen.com:7776/eureka/
+    fetch-registry: true
 
 logging:
   level:
     root: info
+#    org:
+#      springframework:
+#        cloud:
+#          alibaba:
+#            seata:
+#              web: debug
+#    io:
+#      seata: debug
+
 
 #不添加这一项，每次访问都会报异常,zipkin
 management:

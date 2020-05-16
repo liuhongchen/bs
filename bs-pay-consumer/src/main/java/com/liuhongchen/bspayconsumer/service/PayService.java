@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author:892698613@qq.com
  */
 public interface PayService {
-    Money getMoney(Integer id);
+    Money getMoney(String id);
 
-    Double getRestMoney(Integer id);
-
-
-    Integer charge(Integer id, Double num) throws Exception;
+    Double getRestMoney(String id);
 
 
-    Integer test(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception;
+    Integer charge(String id, Double num) throws Exception;
+
+
+    Integer test(String userId, Double num, String goodsName, String goodsId) throws Exception;
 }

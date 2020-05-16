@@ -13,7 +13,7 @@ import java.util.Map;
 @Mapper
 public interface BookMapper {
 
-	public Book getBookById(@Param(value = "id") Long id)throws Exception;
+	public Book getBookById(@Param(value = "id") String id)throws Exception;
 
 	public List<Book>	getBookListByMap(Map<String, Object> param)throws Exception;
 
@@ -23,7 +23,7 @@ public interface BookMapper {
 
 	public Integer updateBook(Book book)throws Exception;
 
-	public Integer deleteBookById(@Param(value = "id") Long id)throws Exception;
+	public Integer deleteBookById(@Param(value = "id") String id)throws Exception;
 
 	public Integer batchDeleteBook(Map<String, List<String>> params);
 

@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class UserVo {
     //
-    private Integer id;
+    private String id;
     //
     private String phone;
 
@@ -17,8 +17,6 @@ public class UserVo {
     private String qqnum;
     //
     private String password;
-    //
-    private String wxUserId;
     //
     private String realName;
     //
@@ -45,10 +43,10 @@ public class UserVo {
 
     //get set 方法
 
-    public void setId (Integer  id){
+    public void setId (String  id){
         this.id=id;
     }
-    public  Integer getId(){
+    public  String getId(){
         return this.id;
     }
     public void setPhone (String  phone){
@@ -62,12 +60,6 @@ public class UserVo {
     }
     public  String getPassword(){
         return this.password;
-    }
-    public void setWxUserId (String  wxUserId){
-        this.wxUserId=wxUserId;
-    }
-    public  String getWxUserId(){
-        return this.wxUserId;
     }
     public void setRealName (String  realName){
         this.realName=realName;

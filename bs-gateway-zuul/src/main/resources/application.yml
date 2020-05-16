@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: bs-gateway-zuul
+  redis:
+    host: router.liuhongchen.com
+    database: 0
+    port: 6379
+    user: root
+    password: 123456
+    timeout: 3000
+  rabbitmq:
+    host: router.liuhongchen.com
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 7600
+  ssl:
+    key-store: classpath:https/router.liuhongchen.com.jks
+    key-store-password: zp7z07exo7p29
+    key-store-type: JKS
+eureka:
+  client:
+    service-url:
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
+    fetch-registry: true
+zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+  semaphore:
+    max-semaphores: 200
+  routes:
+#    这里，zuul会自动匹配到/user开头的uri，然后自动去除prefix，指向该prefix对应的consumer
+    bs-user-consumer: /user/**  #/login -> /user/login
+    bs-pay-consumer: /pay/**
+    bs-item-consumer: /item/**
+    #bs-xxx-consumer: /xxx/**
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 3000

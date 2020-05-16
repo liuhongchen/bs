@@ -19,11 +19,15 @@ spring:
     properties:
       mail:
         smtp:
+          ssl:
+            enabled: true
           auth: true
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
           starttls:
             enable: true
             required: true
     username: 892698613@qq.com
+    port: 587
   rabbitmq:
     host: 192.168.1.180
     listener:

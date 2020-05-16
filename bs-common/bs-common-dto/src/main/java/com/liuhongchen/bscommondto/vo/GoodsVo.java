@@ -10,9 +10,9 @@ import java.util.Date;
 */
 public class GoodsVo implements Serializable {
 	//
-	private Integer id;
+	private String id;
 	//
-	private Integer bookId;
+	private String bookId;
 	//
 	private Integer typeId;
 	//
@@ -32,33 +32,33 @@ public class GoodsVo implements Serializable {
 
 	private Integer status;
 
-	private Integer sellerId;
-	private Integer buyerId;
+	private String sellerId;
+	private String buyerId;
 
 	private Book bookinfo;
 
 
-	public Integer getBuyerId() {
+	public String getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(Integer buyerId) {
+	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Integer getBookId() {
+	public String getBookId() {
 		return bookId;
 	}
 
-	public void setBookId(Integer bookId) {
+	public void setBookId(String bookId) {
 		this.bookId = bookId;
 	}
 
@@ -126,11 +126,11 @@ public class GoodsVo implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getSellerId() {
+	public String getSellerId() {
 		return sellerId;
 	}
 
-	public void setSellerId(Integer sellerId) {
+	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
 

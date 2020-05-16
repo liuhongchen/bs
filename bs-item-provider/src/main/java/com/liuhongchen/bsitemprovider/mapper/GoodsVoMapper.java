@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
 * Created by liuhongchen
@@ -17,9 +18,15 @@ public interface GoodsVoMapper {
 
 
 
-	GoodsVo getGoodsById(@Param("id")Integer id);
+	GoodsVo getGoodsById(@Param("id")String id);
 
 	List<GoodsVo> getGoodsListByMap(Map<String,Object> map);
 
     List<GoodsVo> getAllGoodsVo();
+
+    List<GoodsVo> getNewGoodsVo();
+
+    List<GoodsVo> getByIds(List<String> list);
+
+    GoodsVo getGoodsByBookId(String id);
 }

@@ -2,8 +2,35 @@ spring:
   application:
     name: bs-pay-consumer
 
+  redis:
+    host: router.liuhongchen.com
+    database: 0
+    port: 6379
+    user: root
+    password: 123456
+    timeout: 3000
+  kafka:
+    producer:
+      bootstrap-servers: router.liuhongchen.com:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  zipkin:
+    base-url: http://router.liuhongchen.com:7700
+  sleuth:
+    sampler:
+      percentage: 1.0
+  rabbitmq:
+    host: router.liuhongchen.com
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://router.liuhongchen.com:7776/eureka/
+    fetch-registry: true
 server:
-  port: 15051
+  port: 15053
 
 feign:
   hystrix:
@@ -17,3 +44,4 @@ feign:
 logging:
   level:
     root: info
+

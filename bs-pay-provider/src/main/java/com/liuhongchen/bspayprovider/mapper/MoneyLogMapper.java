@@ -13,5 +13,5 @@ public interface MoneyLogMapper {
 
     void log(MoneyLog moneyLog);
 
-    List<MoneyLog> getByUserId(Integer userId);
+    List<MoneyLog> getByUserId(String userId);
 }

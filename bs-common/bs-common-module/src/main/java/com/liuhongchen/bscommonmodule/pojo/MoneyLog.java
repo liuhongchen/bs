@@ -13,8 +13,8 @@ public class MoneyLog {
     private Date time;
     private Integer type;
     private Double num;
-    private Integer goodsId;
-    private Integer userId;
+    private String goodsId;
+    private String userId;
 
     public String getId() {
         return id;
@@ -56,19 +56,19 @@ public class MoneyLog {
         this.num = num;
     }
 
-    public Integer getGoodsId() {
+    public String getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

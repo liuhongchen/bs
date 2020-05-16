@@ -6,26 +6,48 @@
 
 
 
-    <select id="getMoney" resultType="Double" parameterType="Long">
+    <select id="getMoney" resultType="Double" parameterType="String">
         select
         money as money
         from money
-        where userId=#{userId}
+        where id=#{userId}
     </select>
 
 
     <insert id="insert" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
         insert into money
-        (userId,money)
+        (id,money,paid)
         values
-        (#{userId},#{money})
+        (#{id},#{money},0)
     </insert>
 
 
     <update id="updateMoney" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
         update money
         set money=money+#{money}
-        where userId=#{userId}
+        where id=#{id}
+    </update>
+    <update id="createOrder" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        update money
+        set money=money-#{money},paid=paid+#{paid}
+        where id=#{id}
+    </update>
+
+    <update id="cancelOrder" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        update money
+        set money=money+#{money},paid=paid-#{paid}
+        where id=#{id}
+    </update>
+
+    <update id="trans1" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        update money
+        set paid=paid-#{paid}
+        where id=#{id}
+    </update>
+    <update id="trans2" parameterType="com.liuhongchen.bscommonmodule.pojo.Money">
+        update money
+        set money=money+#{money}
+        where id=#{id}
     </update>
 
 

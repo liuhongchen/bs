@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookById(Integer id) {
+    public Book getBookById(String id) {
         return itemClient.getBookById(id);
     }
 }

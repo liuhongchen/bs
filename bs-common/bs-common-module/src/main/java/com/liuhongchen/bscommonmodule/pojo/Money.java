@@ -3,29 +3,31 @@ package com.liuhongchen.bscommonmodule.pojo;
 import java.util.List;
 
 public class Money {
-    private Integer id;
-
-    private Integer userId;
+    private String id;
 
     private Double money;
 
+    private Double paid;
+
+
+    public Double getPaid() {
+        return paid;
+    }
+
+    public void setPaid(Double paid) {
+        this.paid = paid;
+    }
+
     private List<MoneyLog> list;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Double getMoney() {
         return money;

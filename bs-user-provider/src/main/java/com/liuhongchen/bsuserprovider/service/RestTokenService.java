@@ -27,7 +27,7 @@ public class RestTokenService {
         StringBuilder sb = new StringBuilder();
         sb.append(tokenPrefix + "-");
         sb.append("PC-");
-        String info = MD5.getMd5(EmptyUtils.isEmpty(user.getPhone()) ? user.getWxUserId() : user.getPhone(), 32);
+        String info = MD5.getMd5(user.getId()+"-"+user.getPhone(), 32);
         sb.append(info + "-");
         sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "-");
         sb.append(UUID.randomUUID().toString().substring(0,6));

@@ -12,11 +12,12 @@ import com.liuhongchen.bscommonmodule.pojo.User;
  */
 public interface UserService {
 
-    User getUserById(Long id) ;
+    User getUserById(String id) ;
 
     Object[] updateInfo(User user);
 
-    Double getMoney(Integer id);
+    Double getMoney(String id);
 
 
+    Boolean infoCheck(String id);
 }

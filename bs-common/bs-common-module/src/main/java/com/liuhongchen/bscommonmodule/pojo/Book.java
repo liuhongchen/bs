@@ -7,7 +7,7 @@ import java.util.Date;
 */
 public class Book implements Serializable {
 	//
-	private Integer id;
+	private String id;
 	//
 	private String isbn10;
 	//
@@ -44,7 +44,7 @@ public class Book implements Serializable {
 	public Book() {
 	}
 
-	public Book(Integer id, String isbn10, String title, String subtitle, String pic, String author,String publisher, String pubplace, String pubdate, Integer page, Double price, String binding, String isbn13, String keyword, String edition, String impression, String language) {
+	public Book(String id, String isbn10, String title, String subtitle, String pic, String author,String publisher, String pubplace, String pubdate, Integer page, Double price, String binding, String isbn13, String keyword, String edition, String impression, String language) {
 		this.id = id;
 		this.isbn10 = isbn10;
 		this.title = title;
@@ -64,11 +64,11 @@ public class Book implements Serializable {
 		this.language = language;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

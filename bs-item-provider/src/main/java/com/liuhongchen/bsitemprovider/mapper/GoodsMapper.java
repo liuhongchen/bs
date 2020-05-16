@@ -13,7 +13,7 @@ import java.util.Map;
 @Mapper
 public interface GoodsMapper {
 
-	public Goods getGoodsById(@Param(value = "id") Long id)throws Exception;
+	public Goods getGoodsById(@Param(value = "id") String id)throws Exception;
 
 	public List<Goods>	getGoodsListByMap(Map<String, Object> param)throws Exception;
 
@@ -23,7 +23,7 @@ public interface GoodsMapper {
 
 	public Integer updateGoods(Goods goods)throws Exception;
 
-	public Integer deleteGoodsById(@Param(value = "id") Long id)throws Exception;
+	public Integer deleteGoodsById(@Param(value = "id") String id)throws Exception;
 
 	public Integer batchDeleteGoods(Map<String, List<String>> params);
 

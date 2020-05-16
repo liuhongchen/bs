@@ -218,8 +218,8 @@
         </trim>
     </select>
 
-    <insert id="insertBook" parameterType="com.liuhongchen.bscommonmodule.pojo.Book" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into book(
+    <insert id="insertBook" parameterType="com.liuhongchen.bscommonmodule.pojo.Book" >
+        insert into book(id,
                         isbn10,
                         title,
                         subtitle,
@@ -236,7 +236,7 @@
                         edition,
                         impression,
                         language)
-        values(
+        values(#{id},
                      #{isbn10},
                      #{title},
                      #{subtitle},

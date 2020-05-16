@@ -23,52 +23,52 @@ public class ItemClientFallBack implements RestItemClient {
     }
 
     @Override
-    public Integer getGoodsStatus(Integer id) {
+    public Integer getGoodsStatus(String id) {
         return null;
     }
 
     @Override
-    public Goods getGoodsById(Integer id) {
+    public Goods getGoodsById(String id) {
         return null;
     }
 
     @Override
-    public Book getBookById(Integer id) {
+    public Book getBookById(String id) {
         return null;
     }
 
     @Override
-    public List<Goods> getGoodsBySellerId(Integer id) {
+    public List<Goods> getGoodsBySellerId(String id) {
         return null;
     }
 
     @Override
-    public List<Goods> getGoodsByBuyerId(Integer id) {
+    public List<Goods> getGoodsByBuyerId(String id) {
         return null;
     }
 
     @Override
-    public List<GoodsVo> getGoodsVoBySellerId(Integer id) {
+    public List<GoodsVo> getGoodsVoBySellerId(String id) {
         return null;
     }
 
     @Override
-    public List<GoodsVo> getGoodsVoByBuyerId(Integer id) {
+    public List<GoodsVo> getGoodsVoByBuyerId(String id) {
         return null;
     }
 
     @Override
-    public List<GoodsVo> getGoodsVoByBuyerIdAndStatus(Integer id, Integer status) {
+    public List<GoodsVo> getGoodsVoByBuyerIdAndStatus(String id, Integer status) {
         return null;
     }
 
     @Override
-    public GoodsVo getGoodsVoById(Integer id) {
+    public GoodsVo getGoodsVoById(String id) {
         return null;
     }
 
     @Override
-    public Integer cancelOrder(Integer id) {
+    public Integer cancelOrder(String id) {
         return null;
     }
 
@@ -83,7 +83,7 @@ public class ItemClientFallBack implements RestItemClient {
     }
 
     @Override
-    public Integer deleteGoods(Integer id) {
+    public Integer deleteGoods(String id) {
         return null;
     }
 
@@ -94,6 +94,21 @@ public class ItemClientFallBack implements RestItemClient {
 
     @Override
     public Integer updateGoods(Goods goods) {
+        return null;
+    }
+
+    @Override
+    public Integer createOrder(Goods goods) {
+        return null;
+    }
+
+    @Override
+    public List<GoodsVo> getNewGoodsVo() {
+        return null;
+    }
+
+    @Override
+    public List<GoodsVo> search(String title) {
         return null;
     }
 }

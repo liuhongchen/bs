@@ -12,33 +12,34 @@ import com.liuhongchen.bspayconsumer.client.RestPayClient;
  * @author:892698613@qq.com
  */
 public class PayClientFallback implements RestPayClient {
+
     @Override
-    public Integer createAccount(Integer userId) throws Exception {
+    public Integer createAccount(String userId) throws Exception {
         return null;
     }
 
     @Override
-    public Money getMoney(Integer userId) {
+    public Money getMoney(String userId) {
         return null;
     }
 
     @Override
-    public Double getRestMoney(Integer id) {
+    public Double getRestMoney(String id) {
         return null;
     }
 
     @Override
-    public Integer add(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer add(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 
     @Override
-    public Integer minus(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer minus(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 
     @Override
-    public Integer test(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer test(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 }

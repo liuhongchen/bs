@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @SpringBootApplication(scanBasePackages = {"com.liuhongchen.bscommonutils","com.liuhongchen.bscommonextutils", "com.liuhongchen.bsitemconsumer"})
-@EnableEurekaClient
+//@EnableEurekaClient
 @EnableFeignClients
 public class BsItemConsumerApplication {
 

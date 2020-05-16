@@ -14,7 +14,6 @@
         wxnum as wxnum,
         qqnum as qqnum,
         password as password,
-        wxUserId as wxUserId,
         realName as realName,
         nickname as nickName,
         gender as gender,
@@ -40,7 +39,6 @@
         wxnum as wxnum,
         qqnum as qqnum,
         password as password,
-        wxUserId as wxUserId,
         realName as realName,
         nickName as nickName,
         gender as gender,
@@ -68,9 +66,6 @@
             </if>
             <if test="password != null and password!=''">
                 and password=#{password}
-            </if>
-            <if test="wxUserId != null and wxUserId!=''">
-                and wxUserId=#{wxUserId}
             </if>
             <if test="realName != null and realName!=''">
                 and realName=#{realName}
@@ -111,9 +106,6 @@
             <if test="password != null and password!=''">
                 and password=#{password}
             </if>
-            <if test="wxUserId != null and wxUserId!=''">
-                and wxUserId=#{wxUserId}
-            </if>
             <if test="realName != null and realName!=''">
                 and realName=#{realName}
             </if>
@@ -138,14 +130,13 @@
         </trim>
     </select>
 
-    <insert id="insertUser" parameterType="com.liuhongchen.bscommonmodule.pojo.User" useGeneratedKeys="true"
-            keyColumn="id" keyProperty="id">
-        insert into user(phone,
+    <insert id="insertUser" parameterType="com.liuhongchen.bscommonmodule.pojo.User" >
+        insert into user(id,
+                         phone,
                          email,
                          wxnum,
                          qqnum,
                          password,
-                         wxUserId,
                          realName,
                          nickName,
                          gender,
@@ -153,12 +144,12 @@
                          createdTime,
                          updatedTime,
                          avatarUrl)
-        values (#{phone},
+        values (#{id},
+                #{phone},
                 #{email},
                 #{wxnum},
                 #{qqnum},
                 #{password},
-                #{wxUserId},
                 #{realName},
                 #{nickName},
                 #{gender},
@@ -185,9 +176,6 @@
             </if>
             <if test="qqnum != null and qqnum!=''">
                 qqnum=#{qqnum},
-            </if>
-            <if test="wxUserId != null and wxUserId!=''">
-                wxUserId=#{wxUserId},
             </if>
             <if test="realName != null and realName!=''">
                 realName=#{realName},
@@ -222,7 +210,6 @@
                wxnum       as wxnum,
                qqnum       as qqnum,
                password    as password,
-               wxUserId    as wxUserId,
                realName    as realName,
                nickName    as nickName,
                gender      as gender,

@@ -8,7 +8,7 @@ import java.util.Date;
 */
 public class User implements Serializable {
     //
-    private Integer id;
+    private String id;
     //
     private String phone;
 
@@ -19,8 +19,7 @@ public class User implements Serializable {
     private String qqnum;
     //
     private String password;
-    //
-    private String wxUserId;
+
     //
     private String realName;
     //
@@ -42,12 +41,10 @@ public class User implements Serializable {
     //get set 方法
 
 
-
-
-    public void setId (Integer  id){
+    public void setId (String  id){
         this.id=id;
     }
-    public  Integer getId(){
+    public  String getId(){
         return this.id;
     }
     public void setPhone (String  phone){
@@ -61,12 +58,6 @@ public class User implements Serializable {
     }
     public  String getPassword(){
         return this.password;
-    }
-    public void setWxUserId (String  wxUserId){
-        this.wxUserId=wxUserId;
-    }
-    public  String getWxUserId(){
-        return this.wxUserId;
     }
     public void setRealName (String  realName){
         this.realName=realName;

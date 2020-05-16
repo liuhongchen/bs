@@ -12,7 +12,7 @@ public class UserClientFallBack implements RestUserClient {
 
 
     @Override
-    public User getUserById(Long id)throws Exception{
+    public User getUserById(String id) throws Exception {
         return null;
     }
 
@@ -57,7 +57,13 @@ public class UserClientFallBack implements RestUserClient {
     }
 
     @Override
-    public Double getMoney(Integer id) {
+    public Double getMoney(String id) {
         return null;
     }
+
+    @Override
+    public Boolean infoCheck(String id) {
+        return null;
+    }
+
 }

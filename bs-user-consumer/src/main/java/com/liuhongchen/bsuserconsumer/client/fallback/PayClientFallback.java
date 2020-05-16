@@ -12,8 +12,9 @@ import com.liuhongchen.bsuserconsumer.client.RestPayClient;
  * @author:892698613@qq.com
  */
 public class PayClientFallback implements RestPayClient {
+
     @Override
-    public Integer createAccount(Integer userId) throws Exception {
+    public Integer createAccount(String userId) throws Exception {
         return null;
     }
 }

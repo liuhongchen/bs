@@ -14,6 +14,6 @@ public interface BookService {
 
     Book isbn(String isbn);
 
-    Book getBookById(Integer id);
+    Book getBookById(String id);
 
 }

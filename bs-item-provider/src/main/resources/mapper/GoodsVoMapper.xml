@@ -5,11 +5,11 @@
 <mapper namespace="com.liuhongchen.bsitemprovider.mapper.GoodsVoMapper">
 
     <resultMap id="goodsVoMap" type="com.liuhongchen.bscommondto.vo.GoodsVo">
-        <id column="id" property="id" javaType="Integer" jdbcType="INTEGER"/>
-        <result column="bookId" property="bookId" javaType="Integer" jdbcType="INTEGER"/>
+        <id column="id" property="id" javaType="String" jdbcType="VARCHAR"/>
+        <result column="bookId" property="bookId" javaType="String" jdbcType="VARCHAR"/>
         <result column="typeId" property="typeId" javaType="Integer" jdbcType="INTEGER"/>
-        <result column="sellerId" property="sellerId" javaType="Integer" jdbcType="INTEGER"/>
-        <result column="buyerId" property="buyerId" javaType="Integer" jdbcType="INTEGER"/>
+        <result column="sellerId" property="sellerId" javaType="String" jdbcType="VARCHAR"/>
+        <result column="buyerId" property="buyerId" javaType="String" jdbcType="VARCHAR"/>
         <result column="status" property="status" javaType="Integer" jdbcType="INTEGER"/>
         <result column="way" property="way" javaType="Integer" jdbcType="INTEGER"/>
         <result column="price" property="price" javaType="Double" jdbcType="DOUBLE"/>
@@ -22,13 +22,13 @@
     </resultMap>
 
 
-    <select id="getBookById" resultType="com.liuhongchen.bscommonmodule.pojo.Book" parameterType="int">
+    <select id="getBookById" resultType="com.liuhongchen.bscommonmodule.pojo.Book" parameterType="String">
         select *
         from book
         where id=#{bookId}
     </select>
 
-    <select id="getGoodsById" resultMap="goodsVoMap" parameterType="int">
+    <select id="getGoodsById" resultMap="goodsVoMap" parameterType="String">
         select
         id as id,
         bookId as bookId,
@@ -48,6 +48,37 @@
                 and id=#{id}
             </if>
         </trim>
+    </select>
+    <select id="getGoodsByBookId" resultMap="goodsVoMap" parameterType="String">
+        select *
+        from goods
+        where bookId=#{id}
+    </select>
+    <select id="getByIds" resultMap="goodsVoMap" parameterType="java.util.List">
+        select *
+        from goods
+        where bookId in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getNewGoodsVo" resultMap="goodsVoMap" parameterType="String">
+        select
+        id as id,
+        bookId as bookId,
+        typeId as typeId,
+        price as price,
+        way as way,
+        info as info,
+        createTime as createTime,
+        updateTime as updateTime,
+        status as status,
+        sellerId as sellerId,
+        buyerId as buyerId,
+        address as address
+        from goods
+        order by createTime desc
+        limit 6
     </select>
     <select id="getAllGoodsVo" resultMap="goodsVoMap">
         select

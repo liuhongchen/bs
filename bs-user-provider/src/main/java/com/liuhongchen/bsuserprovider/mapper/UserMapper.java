@@ -12,7 +12,7 @@ import java.util.Map;
 @Mapper
 public interface UserMapper {
 
-	public User getUserById(@Param(value = "id") Long id)throws Exception;
+	public User getUserById(@Param(value = "id") String id)throws Exception;
 
 	public List<User>	getUserListByMap(Map<String, Object> param)throws Exception;
 
@@ -22,7 +22,7 @@ public interface UserMapper {
 
 	public Integer updateUser(User user)throws Exception;
 
-	public Integer deleteUserById(@Param(value = "id") Long id)throws Exception;
+	public Integer deleteUserById(@Param(value = "id") String id)throws Exception;
 
 	public Integer batchDeleteUser(Map<String, List<String>> params);
 

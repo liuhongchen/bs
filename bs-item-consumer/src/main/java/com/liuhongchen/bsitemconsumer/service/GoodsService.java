@@ -19,26 +19,29 @@ public interface GoodsService {
     Goods createGoods(Goods goods);
 
 
-    Integer getGoodsStatus(Integer id);
+    Integer getGoodsStatus(String id);
 
-    Goods getGoodsById(Integer id);
+    Goods getGoodsById(String id);
 
-    List<GoodsVo> getGoodsVoBySellerId(Integer id);
+    List<GoodsVo> getGoodsVoBySellerId(String id);
 
-    List<GoodsVo> getGoodsVoByBuyerId(Integer id);
-    List<GoodsVo> getGoodsVoByBuyerIdAndStatus(Integer id,Integer status);
+    List<GoodsVo> getGoodsVoByBuyerId(String id);
+    List<GoodsVo> getGoodsVoByBuyerIdAndStatus(String id,Integer status);
 
-    GoodsVo getGoodsVoById(Integer id);
+    GoodsVo getGoodsVoById(String id);
 
-    Integer cancelOrder(Integer id) throws Exception;
+    String cancelOrder(String id) throws Exception;
 
-    void sendMail(Integer goodsId, Integer type) throws Exception;
+
+    void sendMail(String goodsId, Integer type) throws Exception;
+
+    void sendMail(String goodsId, String buyerId, Integer type) throws Exception;
 
     List<GoodsVo> getAllGoodsVo();
 
     List<GoodsVo> getGoodsVoByTypeId(Integer typeId);
 
-    Integer deleteGoods(Integer id);
+    Integer deleteGoods(String id);
 
 
     List<GoodsVo> getSellingGoodsVoByTypeId(Integer typeId);
@@ -46,7 +49,11 @@ public interface GoodsService {
 
     Integer createOrder(Goods goods) throws Exception;
 
-    Integer finishOrder(Integer id) throws Exception;
+    Integer finishOrder(String id) throws Exception;
 
-    Integer deleteOrder(Integer id);
+    Integer deleteOrder(String id);
+
+    List<GoodsVo> getNewGoodsVo();
+
+    List<GoodsVo> search(String title);
 }

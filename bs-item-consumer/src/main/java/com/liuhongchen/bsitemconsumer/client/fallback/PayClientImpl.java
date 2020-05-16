@@ -2,6 +2,7 @@ package com.liuhongchen.bsitemconsumer.client.fallback;
 
 import com.liuhongchen.bscommonmodule.pojo.Mail;
 import com.liuhongchen.bsitemconsumer.client.RestPayClient;
+import org.springframework.stereotype.Component;
 
 /**
  * ClassName:RestPayClientImpl
@@ -11,21 +12,22 @@ import com.liuhongchen.bsitemconsumer.client.RestPayClient;
  * @date:2020-05-13 17:46
  * @author:892698613@qq.com
  */
+@Component
 public class PayClientImpl implements RestPayClient {
 
 
     @Override
-    public Integer createOrder(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer createOrder(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 
     @Override
-    public Integer cancelOrder(Integer userId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer cancelOrder(String userId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 
     @Override
-    public Integer finishOrder(Integer sellerId, Integer buyerId, Double num, String goodsName, Integer goodsId) throws Exception {
+    public Integer finishOrder(String sellerId, String buyerId, Double num, String goodsName, String goodsId) throws Exception {
         return null;
     }
 }

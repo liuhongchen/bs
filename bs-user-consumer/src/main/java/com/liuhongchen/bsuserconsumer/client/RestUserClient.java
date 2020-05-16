@@ -17,7 +17,7 @@ import java.util.Map;
 @FeignClient(name = "bs-user-provider", fallback = UserClientFallBack.class)
 public interface RestUserClient {
     @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
-    public User getUserById(@RequestParam("id") Long id) throws Exception;
+    public User getUserById(@RequestParam("id") String id) throws Exception;
 
     @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
     public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception;
@@ -44,6 +44,9 @@ public interface RestUserClient {
     public Object[] update(@RequestBody User user) throws Exception ;
 
     @RequestMapping(value = "/getMoney", method = RequestMethod.POST)
-    Double getMoney(@RequestParam("id") Integer id);
+    Double getMoney(@RequestParam("id") String  id);
+
+    @RequestMapping(value = "/infoCheck", method = RequestMethod.POST)
+    Boolean infoCheck(@RequestParam("id")String id);
 }
 

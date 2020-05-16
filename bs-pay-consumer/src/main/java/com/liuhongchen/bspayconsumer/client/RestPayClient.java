@@ -13,33 +13,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "bs-pay-provider", fallback = PayClientFallback.class)
 public interface RestPayClient {
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-    public Integer createAccount(@RequestParam("userId") Integer userId) throws Exception;
+    public Integer createAccount(@RequestParam("userId") String userId) throws Exception;
 
 
     @RequestMapping(value = "/getMoney",method = RequestMethod.POST)
-    public Money getMoney(@RequestParam("userId")Integer userId);
+    public Money getMoney(@RequestParam("userId")String userId);
 
     @RequestMapping(value ="/getRestMoney",method = RequestMethod.POST)
-    Double getRestMoney(@RequestParam("id") Integer id);
+    Double getRestMoney(@RequestParam("id") String id);
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    Integer add(@RequestParam("userId")Integer userId,
+    Integer add(@RequestParam("userId")String userId,
                 @RequestParam("num")Double num,
                 @RequestParam("goodsName")String goodsName,
-                @RequestParam("goodsId")Integer goodsId) throws Exception;
+                @RequestParam("goodsId")String goodsId) throws Exception;
 
     @RequestMapping(value = "/minus", method = RequestMethod.POST)
-    Integer minus(@RequestParam("userId")Integer userId,
+    Integer minus(@RequestParam("userId")String userId,
                   @RequestParam("num")Double num,
                   @RequestParam("goodsName")String goodsName,
-                  @RequestParam("goodsId")Integer goodsId) throws Exception;
+                  @RequestParam("goodsId")String goodsId) throws Exception;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
-    Integer test(@RequestParam("userId")Integer userId,
+    Integer test(@RequestParam("userId")String userId,
                 @RequestParam("num")Double num,
                 @RequestParam("goodsName")String goodsName,
-                @RequestParam("goodsId")Integer goodsId) throws Exception;
+                @RequestParam("goodsId")String goodsId) throws Exception;
 
 }
 

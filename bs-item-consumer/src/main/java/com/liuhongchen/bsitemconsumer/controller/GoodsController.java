@@ -6,16 +6,20 @@ import com.liuhongchen.bscommondto.vo.GoodsVo;
 import com.liuhongchen.bscommonmodule.pojo.Goods;
 import com.liuhongchen.bscommonutils.common.CheckUtils;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
+import com.liuhongchen.bscommonutils.common.LogUtils;
 import com.liuhongchen.bsitemconsumer.service.GoodsService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
 /**
+ *
  * ClassName:GoodsController
  * Package:com.liuhongchen.bsitemconsumer.controller
  * Description:
@@ -30,13 +34,13 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private LogUtils logUtils;
 
     @GetMapping("/createGoods")
-    public Dto createGoods(Integer bookid,Integer kindid,Integer collegeid,
+    public Dto createGoods(String bookid,Integer kindid,Integer collegeid,
                            String price,Integer deliveryid,String place,
-                           String notes,Integer sellerid){
-
-        System.out.println(bookid+" "+kindid+" "+collegeid+" "+price+" "+deliveryid+" "+place+" "+notes+" "+sellerid);
+                           String notes,String sellerid){
 
         if (bookid==null||kindid==null||collegeid==null||price==null||deliveryid==null||place==null||notes==null||sellerid==null){
             return DtoUtil.returnFail("参数传入失败","0022");
@@ -53,8 +57,18 @@ public class GoodsController {
         goods.setStatus(1);
         goods.setCreateTime(new Date());
         goods.setUpdateTime(new Date());
+        Goods goodsResult;
+        try {
+            goodsResult = goodsService.createGoods(goods);
 
-        Goods goodsResult = goodsService.createGoods(goods);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("createGoods失败","0022");
+        }
         if (goodsResult==null||goodsResult.getId()==null)return DtoUtil.returnFail("商品创建失败","0022");
 
 
@@ -64,53 +78,132 @@ public class GoodsController {
 
 
     @GetMapping("/getGoodsStatus")
-    public Dto getGoodsStatus(Integer id){
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
-
-        Integer goodsStatus = goodsService.getGoodsStatus(id);
+    public Dto getGoodsStatus(String id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
+        Integer goodsStatus;
+        try {
+            goodsStatus = goodsService.getGoodsStatus(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsStatus失败","0022");
+        }
         if (goodsStatus==null)return DtoUtil.returnFail("查询失败","0022");
 
         return DtoUtil.returnSuccess("查询成功",goodsStatus);
     }
 
     @GetMapping("/getGoodsById")
-    public Dto getGoodsById(Integer id){
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
-
-        Goods goods = goodsService.getGoodsById(id);
+    public Dto getGoodsById(String id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
+        Goods goods;
+        try {
+            goods = goodsService.getGoodsById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsById失败","0022");
+        }
         if (goods==null)return DtoUtil.returnFail("查询失败","0022");
 
         return DtoUtil.returnSuccess("查询成功",goods);
     }
-    @GetMapping("/getGoodsVoById")
-    public Dto getGoodsVoById(Integer id){
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
 
-        GoodsVo goods = goodsService.getGoodsVoById(id);
+    @GetMapping("/search")
+    public Dto search(String title){
+        if (EmptyUtils.isEmpty(title))return DtoUtil.returnFail("title错误","0022");
+        List<GoodsVo> goodsVoList;
+        try {
+            goodsVoList = goodsService.search(title);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("search失败","0022");
+        }
+        return DtoUtil.returnSuccess("查询成功",goodsVoList);
+    }
+
+    @GetMapping("/getGoodsVoById")
+    public Dto getGoodsVoById(String id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
+        GoodsVo goods;
+        try {
+            goods = goodsService.getGoodsVoById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsVoById失败","0022");
+        }
         if (goods==null)return DtoUtil.returnFail("查询失败","0022");
 
         return DtoUtil.returnSuccess("查询成功",goods);
+    }
+    @GetMapping("/getNewGoodsVo")
+    public Dto getNewGoodsVo(){
+        List<GoodsVo> goodsVoList;
+        try {
+            goodsVoList = goodsService.getNewGoodsVo();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getNewGoodsVo失败","0022");
+        }
+        return DtoUtil.returnSuccess("查询成功",goodsVoList);
     }
 
     @GetMapping("/getGoodsVoBySellerId")
-    public Dto getGoodsBySellerId(Integer id){
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
-
-        List<GoodsVo> goodsList=goodsService.getGoodsVoBySellerId(id);
+    public Dto getGoodsBySellerId(String id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
+        List<GoodsVo> goodsList;
+        try {
+            goodsList=goodsService.getGoodsVoBySellerId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsVoBySellerId失败","0022");
+        }
 
         if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
 
         return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
     }
     @GetMapping("/getGoodsVoByBuyerIdAndStatus")
-    public Dto getGoodsVoByBuyerIdAndStatus(Integer id,Integer status){
-        if (id==null||id<=0||status==null)
+    public Dto getGoodsVoByBuyerIdAndStatus(String id,Integer status){
+        if (EmptyUtils.isEmpty(id)||status==null)
             return DtoUtil.returnFail("参数错误", "0022");
+        List<GoodsVo> goodsList;
+        try {
+            goodsList=goodsService.getGoodsVoByBuyerIdAndStatus(id, status);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsVoByBuyerIdAndStatus失败","0022");
+        }
 
-        List<GoodsVo> goodsList
-                =goodsService.getGoodsVoByBuyerIdAndStatus(id, status);
 
-        if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
+        if (goodsList==null)return DtoUtil.returnFail("getGoodsVoByBuyerIdAndStatus查询失败","0022");
 
         return DtoUtil.returnSuccess("goodsList查询成功",goodsList);
     }
@@ -119,8 +212,17 @@ public class GoodsController {
 
     @GetMapping("/getAllGoodsVo")
     public Dto getAllGoodsVo(){
-
-        List<GoodsVo> goodsList=goodsService.getAllGoodsVo();
+        List<GoodsVo> goodsList;
+        try {
+            goodsList=goodsService.getAllGoodsVo();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getAllGoodsVo失败","0022");
+        }
 
         if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
 
@@ -133,11 +235,21 @@ public class GoodsController {
 
 
         List<GoodsVo> goodsList=null;
-        if (typeId==0){
-            goodsList=goodsService.getAllGoodsVo();
-        }else{
-            goodsList=goodsService.getGoodsVoByTypeId(typeId+2);
+        try {
+            if (typeId==0){
+                goodsList=goodsService.getAllGoodsVo();
+            }else{
+                goodsList=goodsService.getGoodsVoByTypeId(typeId+2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getGoodsVoByTypeId失败","0022");
         }
+
 
         if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
 
@@ -148,7 +260,19 @@ public class GoodsController {
     public Dto getSellingGoodsVoByTypeId(Integer typeId){
 
         typeId+=2;
-        List<GoodsVo> goodsList=goodsService.getSellingGoodsVoByTypeId(typeId);
+        List<GoodsVo> goodsList;
+        try {
+            goodsList=goodsService.getSellingGoodsVoByTypeId(typeId);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("getSellingGoodsVoByTypeId失败","0022");
+        }
+
 
 
         if (goodsList==null)return DtoUtil.returnFail("goodsList查询失败","0022");
@@ -158,26 +282,59 @@ public class GoodsController {
 
 
     @GetMapping("/cancelOrder")
-    public Dto cancelOrder(Integer id) throws Exception {
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+    public Dto cancelOrder(String id) throws Exception {
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
 
 
-        goodsService.sendMail(id,4);
-        Integer res=goodsService.cancelOrder(id);
-
-
-        return (res==null||res!=1)?
-                DtoUtil.returnFail("取消失败","0022"):
-                DtoUtil.returnSuccess("取消成功");
+        String buyerId;
+        try {
+            buyerId=goodsService.cancelOrder(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("cancelOrder失败","0022");
+        }
+        try {
+            goodsService.sendMail(id,buyerId,4);
+        }catch (Exception e){
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+        }
+        return DtoUtil.returnSuccess("取消成功");
     }
 
     @GetMapping("/finishOrder")
-    public Dto finishOrder(Integer id) throws Exception {
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+    public Dto finishOrder(String id) throws Exception {
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
 
 
-        goodsService.sendMail(id,4);
-        Integer res=goodsService.finishOrder(id);
+        Integer res;
+        try {
+            res=goodsService.finishOrder(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("finishOrder失败","0022");
+        }
+
+        try {
+            goodsService.sendMail(id,3);
+        }catch (Exception e){
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+        }
 
 
         return (res==null||res!=1)?
@@ -186,24 +343,57 @@ public class GoodsController {
     }
 
     @GetMapping("/createOrder")
-    public Dto createOrder(Integer goodsId,Integer buyerId,String address) throws Exception {
+    public Dto createOrder(String goodsId,String buyerId,String address)  {
+
         Goods goods=new Goods();
         goods.setId(goodsId);
+//        buyerId= String.valueOf((int)(Math.random()*100));
         goods.setBuyerId(buyerId);
         goods.setStatus(2);
         if (!address.equals("address"))goods.setAddress(address);
         goods.setUpdateTime(new Date());
-        Integer result=goodsService.createOrder(goods);
+        Integer result= null;
+        try {
+            result = goodsService.createOrder(goods);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("createOrder失败","0022");
+        }
+        try {
+            goodsService.sendMail(goodsId,1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+        }
+
+
         if (result==1)return DtoUtil.returnSuccess("创建成功");
         return DtoUtil.returnFail("创建失败","0022");
     }
 
     @GetMapping("/deleteOrder")
-    public Dto deleteOrder(Integer id) throws Exception {
-        if (id==null||id<=0)return DtoUtil.returnFail("id错误","0022");
+    public Dto deleteOrder(String id) throws Exception {
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("id错误","0022");
 
-
-        Integer res=goodsService.deleteOrder(id);
+        Integer res;
+        try {
+            res=goodsService.deleteOrder(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("deleteOrder失败","0022");
+        }
 
 
         return (res==null||res!=1)?
@@ -226,11 +416,19 @@ public class GoodsController {
      */
     @SuppressWarnings("JavaDoc")
     @GetMapping("/sendMail")
-    public Dto sendMail(Integer goodsId,Integer type) throws Exception {
+    public Dto sendMail(String goodsId,Integer type) throws Exception {
         if (goodsId==null||type==null)return DtoUtil.returnFail("参数传递失败",
                 "0022");
-
-        goodsService.sendMail(goodsId,type);
+        try {
+            goodsService.sendMail(goodsId,type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("sendMail失败","0022");
+        }
 
 
         return DtoUtil.returnSuccess("发送成功");
@@ -238,10 +436,20 @@ public class GoodsController {
 
 
     @GetMapping("/deleteGoods")
-    public Dto deleteGoods(Integer id){
-        if (id==null||id<=0)return DtoUtil.returnFail("参数错误","0022");
+    public Dto deleteGoods(String id){
+        if (EmptyUtils.isEmpty(id))return DtoUtil.returnFail("参数错误","0022");
 
-        Integer res=goodsService.deleteGoods(id);
+        Integer res;
+        try {
+             res=goodsService.deleteGoods(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logUtils.i("item_consumer_exception"
+                    , DateFormat.getDateInstance().format(new Date())+"--"
+                            +Thread.currentThread() .getStackTrace()[1].getMethodName()
+                            +e.getMessage());
+            return DtoUtil.returnFail("deleteGoods失败","0022");
+        }
 
         if(res==null||res!=1)return DtoUtil.returnFail("服务器错误","0033");
 

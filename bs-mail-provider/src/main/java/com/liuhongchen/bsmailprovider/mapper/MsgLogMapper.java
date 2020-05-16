@@ -19,6 +19,7 @@ public interface MsgLogMapper {
     Integer insert(MsgLog msgLog);
 
 
+
     Integer updateStatus(MsgLog msgLog);
 
 //    MsgLog selectByMsgId(String msgId);

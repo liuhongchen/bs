@@ -9,10 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.liuhongchen</groupId>
-    <artifactId>bs-user-consumer</artifactId>
+    <artifactId>bs-pay-consumer</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>bs-user-consumer</name>
-    <description>用户服务消费者</description>
+    <name>bs-pay-consumer</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -61,6 +60,8 @@
 
 
     <dependencies>
+
+
 
         <dependency>
             <groupId>com.liuhongchen</groupId>

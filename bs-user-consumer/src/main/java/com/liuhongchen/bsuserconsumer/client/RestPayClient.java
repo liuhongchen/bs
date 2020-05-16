@@ -19,7 +19,7 @@ import java.util.Map;
 @FeignClient(name = "bs-pay-provider", fallback = PayClientFallback.class)
 public interface RestPayClient {
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-    public Integer createAccount(@RequestParam("userId") Integer userId) throws Exception;
+    public Integer createAccount(@RequestParam("userId") String userId) throws Exception;
 
 
 }

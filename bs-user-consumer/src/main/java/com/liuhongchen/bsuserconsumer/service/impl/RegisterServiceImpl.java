@@ -30,7 +30,6 @@ public class RegisterServiceImpl implements RegisterService {
         //直接传到provider然后让provider判断，√
         User queryUser = userClient.wxRegister(user);
         if (EmptyUtils.isEmpty(queryUser.getId()))return null;
-        System.out.println(queryUser.getId());
         Integer createAccountResult=payClient.createAccount(queryUser.getId());
 
         return tokenService.token(queryUser);

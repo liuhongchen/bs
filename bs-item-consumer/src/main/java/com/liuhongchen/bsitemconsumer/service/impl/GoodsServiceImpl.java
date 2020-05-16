@@ -12,6 +12,8 @@ import com.liuhongchen.bsitemconsumer.client.RestUserClient;
 import com.liuhongchen.bsitemconsumer.service.BookService;
 import com.liuhongchen.bsitemconsumer.service.GoodsService;
 import com.liuhongchen.bsitemconsumer.utils.MailUtil;
+//import io.seata.spring.annotation.GlobalTransactional;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,8 @@ import java.util.List;
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
+
+    private String tempBuyerId;
 
     @Autowired
     private RestItemClient itemClient;
@@ -55,21 +59,21 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Integer getGoodsStatus(Integer id) {
+    public Integer getGoodsStatus(String id) {
         return itemClient.getGoodsStatus(id);
     }
 
     @Override
-    public Goods getGoodsById(Integer id) {
+    public Goods getGoodsById(String id) {
         return itemClient.getGoodsById(id);
     }
 
     @Override
-    public List<GoodsVo> getGoodsVoBySellerId(Integer id) {
+    public List<GoodsVo> getGoodsVoBySellerId(String id) {
         return itemClient.getGoodsVoBySellerId(id);
     }
     @Override
-    public List<GoodsVo> getGoodsVoByBuyerIdAndStatus(Integer id,
+    public List<GoodsVo> getGoodsVoByBuyerIdAndStatus(String id,
                                                        Integer status) {
 
         if (status == 0) {
@@ -82,12 +86,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<GoodsVo> getGoodsVoByBuyerId(Integer id) {
+    public List<GoodsVo> getGoodsVoByBuyerId(String id) {
         return itemClient.getGoodsVoByBuyerId(id);
     }
 
     @Override
-    public GoodsVo getGoodsVoById(Integer id) {
+    public GoodsVo getGoodsVoById(String id) {
         return itemClient.getGoodsVoById(id);
     }
 
@@ -104,14 +108,19 @@ public class GoodsServiceImpl implements GoodsService {
      *             取消交易4 给卖家和买家,书籍信息 取消交易
      */
     @Override
-    public void sendMail(Integer goodsId, Integer type) throws Exception {
+    public void sendMail(String goodsId, Integer type) throws Exception {
+        sendMail(goodsId,null,type);
+    }
+
+    @Override
+    public void sendMail(String goodsId,String buyerId, Integer type) throws Exception {
 
         Goods goods = itemClient.getGoodsById(goodsId);
         Book book = itemClient.getBookById(goods.getBookId());
         User buyer =
-                userClient.getUserById(Long.parseLong(goods.getBuyerId().toString()));
+                userClient.getUserById((goods.getBuyerId().equals("-1"))?buyerId:goods.getBuyerId());
         User seller =
-                userClient.getUserById(Long.parseLong(goods.getSellerId().toString()));
+                userClient.getUserById(goods.getSellerId());
 
         List<Mail> mails=MailUtil.getMail(goods,book,buyer,seller,type);
 
@@ -119,7 +128,6 @@ public class GoodsServiceImpl implements GoodsService {
         for (Mail mail : mails) {
             mailClient.sendSimple(mail);
         }
-
     }
 
     @Override
@@ -133,7 +141,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Integer deleteGoods(Integer id) {
+    public Integer deleteGoods(String id) {
 
         return itemClient.deleteGoods(id);
     }
@@ -145,6 +153,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
 
+    @GlobalTransactional
     @Override
     public Integer createOrder(Goods goods) throws Exception {
 
@@ -155,32 +164,27 @@ public class GoodsServiceImpl implements GoodsService {
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
 
-        Integer payResult= payClient.createOrder(goods.getBuyerId(),price,
-                bookName,goods.getId());
+        Integer createResult=itemClient.createOrder(goods);
 
-
-        Integer createResult=itemClient.updateGoods(goods);
-
+        if (createResult==1) {
+            Integer payResult = payClient.createOrder(goods.getBuyerId(), price,
+                    bookName, goods.getId());
+        }
         return 1;
     }
 
+    @GlobalTransactional
     @Override
-    public Integer finishOrder(Integer id) throws Exception {
+    public Integer finishOrder(String id) throws Exception {
         //这里必须重新获取一次price,万一买家下单的同时卖家改价格
         Goods queryGoods = itemClient.getGoodsById(id);
         Double price=queryGoods.getPrice();
-
-
-
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
-
         Integer finishOrderResult=
                 payClient.finishOrder(queryGoods.getSellerId(),
                 queryGoods.getBuyerId(),price,
                 bookName,id);
-
-
         Goods goods=new Goods();
         goods.setId(id);
         goods.setStatus(3);
@@ -191,18 +195,29 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Integer deleteOrder(Integer id) {
+    public Integer deleteOrder(String id) {
         return itemClient.deleteGoods(id);
     }
 
+    @Override
+    public List<GoodsVo> getNewGoodsVo() {
+        return itemClient.getNewGoodsVo();
+    }
 
     @Override
-    public Integer cancelOrder(Integer id) throws Exception {
+    public List<GoodsVo> search(String title) {
+
+        return itemClient.search(title);
+    }
+
+
+    @GlobalTransactional
+    @Override
+    public String cancelOrder(String id) throws Exception {
         //这里必须重新获取一次price,万一买家下单的同时卖家改价格
         Goods queryGoods = itemClient.getGoodsById(id);
         Double price=queryGoods.getPrice();
-
-
+        tempBuyerId=queryGoods.getBuyerId();
 
         Book book=bookService.getBookById(queryGoods.getBookId());
         String bookName=book.getTitle()+"第"+book.getEdition();
@@ -215,12 +230,13 @@ public class GoodsServiceImpl implements GoodsService {
 
         Goods goods=new Goods();
         goods.setId(id);
-        goods.setBuyerId(-1);
+        goods.setBuyerId("-1");
         goods.setStatus(1);
 
         Integer cancelResult=itemClient.updateGoods(goods);
 
-        return 1;
+
+        return tempBuyerId;
     }
 
 }

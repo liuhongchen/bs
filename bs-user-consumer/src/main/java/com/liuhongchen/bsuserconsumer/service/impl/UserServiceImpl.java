@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         try {
             return userClient.getUserById(id);
         } catch (Exception e) {
@@ -43,8 +43,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Double getMoney(Integer id) {
+    public Double getMoney(String id) {
 
         return userClient.getMoney(id);
+    }
+
+    @Override
+    public Boolean infoCheck(String id) {
+
+        return userClient.infoCheck(id);
     }
 }

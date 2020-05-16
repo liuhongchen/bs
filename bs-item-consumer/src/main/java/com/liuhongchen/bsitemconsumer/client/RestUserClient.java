@@ -17,19 +17,11 @@ import java.util.Map;
 @FeignClient(name = "bs-user-provider", fallback = UserClientFallBack.class)
 public interface RestUserClient {
     @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
-    public User getUserById(@RequestParam("id") Long id) throws Exception;
+    public User getUserById(@RequestParam("id") String id) throws Exception;
 
     @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
     public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception;
 
-    @RequestMapping(value = "/minus", method = RequestMethod.POST)
-    Integer minus(@RequestParam("userId") Integer userId,
-                  @RequestParam("price") Double price);
-
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    Integer add(@RequestParam("userId") Integer userId,
-                  @RequestParam("price") Double price);
 
 }
 

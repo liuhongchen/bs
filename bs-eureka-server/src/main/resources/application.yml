@@ -12,3 +12,6 @@ eureka:
     register-with-eureka: false
   server:
     enable-self-preservation: false
+ribbon:
+  eureka:
+    enabled: true

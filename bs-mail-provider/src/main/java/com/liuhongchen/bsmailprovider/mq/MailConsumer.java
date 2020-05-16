@@ -3,6 +3,7 @@ package com.liuhongchen.bsmailprovider.mq;
 import com.liuhongchen.bscommonmodule.pojo.Mail;
 import com.liuhongchen.bscommonmodule.pojo.MsgLog;
 import com.liuhongchen.bscommonutils.common.Constants;
+import com.liuhongchen.bscommonutils.common.LogUtils;
 import com.liuhongchen.bsmailprovider.config.RabbitConfig;
 import com.liuhongchen.bsmailprovider.service.MsgLogService;
 import com.liuhongchen.bsmailprovider.utils.MailUtil;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * ClassName:MailConsumer
@@ -33,6 +36,9 @@ public class MailConsumer {
     private MsgLogService msgLogService;
 
     private static Logger log= LoggerFactory.getLogger(MailConsumer.class);
+
+    @Autowired
+    private LogUtils logUtils;
 
     @Autowired
     private MailUtil mailUtil;
@@ -59,9 +65,7 @@ public class MailConsumer {
         MessageProperties properties = message.getMessageProperties();
         long tag = properties.getDeliveryTag();
 
-
-        //发送邮件
-        boolean success = mailUtil.send(mail);
+        boolean success= mailUtil.send(mail);
         if (success) {//成功更新状态
             msgLogService.updateStatus(msgId, Constants.MsgLogStatus.CONSUMED_SUCCESS);
             channel.basicAck(tag, false);// 消费确认

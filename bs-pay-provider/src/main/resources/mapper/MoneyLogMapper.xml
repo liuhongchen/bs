@@ -11,10 +11,12 @@
         (#{id},#{name},#{time},#{type},#{num},#{goodsId},#{userId})
     </insert>
 
-    <select id="getByUserId" parameterType="Integer" resultType="com.liuhongchen.bscommonmodule.pojo.MoneyLog">
+    <select id="getByUserId" parameterType="String" resultType="com.liuhongchen.bscommonmodule.pojo.MoneyLog">
         select *
         from money_log
         where userId=#{userId}
+        order by time desc
+        limit 20
     </select>
 
 </mapper>

@@ -22,8 +22,14 @@ public class RestUserService {
     private UserMapper userMapper;
 
     @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
-    public User getUserById(@RequestParam("id") Long id) throws Exception {
+    public User getUserById(@RequestParam("id") String id) throws Exception {
         return userMapper.getUserById(id);
+    }
+
+    @RequestMapping(value = "/infoCheck", method = RequestMethod.POST)
+    public Boolean infoCheck(@RequestParam("id") String id) throws Exception {
+        User user = userMapper.getUserById(id);
+        return !EmptyUtils.isEmpty(user.getPhone()) && !EmptyUtils.isEmpty(user.getEmail());
     }
 
     @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
@@ -36,17 +42,6 @@ public class RestUserService {
         return userMapper.getUserCountByMap(param);
     }
 
-    @RequestMapping(value = "/qdtxAddUser", method = RequestMethod.POST)
-    public Integer qdtxAddUser(@RequestBody User user) throws Exception {
-        user.setCreatedTime(new Date());
-        return userMapper.insertUser(user);
-    }
-
-    @RequestMapping(value = "/qdtxModifyUser", method = RequestMethod.POST)
-    public Integer qdtxModifyUser(@RequestBody User user) throws Exception {
-        user.setUpdatedTime(new Date());
-        return userMapper.updateUser(user);
-    }
 
     /**
      * 注意一定要在参数列表里面写 @RequestBody
@@ -65,7 +60,7 @@ public class RestUserService {
     @RequestMapping(value = "/wxRegister", method = RequestMethod.POST)
     public User wxRegister(@RequestBody User user) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        map.put("wxUserId", user.getWxUserId());
+        map.put("id", user.getId());
         List<User> users = userMapper.getUserListByMap(map);
         if (EmptyUtils.isEmpty(users)) {//此时不存在该用户，需要insert
             user.setCreatedTime(new Date());
@@ -75,8 +70,7 @@ public class RestUserService {
             user.setUpdatedTime(new Date());
             userMapper.updateUser(user);
         }
-        return user;//这个user是自动生成key的
-
+        return user;
 
     }
 
@@ -85,7 +79,7 @@ public class RestUserService {
     public Object[] update(@RequestBody User user) throws Exception {
         Integer result = userMapper.updateUser(user);
 
-        return new Object[]{result, userMapper.getUserById(Long.valueOf(user.getId()))};
+        return new Object[]{result, userMapper.getUserById(user.getId())};
 
     }
 

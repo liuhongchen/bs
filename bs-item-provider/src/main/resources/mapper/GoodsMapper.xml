@@ -127,8 +127,8 @@
         </trim>
     </select>
 
-    <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into goods(
+    <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods" >
+        insert into goods(id,
                         bookId,
                         typeId,
                         price,
@@ -140,7 +140,7 @@
                         sellerId,
                           buyerId,
                         address)
-        values(
+        values(#{id},
                      #{bookId},
                      #{typeId},
                      #{price},
@@ -193,7 +193,7 @@
         </trim>
     </update>
 
-    <delete id="deleteGoodsById" parameterType="Long" >
+    <delete id="deleteGoodsById" parameterType="String" >
         delete from goods
         where id=#{id}
     </delete>

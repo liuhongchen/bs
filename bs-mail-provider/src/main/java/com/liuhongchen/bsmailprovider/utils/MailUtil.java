@@ -32,6 +32,7 @@ public class MailUtil {
      * @param mail
      */
     public boolean send(Mail mail) {
+
         String to = mail.getTo();// 目标邮箱
         String title = mail.getTitle();// 邮件标题
         String content = mail.getContent();// 邮件正文
