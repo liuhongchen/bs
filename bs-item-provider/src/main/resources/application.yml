@@ -39,14 +39,15 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
 
 server:
-  port: 15002
+  port: 15001
 
 eureka:
   client:
     service-url:
       defaultZone: http://router.liuhongchen.com:7776/eureka/
     fetch-registry: true
-
+  instance:
+    prefer-ip-address: true
 logging:
   level:
     root: info

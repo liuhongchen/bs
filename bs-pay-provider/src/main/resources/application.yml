@@ -22,14 +22,16 @@ mybatis:
   type-aliases-package: com.liuhongchen.bscommonmodule.pojo
   mapper-locations: classpath*:mapper/*.xml
 
-#server:
-#  port: 15004
+server:
+  port: 15201
 
 eureka:
   client:
     service-url:
       defaultZone: http://router.liuhongchen.com:7776/eureka/
-
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
 logging:
   level:
     root: info

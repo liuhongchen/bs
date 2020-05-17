@@ -40,12 +40,12 @@ eureka:
     service-url:
       defaultZone: http://router.liuhongchen.com:7776/eureka/
     fetch-registry: true
-#  instance:
-#    prefer-ip-address: true
+  instance:
+    prefer-ip-address: true
 
 
 server:
-  port: 15052
+  port: 15051
 
 feign:
   hystrix:

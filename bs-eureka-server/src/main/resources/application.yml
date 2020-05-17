@@ -10,6 +10,8 @@ eureka:
       defaultZone: http://localhost:7776/eureka/
     fetch-registry: false
     register-with-eureka: false
+  instance:
+    prefer-ip-address: true
   server:
     enable-self-preservation: false
 ribbon:
