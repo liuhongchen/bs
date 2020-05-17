@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.liuhongchen.bscommonutils","com.liuhongchen.bscommonextutils","com.liuhongchen.bsuserprovider"})
 @EnableEurekaClient
 //@ComponentScan({"com.liuhongchen.bscommondao","com.liuhongchen.bsuserprovider"})
 //@MapperScan("com.liuhongchen.bscommondao.mapper")

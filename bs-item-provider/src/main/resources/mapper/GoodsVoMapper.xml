@@ -28,6 +28,7 @@
         where id=#{bookId}
     </select>
 
+
     <select id="getGoodsById" resultMap="goodsVoMap" parameterType="String">
         select
         id as id,
@@ -52,15 +53,7 @@
     <select id="getGoodsByBookId" resultMap="goodsVoMap" parameterType="String">
         select *
         from goods
-        where bookId=#{id}
-    </select>
-    <select id="getByIds" resultMap="goodsVoMap" parameterType="java.util.List">
-        select *
-        from goods
-        where bookId in
-        <foreach collection="list" item="item" open="(" close=")" separator=",">
-            #{item}
-        </foreach>
+        where bookId=#{id} and status=1
     </select>
     <select id="getNewGoodsVo" resultMap="goodsVoMap" parameterType="String">
         select
@@ -77,6 +70,7 @@
         buyerId as buyerId,
         address as address
         from goods
+        where status=1
         order by createTime desc
         limit 6
     </select>

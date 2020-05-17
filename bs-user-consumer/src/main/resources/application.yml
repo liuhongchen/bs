@@ -33,8 +33,15 @@ server:
 
 feign:
   hystrix:
-    enabled: false
-
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 500
 #要以被负载均衡的模块的名字开始，默认是轮询
 #bs-user-provider:
 #  ribbon:

@@ -16,17 +16,9 @@ public interface UserMapper {
 
 	public List<User>	getUserListByMap(Map<String, Object> param)throws Exception;
 
-	public Integer getUserCountByMap(Map<String, Object> param)throws Exception;
-
 	public Integer insertUser(User user)throws Exception;
 
 	public Integer updateUser(User user)throws Exception;
-
-	public Integer deleteUserById(@Param(value = "id") String id)throws Exception;
-
-	public Integer batchDeleteUser(Map<String, List<String>> params);
-
-	User checkLoginByPassword(String phone, String password);
 
 
 }

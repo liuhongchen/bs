@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 /**
  * 数据源代理
- * @author wangzhongxiang
+ * @author liuhongchen
  */
 @Configuration
 public class DataSourceConfiguration {

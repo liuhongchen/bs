@@ -15,19 +15,9 @@ public interface BookMapper {
 
 	public Book getBookById(@Param(value = "id") String id)throws Exception;
 
-	public List<Book>	getBookListByMap(Map<String, Object> param)throws Exception;
-
-	public Integer getBookCountByMap(Map<String, Object> param)throws Exception;
 
 	public Integer insertBook(Book book)throws Exception;
 
-	public Integer updateBook(Book book)throws Exception;
-
-	public Integer deleteBookById(@Param(value = "id") String id)throws Exception;
-
-	public Integer batchDeleteBook(Map<String, List<String>> params);
-
-	Book getBookByIsbn10(@Param("isbn") String isbn);
 
 	Book getBookByIsbn13(@Param("isbn") String isbn);
 }

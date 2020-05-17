@@ -12,6 +12,18 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: router.liuhongchen.com
+    database: 0
+    port: 6379
+    user: root
+    password: 123456
+    timeout: 3000
+  rabbitmq:
+    host: router.liuhongchen.com
+    port: 5672
+    username: guest
+    password: guest
   elasticsearch:
     jest:
       uris: http://router.liuhongchen.com:9200 # ES服务器的地址！
@@ -38,14 +50,6 @@ eureka:
 logging:
   level:
     root: info
-#    org:
-#      springframework:
-#        cloud:
-#          alibaba:
-#            seata:
-#              web: debug
-#    io:
-#      seata: debug
 
 
 #不添加这一项，每次访问都会报异常,zipkin

@@ -33,14 +33,7 @@ eureka:
 logging:
   level:
     root: info
-#    org:
-#      springframework:
-#        cloud:
-#          alibaba:
-#            seata:
-#              web: debug
-#    io:
-#      seata: debug
+
 #不添加这一项，每次访问都会报异常,zipkin
 management:
   metrics:

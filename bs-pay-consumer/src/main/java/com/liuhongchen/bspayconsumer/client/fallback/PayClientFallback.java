@@ -2,6 +2,7 @@ package com.liuhongchen.bspayconsumer.client.fallback;
 
 import com.liuhongchen.bscommonmodule.pojo.Money;
 import com.liuhongchen.bspayconsumer.client.RestPayClient;
+import org.springframework.stereotype.Service;
 
 /**
  * ClassName:RestPayClientImpl
@@ -11,6 +12,7 @@ import com.liuhongchen.bspayconsumer.client.RestPayClient;
  * @date:2020-05-13 18:01
  * @author:892698613@qq.com
  */
+@Service
 public class PayClientFallback implements RestPayClient {
 
     @Override

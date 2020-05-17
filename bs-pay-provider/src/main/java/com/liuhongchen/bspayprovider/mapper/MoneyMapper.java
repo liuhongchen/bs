@@ -1,13 +1,7 @@
 package com.liuhongchen.bspayprovider.mapper;
 
 import com.liuhongchen.bscommonmodule.pojo.Money;
-import com.liuhongchen.bscommonmodule.pojo.MoneyLog;
-import com.liuhongchen.bscommonmodule.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
-import java.util.Map;
 /**
  * Created by liuhongchen
  */

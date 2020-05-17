@@ -94,42 +94,6 @@
         </if>
     </select>
 
-    <select id="getUserCountByMap" resultType="Integer" parameterType="java.util.Map">
-        select count(*) from user
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="id != null and id!=''">
-                and id=#{id}
-            </if>
-            <if test="phone != null and phone!=''">
-                and phone=#{phone}
-            </if>
-            <if test="password != null and password!=''">
-                and password=#{password}
-            </if>
-            <if test="realName != null and realName!=''">
-                and realName=#{realName}
-            </if>
-            <if test="nickName != null and nickName!=''">
-                and nickName=#{nickName}
-            </if>
-            <if test="gender != null and gender!=''">
-                and gender=#{gender}
-            </if>
-            <if test="birthday != null and birthday!=''">
-                and birthday=#{birthday}
-            </if>
-            <if test="createdTime != null and createdTime!=''">
-                and createdTime=#{createdTime}
-            </if>
-            <if test="updatedTime != null and updatedTime!=''">
-                and updatedTime=#{updatedTime}
-            </if>
-            <if test="avatarUrl != null and avatarUrl!=''">
-                and avatarUrl=#{avatarUrl}
-            </if>
-        </trim>
-    </select>
-
     <insert id="insertUser" parameterType="com.liuhongchen.bscommonmodule.pojo.User" >
         insert into user(id,
                          phone,
@@ -200,27 +164,6 @@
             </if>
         </trim>
     </update>
-
-
-
-    <select id="checkLoginByPassword" resultType="com.liuhongchen.bscommonmodule.pojo.User">
-        select id          as id,
-               phone       as phone,
-               email       as email,
-               wxnum       as wxnum,
-               qqnum       as qqnum,
-               password    as password,
-               realName    as realName,
-               nickName    as nickName,
-               gender      as gender,
-               birthday    as birthday,
-               createdTime as createdTime,
-               updatedTime as updatedTime,
-               avatarUrl   as avatarUrl
-        from user
-        where phone = #{phone}
-          and password = #{password}
-    </select>
 
 
 

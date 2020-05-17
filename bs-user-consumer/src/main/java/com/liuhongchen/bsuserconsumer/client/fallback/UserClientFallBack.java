@@ -17,27 +17,7 @@ public class UserClientFallBack implements RestUserClient {
     }
 
     @Override
-    public List<User>	getUserListByMap(Map<String,Object> param)throws Exception{
-        return null;
-    }
-
-    @Override
-    public Integer getUserCountByMap(Map<String,Object> param)throws Exception{
-        return null;
-    }
-
-    @Override
-    public Integer qdtxAddUser(User user)throws Exception{
-        return null;
-    }
-
-    @Override
-    public Integer qdtxModifyUser(User user)throws Exception{
-        return null;
-    }
-
-    @Override
-    public User checkLoginByPassword(User user) {
+    public List<User> getUserListByMap(Map<String, Object> param) throws Exception {
         return null;
     }
 
@@ -53,17 +33,12 @@ public class UserClientFallBack implements RestUserClient {
 
     @Override
     public Object[] update(User user) throws Exception {
-        return null;
+        return new Object[0];
     }
 
-    @Override
-    public Double getMoney(String id) {
-        return null;
-    }
 
     @Override
     public Boolean infoCheck(String id) {
         return null;
     }
-
 }

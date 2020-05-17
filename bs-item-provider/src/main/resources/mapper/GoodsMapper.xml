@@ -85,47 +85,6 @@
         </if>
     </select>
 
-    <select id="getGoodsCountByMap" resultType="Integer"  parameterType="java.util.Map">
-        select count(*) from goods
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="bookId != null and bookId!=''">
-                    and bookId=#{bookId}
-                </if>
-                <if test="typeId != null and typeId!=''">
-                    and typeId=#{typeId}
-                </if>
-                <if test="price != null and price!=''">
-                    and price=#{price}
-                </if>
-                <if test="way != null and way!=''">
-                    and way=#{way}
-                </if>
-                <if test="info != null and info!=''">
-                    and info=#{info}
-                </if>
-                <if test="createTime != null and createTime!=''">
-                    and createTime=#{createTime}
-                </if>
-                <if test="updateTime != null and updateTime!=''">
-                    and updateTime=#{updateTime}
-                </if>
-                <if test="status != null and status!=''">
-                    and status=#{status}
-                </if>
-                <if test="sellerId != null and sellerId!=''">
-                    and sellerId=#{sellerId}
-                </if>
-            <if test="buyerId != null and buyerId!=''">
-                and buyerId=#{buyerId}
-            </if>
-                <if test="address != null and address!=''">
-                    and address=#{address}
-                </if>
-        </trim>
-    </select>
 
     <insert id="insertGoods" parameterType="com.liuhongchen.bscommonmodule.pojo.Goods" >
         insert into goods(id,

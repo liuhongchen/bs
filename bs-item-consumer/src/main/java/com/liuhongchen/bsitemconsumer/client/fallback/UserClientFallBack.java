@@ -24,8 +24,4 @@ public class UserClientFallBack implements RestUserClient {
         return null;
     }
 
-    @Override
-    public List<User> getUserListByMap(Map<String, Object> param) throws Exception {
-        return null;
-    }
 }

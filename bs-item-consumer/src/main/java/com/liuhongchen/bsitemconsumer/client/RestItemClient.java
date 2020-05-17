@@ -53,9 +53,6 @@ public interface RestItemClient {
     @RequestMapping(value = "/getGoodsVoById", method = RequestMethod.POST)
     GoodsVo getGoodsVoById(@RequestParam("id") String id);
 
-    @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
-    Integer cancelOrder(@RequestParam("id")String id);
-
     @RequestMapping(value = "/getAllGoodsVo", method = RequestMethod.POST)
     List<GoodsVo> getAllGoodsVo();
 

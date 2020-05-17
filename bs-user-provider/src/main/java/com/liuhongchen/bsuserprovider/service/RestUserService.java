@@ -1,9 +1,12 @@
 package com.liuhongchen.bsuserprovider.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.liuhongchen.bscommonextutils.common.RedisUtils;
 import com.liuhongchen.bscommonmodule.pojo.User;
 import com.liuhongchen.bscommonutils.common.EmptyUtils;
 import com.liuhongchen.bsuserprovider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -21,14 +24,31 @@ public class RestUserService {
     @Autowired
     private UserMapper userMapper;
 
+    public static final String PREFIX="cache_user:";
+
+    @Autowired
+    private RedisUtils redisUtils;
+
     @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
     public User getUserById(@RequestParam("id") String id) throws Exception {
-        return userMapper.getUserById(id);
+        String key=PREFIX+id;
+//        System.out.println(redisUtils.get(key));
+        User user;
+        if (!EmptyUtils.isEmpty(redisUtils.get(key))){
+            //直接从缓存中拿到了数据
+            user= JSONObject.parseObject(redisUtils.get(key).toString(),User.class);
+            return user;
+        }else{
+           user = userMapper.getUserById(id);
+            if (EmptyUtils.isEmpty(user))return null;
+           redisUtils.set(key, JSONObject.toJSONString(user));
+           return user;
+        }
     }
 
     @RequestMapping(value = "/infoCheck", method = RequestMethod.POST)
     public Boolean infoCheck(@RequestParam("id") String id) throws Exception {
-        User user = userMapper.getUserById(id);
+        User user = getUserById(id);
         return !EmptyUtils.isEmpty(user.getPhone()) && !EmptyUtils.isEmpty(user.getEmail());
     }
 
@@ -37,39 +57,21 @@ public class RestUserService {
         return userMapper.getUserListByMap(param);
     }
 
-    @RequestMapping(value = "/getUserCountByMap", method = RequestMethod.POST)
-    public Integer getUserCountByMap(@RequestParam Map<String, Object> param) throws Exception {
-        return userMapper.getUserCountByMap(param);
-    }
-
-
-    /**
-     * 注意一定要在参数列表里面写 @RequestBody
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/checkLoginByPassword", method = RequestMethod.POST)
-    public User checkLoginByPassword(@RequestBody User user) {
-        User user1 = userMapper.checkLoginByPassword(user.getPhone(), user.getPassword());
-        return user1;
-
-    }
-
 
     @RequestMapping(value = "/wxRegister", method = RequestMethod.POST)
     public User wxRegister(@RequestBody User user) throws Exception {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", user.getId());
-        List<User> users = userMapper.getUserListByMap(map);
-        if (EmptyUtils.isEmpty(users)) {//此时不存在该用户，需要insert
+        User queryUser = getUserById(user.getId());
+        String key=PREFIX+user.getId();
+        Integer result;
+        if (EmptyUtils.isEmpty(queryUser)) {//此时不存在该用户，需要insert
             user.setCreatedTime(new Date());
-            userMapper.insertUser(user);
+            result = userMapper.insertUser(user);
         } else {
-            user.setId(users.get(0).getId());
+            user.setId(queryUser.getId());
             user.setUpdatedTime(new Date());
-            userMapper.updateUser(user);
+            result=userMapper.updateUser(user);
         }
+        if (result==1)redisUtils.set(key,JSONObject.toJSONString(userMapper.getUserById(user.getId())));
         return user;
 
     }
@@ -78,6 +80,8 @@ public class RestUserService {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Object[] update(@RequestBody User user) throws Exception {
         Integer result = userMapper.updateUser(user);
+        String key=PREFIX+user.getId();
+        if (result==1)redisUtils.set(key,JSONObject.toJSONString(userMapper.getUserById(user.getId())));
 
         return new Object[]{result, userMapper.getUserById(user.getId())};
 

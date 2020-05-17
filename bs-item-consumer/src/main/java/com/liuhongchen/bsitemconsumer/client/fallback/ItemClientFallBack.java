@@ -68,11 +68,6 @@ public class ItemClientFallBack implements RestItemClient {
     }
 
     @Override
-    public Integer cancelOrder(String id) {
-        return null;
-    }
-
-    @Override
     public List<GoodsVo> getAllGoodsVo() {
         return null;
     }
@@ -104,6 +99,7 @@ public class ItemClientFallBack implements RestItemClient {
 
     @Override
     public List<GoodsVo> getNewGoodsVo() {
+//        throw new Exception()
         return null;
     }
 

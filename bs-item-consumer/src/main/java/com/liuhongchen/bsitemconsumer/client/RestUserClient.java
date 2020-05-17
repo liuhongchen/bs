@@ -19,8 +19,6 @@ public interface RestUserClient {
     @RequestMapping(value = "/getUserById", method = RequestMethod.POST)
     public User getUserById(@RequestParam("id") String id) throws Exception;
 
-    @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
-    public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception;
 
 
 }

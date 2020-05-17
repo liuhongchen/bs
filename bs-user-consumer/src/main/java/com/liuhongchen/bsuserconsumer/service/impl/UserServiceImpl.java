@@ -43,12 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Double getMoney(String id) {
-
-        return userClient.getMoney(id);
-    }
-
-    @Override
     public Boolean infoCheck(String id) {
 
         return userClient.infoCheck(id);

@@ -33,7 +33,6 @@ public class EsBookServiceImpl implements EsBookService {
         Index index = new Index.Builder(book).index("book").id(book.getId()).type("book_type").build();
         try {
             DocumentResult execute = jestClient.execute(index);
-            System.out.println(execute);
         } catch (IOException e) {
             e.printStackTrace();
             logUtils.i("item_provider_exception"

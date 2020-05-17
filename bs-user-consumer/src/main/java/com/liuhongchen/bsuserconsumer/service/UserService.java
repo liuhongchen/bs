@@ -16,7 +16,6 @@ public interface UserService {
 
     Object[] updateInfo(User user);
 
-    Double getMoney(String id);
 
 
     Boolean infoCheck(String id);

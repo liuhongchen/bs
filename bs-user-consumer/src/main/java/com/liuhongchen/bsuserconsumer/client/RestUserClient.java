@@ -22,18 +22,6 @@ public interface RestUserClient {
     @RequestMapping(value = "/getUserListByMap", method = RequestMethod.POST)
     public List<User> getUserListByMap(@RequestParam Map<String, Object> param) throws Exception;
 
-    @RequestMapping(value = "/getUserCountByMap", method = RequestMethod.POST)
-    public Integer getUserCountByMap(@RequestParam Map<String, Object> param) throws Exception;
-
-    @RequestMapping(value = "/qdtxAddUser", method = RequestMethod.POST)
-    public Integer qdtxAddUser(@RequestBody User user) throws Exception;
-
-    @RequestMapping(value = "/qdtxModifyUser", method = RequestMethod.POST)
-    public Integer qdtxModifyUser(@RequestBody User user) throws Exception;
-
-    @RequestMapping(value = "/checkLoginByPassword", method = RequestMethod.POST)
-    User checkLoginByPassword(User user);
-
     @RequestMapping(value = "/generateToken", method = RequestMethod.POST)
     String generateToken(User user);
 
@@ -43,8 +31,6 @@ public interface RestUserClient {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Object[] update(@RequestBody User user) throws Exception ;
 
-    @RequestMapping(value = "/getMoney", method = RequestMethod.POST)
-    Double getMoney(@RequestParam("id") String  id);
 
     @RequestMapping(value = "/infoCheck", method = RequestMethod.POST)
     Boolean infoCheck(@RequestParam("id")String id);

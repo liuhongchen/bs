@@ -26,7 +26,5 @@ public interface GoodsVoMapper {
 
     List<GoodsVo> getNewGoodsVo();
 
-    List<GoodsVo> getByIds(List<String> list);
-
-    GoodsVo getGoodsByBookId(String id);
+    List<GoodsVo> getGoodsByBookId(String id);
 }

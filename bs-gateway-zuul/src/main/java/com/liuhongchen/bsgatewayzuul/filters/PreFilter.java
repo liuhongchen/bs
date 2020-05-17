@@ -81,17 +81,17 @@ public class PreFilter extends ZuulFilter {
 
         String token = request.getHeader("token");
 
-        context.setSendZuulResponse(true);
+//        context.setSendZuulResponse(true);
 
 
-//        if (token==null|| EmptyUtils.isEmpty(redisUtils.get(token))){
-//            context.setSendZuulResponse(false);//给后面的过滤器发信息，这里出问题了，不要在进行路由转发了
-//            context.setResponseStatusCode(200);
-//
-//            context.setResponseBody("{\"msg\":\"401,access without premission,please login first\"");
-//
-//            return "access denied";
-//        }
+        if (token==null|| EmptyUtils.isEmpty(redisUtils.get(token))){
+            context.setSendZuulResponse(false);//给后面的过滤器发信息，这里出问题了，不要在进行路由转发了
+            context.setResponseStatusCode(200);
+
+            context.setResponseBody("{\"msg\":\"401,access without premission,please login first\"");
+
+            return "access denied";
+        }
 
 
         return "pass";//返回值是预留的，没有用
