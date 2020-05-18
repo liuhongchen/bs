@@ -15,8 +15,8 @@
         <result column="price" property="price" javaType="Double" jdbcType="DOUBLE"/>
         <result column="info" property="info" javaType="String" jdbcType="VARCHAR"/>
         <result column="address" property="address" javaType="String" jdbcType="VARCHAR"/>
-        <result column="createTime" property="createTime" javaType="Date" jdbcType="DATE"/>
-        <result column="updateTime" property="updateTime" javaType="Date" jdbcType="DATE"/>
+        <result column="createTime" property="createTime" javaType="Date" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" javaType="Date" jdbcType="TIMESTAMP"/>
         <association property="bookinfo" javaType="com.liuhongchen.bscommonmodule.pojo.Book"
                      select="getBookById" column="bookId"/>
     </resultMap>
