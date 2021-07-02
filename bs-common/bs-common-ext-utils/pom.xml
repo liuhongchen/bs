@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-amqp</artifactId>
-            <version>RELEASE</version>
+            <version>1.7.11.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.liuhongchen</groupId>
