@@ -1,4 +1,6 @@
 
+package com.liuhongchen.bscommonclient.fallback;
+
 import org.springframework.stereotype.Component;
 
 import com.liuhongchen.bscommonmodule.pojo.User;
@@ -6,7 +8,7 @@ import com.liuhongchen.bscommonmodule.pojo.User;
 import java.util.List;
 import java.util.Map;
 @Component
-public class UserClientFallBack implements RestUserClient {
+public class UserClientFallBack implements com.liuhongchen.bsuserconsumer.service.RestUserClient {
 
 
     @Override

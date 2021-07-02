@@ -48,11 +48,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>jms</artifactId>
-            <version>1.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.jms</groupId>-->
+<!--            <artifactId>jms</artifactId>-->
+<!--            <version>1.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.liuhongchen</groupId>
             <artifactId>bs-common-dto</artifactId>
@@ -73,16 +73,6 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>jms</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-redis</artifactId>
-            <version>1.4.5.RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
