@@ -2,7 +2,7 @@ spring:
   application:
     name: bs-item-consumer
   datasource:
-    url: jdbc:mysql://router.liuhongchen.com:3306/seata?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://s.liuhongchen.com:3306/seata?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,24 +13,24 @@ spring:
       seata:
         tx-service-group: my_test_tx_group
   redis:
-    host: router.liuhongchen.com
+    host: s.liuhongchen.com
     database: 0
     port: 6379
-    user: root
-    password: 123456
+#    user: root
+#    password: 123456
     timeout: 3000
   kafka:
     producer:
-      bootstrap-servers: router.liuhongchen.com:9092
+      bootstrap-servers: s.liuhongchen.com:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   zipkin:
-    base-url: http://router.liuhongchen.com:7700
+    base-url: http://s.liuhongchen.com:7700
   sleuth:
     sampler:
       percentage: 1.0
   rabbitmq:
-    host: router.liuhongchen.com
+    host: s.liuhongchen.com
     port: 5672
     username: guest
     password: guest

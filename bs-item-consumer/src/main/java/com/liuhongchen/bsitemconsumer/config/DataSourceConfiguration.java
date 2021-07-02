@@ -22,7 +22,7 @@ public class DataSourceConfiguration {
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource(){
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl("jdbc:mysql://router.liuhongchen.com:3306/seata");
+        druidDataSource.setUrl("jdbc:mysql://s.liuhongchen.com:3306/seata");
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("123456");
         druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");

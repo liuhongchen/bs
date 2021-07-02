@@ -30,32 +30,32 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>nexus</id>
-            <name>Nexus Repository</name>
-            <url>http://192.168.1.180:8081/repository/maven-public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
+<!--        <repository>-->
+<!--            <id>nexus</id>-->
+<!--            <name>Nexus Repository</name>-->
+<!--            <url>http://192.168.1.180:8081/repository/maven-public/</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--        </repository>-->
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nexus</id>
-            <name>Nexus Plugin Repository</name>
-            <url>http://router.liuhongchen.com:8081/repository/maven-public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
+<!--    <pluginRepositories>-->
+<!--        <pluginRepository>-->
+<!--            <id>nexus</id>-->
+<!--            <name>Nexus Plugin Repository</name>-->
+<!--            <url>http://router.liuhongchen.com:8081/repository/maven-public/</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--        </pluginRepository>-->
+<!--    </pluginRepositories>-->
 
     <dependencies>
         <dependency>

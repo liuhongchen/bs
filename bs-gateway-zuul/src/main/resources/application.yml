@@ -2,14 +2,14 @@ spring:
   application:
     name: bs-gateway-zuul
   redis:
-    host: router.liuhongchen.com
+    host: s.liuhongchen.com
     database: 0
     port: 6379
-    user: root
-    password: 123456
+#    user: root
+#    password: 123456
     timeout: 3000
   rabbitmq:
-    host: router.liuhongchen.com
+    host: s.liuhongchen.com
     port: 5672
     username: guest
     password: guest
